@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+@media screen and (max-width:545px){
+	.metronome{
+		width: 400px !important;
+	}
+	.selected-cnt{width:17px !important; height:17px !important;}
+	.how_to_use{width: 400px !important}
+}
+
+@media screen and (max-width:420px){
+	.metronome{
+		width: 300px !important;
+	}
+	.selected-cnt{width:14px !important; height:14px !important; margin: 0 5px !important;}
+	.how_to_use{width: 300px !important}
+}
+
+@media screen and (max-width:350px){
+	.metronome{
+		width: 260px !important;
+	}
+	.selected-cnt{width:12px !important; height:12px !important; margin: 0 5px !important;}
+	.how_to_use{width: 260px !important}
+}
+
+.metronome-container {
+	margin-top: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+}
+
+.metronome {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 600px;
+}
+
+.bpm-display {
+	width: 100%;
+	text-align: center;
+	color: #609fd6;
+	font-weight: bold;
+}
+
+.bpm-display .tempo {
+	font-size: 4em;
+}
+.tempo.tempo-dark{color: #dcb662;}
+.bpm-dark{color: #dcb662;}
+.tempo-text {
+	margin: 10px;
+	font-size: .8em;
+	text-transform: uppercase;
+	text-align: center;
+	color:grey;
+}
+.tempo-text.tempo-text-dark{color: white;}
+.tempo-setting {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tempo-setting .adjust-tempo-btn {
+	width: 30px;
+	height: 30px;
+	font-size: 40px;
+	border-radius: 50%;
+	border: 1px solid #ddd;
+	text-align: center;
+	cursor: pointer;
+	line-height: 21px;
+}
+
+.decrease-tempo:hover, .increase-tempo:hover,
+.subtrack-beats:hover, .add-beats:hover {
+	background-color: #609fd6;
+	border-color: #609fd6;
+	color: white;
+	transition: .2s;
+}
+.decrease-tempo-dark:hover, .increase-tempo-dark:hover,
+.subtrack-beats-dark:hover, .add-beats-dark:hover {
+	background-color: #dcb662;
+	border-color: #dcb662;
+	transition: .2s;
+}
+
+.tempo-slider {
+	width: 75%;
+}
+
+input[type="range"] {
+	-webkit-appearance: none; /* hide range bar slider*/
+	background-color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none; /* hide range bar thumb*/
+}
+
+input[type="range"]:focus {
+	outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background-color: #609fd6;
+	cursor: pointer;
+	margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background-color: #609fd6;
+	border: none;
+	cursor: pointer;
+	margin-top: -6px;
+}
+input[type="range"].tempo-slider-dark::-webkit-slider-thumb {
+	background-color: #dcb662;
+}
+input[type="range"].tempo-slider-dark::-moz-range-thumb {
+	background-color: #dcb662;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 4px;
+	background-color: #ddd;
+	border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-track {
+	width: 100%;
+	height: 4px;
+	background-color: #ddd;
+	border-radius: 2px;
+}
+
+.selected-cnt-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px 0;
+}
+
+.selected-cnt {
+	width: 20px;
+	height: 20px;
+	background-color: lightgrey;
+	border-radius: 50%;
+	margin: 0 8px;
+}
+
+.cnt-first {background-color: #fa545c}
+.cnt-rest {background-color: #ff9ca1}
+
+.start-stop {
+	width: 100%;
+	height: 50px;
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+	background-color: #609fd6;
+	border-radius: 3px;
+	color: #fff;
+	line-height: 50px;
+	margin: 10px auto;
+	cursor: pointer;
+}
+.start-stop:hover {
+	opacity: .8;
+	transition: .2s;
+}
+.start-stop.start-stop-dark{background-color: #3a3a3a}
+.start-stop.start-stop-dark:hover{background-color: #dcb662; transition: .2s;}
+.running{background-color:#a2a2a2;}
+
+.measures {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0 10px 0;
+}
+
+.measures .stepper {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid #ddd;
+	text-align: center;
+	margin: 0 10px;
+	cursor: pointer;
+}
+.subtrack-beats {
+	line-height: 16px;
+}
+
+.add-beats {
+	line-height: 18px;
+}
+
+.beats-per-measure-text {
+	text-align: center;
+	font-size: .5em;
+	text-transform: uppercase;
+	color: lightslategray;
+}
+.beats-per-measure-text.beats-per-measure-text-dark{color:white;}
+.measure-count{color:grey;}
+.measure-count.measure-count-dark{color: white;}
+
+.decrease-tempo-dark, .increase-tempo-dark,
+.subtrack-beats-dark, .add-beats-dark
+{background-color: #3a3a3a; border:1px solid #3a3a3a !important; color: white;};

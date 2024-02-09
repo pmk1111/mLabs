@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">  
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="내 IP 주소가 궁금하다면?">
+
+<title>내 IP 주소 확인하기</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="/images/logo.png" />
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/slider.css"/>
+  <link rel="stylesheet" href="/slick/slick.css" />
+  <link rel="stylesheet" href="/slick/slick-theme.css"/>
+
+<style>
+footer {
+	position: relative;
+	margin-top: 100px;
+}
+
+#Accordion_wrap {
+	position: fixed;
+	width: 100%;
+}
+
+main {
+	margin-top: 0;
+}
+
+.container {
+	margin: 150px 0 30px 0;
+}
+
+.txt-wrap{margin:30px 0;}
+.txt-wrap p{
+	font-family: 'Black Han Sans', sans-serif;
+	font-size: 20px;
+  font-weight: 300;
+  color: #3a3a3a;
+}
+.txt-wrap p.txt-dark{color:white};
+.my-ip-wrap{}
+.my-ip-is{
+	font-family: 'Black Han Sans', sans-serif;
+  font-size: 50px;
+  color: #609fd6;
+}
+.my-ip-is.my-ip-is-dark{color: #dcb662;}
+
+</style>
+
+</head>
+<body>
+  <%- include('./nav') %>
+  <%- include('./accordion') %>
+	
+	<main>
+		<div class="container">
+			<div class="txt-wrap"><p>내 ip 주소는...?</p></div>
+			<div class="my-ip--wrap"><h1 class="my-ip-is"></h1></div>
+			
+			<div class="how_to_use">
+      	<div class="htu_h3"><h3>소개</h3></div>
+          <div class="description">
+            <p><span style="font-weight: 600">내 IP 주소</span> 서비스는 접속한 사용자의 IP 주소를 가져온 다음, 사용자의 화면에
+            		IP 주소를 표시해 줍니다.</p>
+            <p>가져온 IP 주소를 이용해 <span style="font-weight: 600;">위치 검색, 비정상적인 로그인 시 내 IP와 비교</span>하는 것과 같은 동작을 수행
+                할 수 있습니다.</p>
+          </div>
+        </div>
+        <%- include('./slick') %>
+		</div>
+	</main>
+	
+	    <!-- footer -->
+      <%- include('./footer') %>
+
+	  <script src="/js/common.js"></script>
+	  <script src="/js/myip.js"></script>
+	  <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+	  
+</body>
+</html>

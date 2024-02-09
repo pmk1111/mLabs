@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <footer th:fragment = "footer">
+      <h4>Share To</h4>
+      <div class="share_container">
+        <div class="share_content">
+          <a
+            id="btnTwitter"
+            class="link-icon twitter"
+            href="javascript:shareTwitter();"
+            ><img src="/images/icon-twitter.png"
+          /></a>
+        </div>
+        <div class="share_content">
+          <a
+            id="btnFacebook"
+            class="link-icon facebook"
+            href="javascript:shareFacebook();"
+            ><img src="/images/icon-facebook.png"
+          /></a>
+        </div>
+        <div class="share_content">
+          <a
+            id="btnKakao"
+            class="link-icon kakao"
+            href="javascript:shareKakao();"
+            ><img src="/images/icon-kakao.png"
+          /></a>
+        </div>
+        <div class="share_content">
+          <span class="naver_btn" onclick="shareNaver()">
+            <script
+              type="text/javascript"
+              src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"
+            ></script>
+            <script type="text/javascript">
+              new ShareNaver.makeButton({ type: "e" });
+            </script>
+          </span>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2024. M.Labs. all rights reserved.</p>
+      </div>
+    </footer>
+
+</body>
+</html>

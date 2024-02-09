@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="qrcode-container" th:fragment="qr">
+  	<div id="qrcode-wrap">
+			<div id="qrcode"></div>
+    </div>
+      
+
+			<div class="qr-setting-wrap">
+				<button id="qr-download" onclick="downloadQRCode()">Download QR Code</button>
+      	<div class="qr-url-wrap wrapper">
+      		<span>QR 텍스트</span>
+      		<div class="txt-wrap">
+        		<input type="text" id="qr-url" onkeyup="setQrUrl()" />
+        	</div>
+      	</div>
+      
+      	<div class="set-w-h-wrap wrapper">
+      		<span>크기</span>
+      		<div class="range-wrap">
+        		<input type="range"id="w-h"name="w-h" placeholder="1~250" min="1" max="250" value="128" oninput="setQrSize()"/>
+        		<div class="val-wrap">
+          		<p class="qr-size-val val"></p>
+          	</div>
+        	</div>
+      	</div>
+      
+     	 	<div class="qr-bg-color-wrap wrapper">
+     	 		<span>배경색</span>
+     	 		<div class="color-wrap">
+       	 		<input type="color" id="set-qr-bg-color" oninput="setQrBgColor()" />
+       	 		<div class="val-wrap">
+          		<p class="qr-bg-color-val val"></p>
+          	</div>
+       	 	</div>
+      	</div>
+      	<div class="qr-color-wrap wrapper">
+      		<span>QR색상</span>
+      		<div class="color-wrap">
+        		<input type="color" id="set-qr-color" oninput="setQrLineColor()" />
+        		<div class="val-wrap">
+          		<p class="qr-color-val val"></p>
+          	</div>
+        	</div>
+      	</div>
+      </div>
+    </div>
+
+</body>
+</html>

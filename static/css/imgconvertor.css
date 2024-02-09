@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+.prev_img_wrap {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	width: 450px;
+	height: 550px;
+	border: 1px dashed lightgrey;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+	border-radius: 3px;
+}
+
+#preview {
+	max-width: 90%;
+	max-height: 90%;
+	width: auto;
+	height: auto;
+	position: absolute;
+	display: none;
+}
+
+.no_img {
+	width: 100px;
+	height: 100px;
+}
+
+.drop_img_here {
+	color: lightgrey;
+}
+
+.container {
+	margin-top: 150px;
+}
+
+.download_wrap {
+	position: relative;
+	width: 400px;
+	height: 50px;
+	background-color: #609fd6;
+	color: white;
+	border-radius: 3px;
+	display: none;
+	cursor: pointer;
+	
+}
+
+.download_wrap:hover {
+	opacity: .8;
+	transition: .2s;
+}
+
+#downloadLink {
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+}
+
+#imageInput {
+	display: none
+}
+
+.convert_wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btn-upload {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
+	height: 35px;
+	background: #fff;
+	border-style: none;
+	border-radius: 3px;
+	font-weight: 500;
+	cursor: pointer;
+	background-color: #609fd6;
+	color: white;
+	cursor: pointer;
+	
+}
+
+#downloadLink {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.btn-upload:hover {
+	opacity: .8;
+	transition: .2s;
+}
+
+select {
+	position: relative;
+	top: -1px;
+	height: 36px;
+	border-color: lightgrey;
+	border-radius: 3px;
+}
+
+.convert-btn {
+	width: 100px;
+	height: 35px;
+	border-style: none;
+	background-color: #609fd6;
+	border-radius: 3px;
+	color: white;
+	cursor: pointer;
+	
+}
+
+.convert-btn:hover {
+	opacity: .8;
+	transition: .2s;
+}
+
+.btn_dark {
+	background-color: #3a3a3a;
+	
+}
+
+.how_to_use {
+	margin-top: 40px;
+	width: 600px;
+	border: 1px solid #609FD6;
+	border-radius: 3px;
+}
+
+.how_to_use.htu_dark {
+	border: 1px solid #3a3a3a;
+}
+
+.htu_h3 {
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	background: #609FD6;
+	text-align: center;
+	padding: 10px;
+	color: white;
+	
+}
+
+.htu_h3.htu_h3_dark {
+	background-color: #3a3a3a;
+	color: rgb(166, 166, 166);
+	
+}
+
+.step {
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding: 10px;
+	background-color: white;
+    
+}
+
+.step.step_dark {
+	background-color: #151515;
+    
+}
+
+.step p {
+	margin: 10px 0;
+}
+
+@media screen and (max-width:426px) {
+	.prev_img_wrap {
+		width: 300px;
+		height: 370px;
+	}
+	.btn-upload {
+		width: 100px;
+		font-size: 13px;
+	}
+	.convert-btn {
+		width: 80px;
+		font-size: 13px;
+	}
+	.download_wrap {
+		width: 300px;
+		font-size: 14px;
+	}
+	#downloadLink {
+		font-size: 14px;
+	}
+	.how_to_use{
+		width: 350px;
+	}
+}
+
+@media screen and (max-width:426px) {
+	.how_to_use{
+		width: 300px;
+	}
+}

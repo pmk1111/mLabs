@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <div class="barcode-container" th:fragment="bar">
+      <div class="barcode-wrap">
+        <img id="barcode" />
+        <span class="wrong-value">올바른 값을 입력해 주세요.</span>
+      </div>
+      
+      <div class="barcode-setting-wrap">
+      	<button id="barcode-download" onclick="downloadBarCode()">Download barCode</button>
+        <div class="bar-txt-format-wrap wrapper">
+        	<span>텍스트 | 포맷</span>
+          <div class="txt-wrap">
+            <input id="barcode-txt" type="text" onkeyup="setBarTxt()" />
+          </div>
+          <div class="format-wrap">
+            <select id="barcode-format" onchange="setBarFormat()">
+              <option value="CODE128" selected>CODE128</option>
+              <option value="CODE128A">CODE128A</option>
+              <option value="CODE128B">CODE128B</option>
+              <option value="CODE128C">CODE128C</option>
+              <option value="CODE39">CODE39</option>
+              <option value="EAN8">EAN8</option>
+              <option value="EAN5">EAN5</option>
+              <option value="EAN2">EAN2</option>
+              <option value="upc">UPC</option>
+              <option value="ITF">ITF</option>
+              <option value="MSI10">MSI10</option>
+              <option value="MSI11">MSI11</option>
+              <option value="MSI1010">MSI1010</option>
+              <option value="MSI1110">MSI1110</option>
+              <option value="pharmacode">Pharmacode</option>
+              <option value="CODABAR">Codabar</option>
+            </select>
+          </div>
+        </div>
+        <div class="txt-visibility-wrap wrapper">
+        	<span>텍스트 표시</span>
+        	<div class="text-visibility-input-wrap">
+          	<div class="show-txt-wrap radio-wrapper selected-radio" style="width: 50%; border-left-style:none; border-radius: 0">
+            	<input type="radio" id="set-txt-show" class="txt-visibility" name="txt-visibility" value="true" 
+            				 onclick="setTxtVisibility()" checked/>
+            	<label for="set-txt-show">표시</label>
+          	</div>
+          	<div class="hide-txt-wrap radio-wrapper" style="width: 50%; border-left-style:none;">
+            	<input type="radio" id="set-txt-hide" class="txt-visibility" name="txt-visibility" value="false" 
+            				 onclick="setTxtVisibility()"/>
+            	<label for="set-txt-hide">숨기기</label>
+          	</div>
+          </div>
+        </div>
+        
+        <div class="text-option">
+					<div class="txt-position-wrap wrapper">
+        		<span>텍스트 위치</span>
+        		<div class="pos-input-wrap">
+        	
+          		<div class="txt-top-wrap radio-wrapper" style="width: 25%; border-left-style:none;">
+           			<input type="radio" id="set-txt-top" class="txt-position" name="txt-position" value="top" onclick="setTxtPos()" />
+            		<label for="set-txt-top">top</label>
+          		</div>
+          		<div class="txt-bottom-wrap selected-radio" style="width: 25%; border-left-style:none; border-radius: 0px">
+           	 		<input type="radio" id="set-txt-bottom" class="txt-position" name="txt-position" value="bottom" onclick="setTxtPos()" checked />
+            		<label for="set-txt-bottom">bottom</label>
+          		</div>
+
+							<div class="left-wrap radio-wrapper" style="width: 25%; border-left-style:none; border-radius: 0px">
+  	          	<input type="radio" class="txt-align" id="txt-left" name="txt-align" value="left" onclick="setTxtAlign()"/>
+    	        	<label for="txt-left">left</label>
+      	    	</div>
+        	  	<div class="center-wrap selected-radio" style="width: 25%; border-left-style:none;">
+          	  	<input type="radio" class="txt-align" id="txt-center" name="txt-align" value="center" onclick="setTxtAlign()" checked />
+         		   	<label for="txt-center">center</label>
+          		</div>
+          		<div class="right-wrap radio-wrapper" style="width: 25%; border-left-style:none;">
+            		<input type="radio" class="txt-align" id="txt-right" name="txt-align" value="right" onclick="setTxtAlign()"/>
+        	    	<label for="txt-right">right</label>
+          		</div>
+          	</div>
+        	</div>
+        	
+        	<div class="txt-size-wrap wrapper">
+        		<span>텍스트 크기</span>
+        		<div class="range-wrap">
+          		<input type="range" id="set-txt-size" min="8" max="40" oninput="setTxtSize()" />
+          		<div class="val-wrap">
+          			<p class="txt-size-val val"></p>
+          		</div>
+          	</div>
+        	</div>
+        	
+        	<div class="txt-margin-wrap wrapper">
+        		<span>텍스트 간격</span>
+        		<div class="range-wrap">
+          		<input type="range" id="set-txt-margin" min="0" max="15" oninput="setTxtMargin()" />
+          		<div class="val-wrap">
+          			<p class="txt-margin-val val"></p>
+          		</div>
+          	</div>
+       	 	</div>
+        </div>
+       
+       	<div class="width-wrap wrapper">
+        	<span>넓이</span>
+        	<div class="range-wrap">
+         		<input type="range" id="set-width" class="range" min="1" max="4" oninput="setBarWidth()"/>
+         		<div class="val-wrap">
+         			<p class="bar-width-val val"></p>
+         		</div>
+         	</div>
+        </div>
+        
+        <div class="height-wrap wrapper">
+        	<span>높이</span>
+        	<div class="range-wrap">
+         		<input type="range" id="set-heigth" min="10" max="150" oninput="setBarHeight()"/>
+         		<div class="val-wrap">
+         			<p class="bar-height-val val"></p>
+         		</div>
+         	</div>
+        </div>
+
+        <div class="margin-wrap wrapper">
+        	<span>바코드 간격</span>
+        	<div class="range-wrap">
+          	<input type="range" id="set-margin" min="0" max="25" value="10" oninput="setBarMargin()" />
+          	<div class="val-wrap">
+          		<p class="bar-margin-val val"></p>
+          	</div>
+        	</div>
+        </div>
+        
+        <div class="bg-color-wrap wrapper">
+        	<span>배경색</span>
+        	<div class="color-wrap">
+          	<input type="color" id="set-bg-color" oninput="setBarBgColor()" />
+          	<div class="val-wrap">
+          		<p class="bar-bg-color-val val"></p>
+          	</div>
+          </div>
+        </div>
+        <div class="line-color-wrap wrapper">
+        	<span>바코드 색</span>
+        	<div class="color-wrap">
+          	<input type="color" id="set-line-color" oninput="setBarLineColor()" />
+							<div class="val-wrap">
+          			<p class="bar-line-color-val val"></p>
+          	</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

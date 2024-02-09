@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="내 가청범위를 테스트 및 음향 장비 테스트를 위해 사용하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:description" content="내 가청범위를 테스트 및 음향 장비 테스트를 위해 사용하세요.">
+    <title>가청 주파수 테스트</title>
+
+	  <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/generator.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+
+#frequencyCanvas {
+	border: 1px solid black;
+}
+</style>
+    <meta name="naver-site-verification" content="e1df0a63e1c5b4574886643f7a465879415d826b" />
+    <meta name="google-site-verification" content="kW09c0DK4xDTGSGAAOdQK3UgPYERortrtnP8bLnjeZ8" />
+
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2866511897521551"
+     crossorigin="anonymous"></script>
+  </head>
+  <body class="lite">
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+    
+
+    <main>
+      <div class="container">
+        <div class="wave_select_wrap">
+          <!-- 파형 설정 raido -->
+          <input type="radio" name="wave" id="wave_sine" class="radio_wave custom-radio" value="sine" checked/>
+          <label for="wave_sine"><span>Sine</span></label>
+          <input type="radio" name="wave" id="wave_square" class="radio_wave custom-radio" value="square"/>
+          <label for="wave_square"><span>square</span></label>
+          <input type="radio" name="wave" id="wave_sawtooth" class="radio_wave custom-radio" value="sawtooth"/>
+          <label for="wave_sawtooth"><span>sawtooth</span></label>
+          <input type="radio" name="wave" id="wave_triangle" class="radio_wave custom-radio" value="triangle"/>
+          <label for="wave_triangle"><span>triangle</span></label>
+        </div>
+
+        <!-- 주파수 조정 슬라이드바 -->
+        <!-- <label for="bar_frequency">주파수 조정</label> -->
+        <div class="frequency_wrap">
+          <div class="frequency_bar_wrap flex_center m_20_0">
+            <label for="bar_frequency">주파수</label>
+            <p class="frequency_text">주파수</p>
+            <input type="range" name="bar_frequency" id="bar_frequency" min="20" max="20000" value="1000" oninput="updateFrequency()"/>
+          </div>
+          <div class="frequency_input_wrap flex_center m_20_0">
+            <input type="text" id="span_frequency" value="1000" oninput="updateBarFrequency()"/> <span class="hz">Hz</span>
+            <input type="checkbox" id="auto_increment" name="auto_increment">
+            <label for="auto_increment"></label>
+            <span>자동 증가</span>
+          </div>
+        </div>
+        <!-- <canvas id="frequencyCanvas" width="440" height="200"></canvas> -->
+        <!-- 재생/정지 버튼 -->
+        <div class="generate_btn_wrap">
+          <button id="btn">재생/정지</button>
+        </div>
+
+        <div class="how_to_use">
+          <div class="htu_h3"><h3>사용 방법</h3></div>
+          <div class="description">
+            <p>1. 원하는 파형을 선택합니다.</p>
+            <p>2. 막대를 움직여서 주파수를 선택합니다.</p>
+            <p>3. 또는 원하는 주파수를 입력합니다.</p>
+            <p>4. 재생/정지 버튼을 눌러 주파수를 재생/정지할 수 있습니다.</p>
+            <p>5. 재생 중 막대를 조절해 출력 주파수를 조정할 수 있습니다.</p>
+            <p>6. 자동 증가 항목을 체크하면 초당 100hz씩 증가합니다.</p>
+          </div>
+        </div>
+
+        <table>
+          <tr><th>가청 주파수 범위</th><th>결과</th></tr>
+          <tr><td>~8000Hz</td><td>70대 후반</td></tr>
+          <tr><td>~10000Hz</td><td>50대 이후</td></tr>
+          <tr><td>~12000Hz</td><td> 40대 정도</td></tr>
+          <tr><td>~14000Hz</td><td>30대 정도</td></tr>
+          <tr><td>~15000Hz</td><td>20대 후반</td></tr>
+          <tr><td>~16800Hz</td><td>20대 초반</td></tr>
+          <tr><td>~17600Hz</td><td>10대 후반</td></tr>
+          <tr><td>~18000Hz</td><td>10대 초반</td></tr>
+        </table>
+        
+				<table>
+  				<tr><th>주파수 별 피아노 음계(1~8 옥타브)</th><th>결과(Hz)</th></tr>
+  				<tr><td>C</td><td>32.70, 65.41, 130.81, 261.63, 523.25, 1046.50, 2093.00, 4186.01</td></tr>
+  				<tr><td>C#(Db)</td><td>34.65, 69.30, 138.59, 277.18, 554.37, 1108.73, 2217.46, 4434.92</td></tr>
+  				<tr><td>D</td><td>36.71, 73.42, 146.83, 293.66, 587.33, 1174.66, 2349.32, 4698.64</td></tr>
+  				<tr><td>D#(Eb)</td><td>38.89, 77.78, 155.56, 311.13, 622.25, 1244.51, 2489.02, 4978.03</td></tr>
+  				<tr><td>E</td><td>41.20, 82.41, 164.81, 329.63, 659.26, 1318.51, 2637.02, 5274.04</td></tr>
+  				<tr><td>F</td><td>43.65, 87.31, 174.61, 349.23, 698.46, 1396.91, 2793.83, 5587.65</td></tr>
+  				<tr><td>F#(Gb)</td><td>46.25, 92.50, 185.00, 369.99, 739.99, 1479.98, 2959.96, 5919.91</td></tr>
+  				<tr><td>G</td><td>49.00, 98.00, 196.00, 392.00, 783.99, 1567.98, 3135.96, 6271.93</td></tr>
+  				<tr><td>G#(Ab)</td><td>51.91, 103.83, 207.65, 415.30, 830.61, 1661.22, 3322.44, 6644.88</td></tr>
+  				<tr><td>A</td><td>55.00, 110.00, 220.00, 440.00, 880.00, 1760.00, 3520.00, 7040.00</td></tr>
+  				<tr><td>A#(Bb)</td><td>58.27, 116.54, 233.08, 466.16, 932.33, 1864.66, 3729.31, 7458.62</td></tr>
+  				<tr><td>B</td><td>61.74, 123.47, 246.94, 493.88, 987.77, 1975.53, 3951.07, 7902.13</td></tr>
+				</table>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/frequency.js"></script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지 변환기</title>
+
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/imgconvertor.css" />
+	<style>
+	  footer {
+	    position: relative;
+	    bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 170px;
+        margin-top:100px;
+        background-color: rgb(227, 227, 227);
+        transition: all 0.2s ease-in;
+      }
+      #Accordion_wrap {
+        position: fixed;
+        width: 100%;
+      }
+      main {
+		margin-top: 0;
+	  }
+	</style>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+
+    <main>
+      <div class="container">
+        <form
+          action="mlabs/convert-image"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="prev_img_wrap">
+            <img id="preview" src="#" alt="Preview" />
+            <img class="no_img" src="/images/previmg.svg" />
+            <p class="drop_img_here">이미지를 여기에 끌어다 놓으세요.</p>
+          </div>
+          <div class="convert_wrap">
+            <label for="imageInput">
+  		  	  <div class="btn-upload">파일 업로드</div>
+		    </label>
+            <input id="imageInput" type="file" name="image" accept="image/*" required/>
+            <div class="select-convert">
+              <select name="format" required>
+                <option value="jpg">JPG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="bmp">BMP</option>
+                <option value="gif">GIF</option>
+                <option value="png">PNG</option>
+                <option value="tiff">TIFF</option>
+              </select>
+              <button class="convert-btn" type="button" onclick="convertImage()">이미지 변환</button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <div class="download_wrap">
+          <a id="downloadLink"></a>
+        </div>
+        <div class="how_to_use">
+          <div class="htu_h3"><h3>기능 소개 및 사용법</h3></div>
+          <div class="step">
+            <p>간편하게 다양한 이미지 파일을 내가 원하는 확장자로 변경하는 기능입니다. 
+            <br>변경 가능한 타입은 jpg, jpeg, bmp, gif, png, tiff 입니다.
+            이미지의 확장자를 변경해서 호환성 및 지원 형식 변경, 파일 크기 최적화를 해보세요.</p>
+            <br>
+            <h3>사용 방법</h3>
+            <br>
+            <p>1. 파일 업로드 버튼을 클릭 또는 이미지 영역에 드래그 & 드롭을 통해 파일을 업로드 하세요</p>
+            <br>
+            <p>2. 변경하고 싶은 확장자를 선택하세요</p>
+            <br>
+            <p>3. 이미지 변환 버튼을 누르면, 해당 확장자로 이미지 파일이 변환되며, 다운로드 버튼이 표시됩니다.</p>
+            <br>
+            <p>4. 다운로드 버튼을 누르면 변환된 이미지 파일이 다운로드됩니다.</p>
+            
+          </div>
+        </div>
+        
+      </div>
+    </main>
+
+    <!-- footer -->
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/img-convert.js"></script>
+
+    <script></script>
+  </body>
+</html>

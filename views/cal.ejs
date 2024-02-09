@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="naver-site-verification" content="6613a69297c56f13f01d64bea6c8a02076965f6b" />
+    <meta name="google-site-verification" content="kW09c0DK4xDTGSGAAOdQK3UgPYERortrtnP8bLnjeZ8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Sunflower:wght@500&display=swap"rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/css/cal.css">
+    <link rel="icon" href="/images/logo.png">
+    <title>계산기</title>
+    <meta name="description" content="간편 공학용 계산기입니다.">
+    <meta name="keywords" content="
+    공학용 계산기, 과학 계산기, 고급 계산기, 수학 계산기, 
+    Engineering Calculator, Scientific Calculator, Advanced Calculator, Mathematical Calculator,
+    工程计算器, 科学计算器, 高级计算器, 数学计算器,
+    エンジニアリング計算器, 科学計算器, 高度な計算器, 数学計算器">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2866511897521551"
+     crossorigin="anonymous"></script>
+     <script type="application/ld+json">
+      {
+        "@context" : "https://schema.org",
+        "@type" : "WebSite",
+        "name" : "M_Labs",
+        "alternateName" : "EC",
+        "url" : "https://scientifics.netlify.app/"
+      }
+    </script>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+
+<!-- main -->
+    <main>
+      <div class="main_wrap">
+        <form>
+          <table border="1">
+            <tr>
+              <td colspan="5"><input class="write_input" type="text" id="display"/></td>
+            </tr>
+            <tr>
+              <td colspan="3"><input class="cal_btn" type="button" value="Enter" onclick="sum()" style="height: 100%; width: 100%"/></td>
+              <td colspan="2"><input class="cal_btn" type="button"value="Clear"onclick="clearDisplay()"style="height: 100%; width: 100%"/></td>
+            </tr>
+            <tr>
+              <td><input class="number_btn cal_btn" type="button"value="1"onclick="add('1')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="2" onclick="add('2')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="3" onclick="add('3')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="+" onclick="add('+')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="tan" onclick="tan(this.form.display)" style="height: 100%; width: 100%"/></td>
+            </tr>
+            <tr>
+              <td><input class="number_btn cal_btn" type="button" value="4" onclick="add('4')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="5" onclick="add('5')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="6" onclick="add('6')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="-" onclick="add('-')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="sin" onclick="sin(this.form.display)" style="height: 100%; width: 100%"/></td>
+            </tr>
+            <tr>
+              <td><input class="number_btn cal_btn" type="button" value="7" onclick="add('7')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="8" onclick="add('8')" style="height: 100%; width: 100%"/></td>
+              <td><input class="number_btn cal_btn" type="button" value="9" onclick="add('9')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="*" onclick="add('*')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="cos" onclick="cos(this.form.display)" style="height: 100%; width: 100%"/></td>
+            </tr>
+            <tr>
+              <td><input class="cal_btn" type="button" value="0" onclick="add('0')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="+/-" onclick="addAbs()" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="/" onclick="add('/')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="in" onclick="addIn()" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="x^y" onclick="addPow()" style="height: 100%; width: 100%"/></td>
+            </tr>
+            <!-- 단위 변환 버튼 추가 -->
+            <tr>
+              <td><input class="cal_btn" type="button" value="." onclick="add('.')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value=")" onclick="add(')')" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="log" onclick="addLog()" style="height: 100%; width: 100%"/></td>
+              <td><input class="cal_btn" type="button" value="feet" onclick="convertToFeet()" style="height: 100%; width: 100%" /></td>
+              <td><input class="cal_btn" type="button" value="inches" onclick="convertToInches()" style="height: 100%; width: 100%"/></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <%- include('./footer') %>
+    <script src="/js/cal.js" ></script>
+  </body>
+</html>
