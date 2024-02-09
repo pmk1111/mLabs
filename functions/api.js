@@ -5,46 +5,46 @@ const multer = require('multer'); // multer 모듈을 require
 const sharp = require('sharp');
 const axios = require('axios');
 
-const app = express();
+const api = express();
 const port = 9500;
 
 const router = Router();
 
 // EJS 템플릿 엔진 설정
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+api.set('view engine', 'ejs');
+api.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static(path.join(__dirname, 'static')));
-app.use(express.json());
+api.use(express.static(path.join(__dirname, 'static')));
+api.use(express.json());
 
-app.get('/mlabolatories', (req, res) => {
+api.get('/mlabolatories', (req, res) => {
   res.render(path.join(__dirname, 'index'));
 });
-app.get('/mlabolatories/frequency', (req, res) => {
+api.get('/mlabolatories/frequency', (req, res) => {
   res.render('frequency'); 
 });
-app.get('/mlabolatories/barcode', (req, res) => {
+api.get('/mlabolatories/barcode', (req, res) => {
   res.render('barcode'); 
 });
-app.get('/mlabolatories/bokkli', (req, res) => {
+api.get('/mlabolatories/bokkli', (req, res) => {
   res.render('bokkli'); 
 });
-app.get('/mlabolatories/cal', (req, res) => {
+api.get('/mlabolatories/cal', (req, res) => {
   res.render('cal'); 
 });
-app.get('/mlabolatories/img-convert', (req, res) => {
+api.get('/mlabolatories/img-convert', (req, res) => {
   res.render('img-convert'); 
 });
-app.get('/mlabolatories/lotto', (req, res) => {
+api.get('/mlabolatories/lotto', (req, res) => {
   res.render('lotto'); 
 });
-app.get('/mlabolatories/metronome', (req, res) => {
+api.get('/mlabolatories/metronome', (req, res) => {
   res.render('metronome'); 
 });
-app.get('/mlabolatories/myip', (req, res) => {
+api.get('/mlabolatories/myip', (req, res) => {
   res.render('myip'); 
 });
-app.get('/mlabolatories/server-time', (req, res) => {
+api.get('/mlabolatories/server-time', (req, res) => {
   res.render('server-time'); 
 });
 
@@ -52,7 +52,7 @@ app.get('/mlabolatories/server-time', (req, res) => {
 const upload = multer();
 
 // convert img
-app.post('/mlabolatories/convert-image', upload.single('image'), async (req, res) => {
+api.post('/mlabolatories/convert-image', upload.single('image'), async (req, res) => {
   try {
     const { format } = req.body;
 
@@ -72,7 +72,7 @@ app.post('/mlabolatories/convert-image', upload.single('image'), async (req, res
 });
 
 
-app.post('/mlabolatories/get-server-time', async (req, res) => {
+api.post('/mlabolatories/get-server-time', async (req, res) => {
   try {
       const targetUrl = req.body.url;
 
@@ -97,10 +97,10 @@ app.post('/mlabolatories/get-server-time', async (req, res) => {
 
 
 // 서버 시작
-app.listen(port, () => {
+api.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
 
-app.use("/api/", router);
+api.use("/api/", router);
 
-export const handler = serverless(app);
+export const handler = serverless(api);
