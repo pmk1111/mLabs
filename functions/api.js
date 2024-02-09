@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const serverless = require("serverless-http");
 const path = require('path');
 const multer = require('multer'); // multer 모듈을 require
@@ -8,17 +9,16 @@ const axios = require('axios');
 const api = express();
 const port = 9500;
 
-const router = Router();
 
 // EJS 템플릿 엔진 설정
 api.set('view engine', 'ejs');
-api.set('views', path.join(__dirname, 'views'));
+api.set('views', path.join(__dirname, '..', 'views'));
 
-api.use(express.static(path.join(__dirname, 'static')));
+api.use(express.static(path.join(__dirname, '..', 'static')));
 api.use(express.json());
 
 api.get('/mlabolatories', (req, res) => {
-  res.render(path.join(__dirname, 'index'));
+  res.render(path.join(__dirname, '..', 'index'));
 });
 api.get('/mlabolatories/frequency', (req, res) => {
   res.render('frequency'); 
@@ -103,4 +103,4 @@ api.listen(port, () => {
 
 api.use("/api/", router);
 
-export const handler = serverless(api);
+module.exports.handler = serverless(api);
