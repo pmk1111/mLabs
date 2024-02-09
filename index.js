@@ -14,34 +14,34 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 
-app.get('/mlabs', (req, res) => {
+app.get('/mlabolatories', (req, res) => {
   res.render('index'); 
 });
-app.get('/mlabs/frequency', (req, res) => {
+app.get('/mlabolatories/frequency', (req, res) => {
   res.render('frequency'); 
 });
-app.get('/mlabs/barcode', (req, res) => {
+app.get('/mlabolatories/barcode', (req, res) => {
   res.render('barcode'); 
 });
-app.get('/mlabs/bokkli', (req, res) => {
+app.get('/mlabolatories/bokkli', (req, res) => {
   res.render('bokkli'); 
 });
-app.get('/mlabs/cal', (req, res) => {
+app.get('/mlabolatories/cal', (req, res) => {
   res.render('cal'); 
 });
-app.get('/mlabs/img-convert', (req, res) => {
+app.get('/mlabolatories/img-convert', (req, res) => {
   res.render('img-convert'); 
 });
-app.get('/mlabs/lotto', (req, res) => {
+app.get('/mlabolatories/lotto', (req, res) => {
   res.render('lotto'); 
 });
-app.get('/mlabs/metronome', (req, res) => {
+app.get('/mlabolatories/metronome', (req, res) => {
   res.render('metronome'); 
 });
-app.get('/mlabs/myip', (req, res) => {
+app.get('/mlabolatories/myip', (req, res) => {
   res.render('myip'); 
 });
-app.get('/mlabs/server-time', (req, res) => {
+app.get('/mlabolatories/server-time', (req, res) => {
   res.render('server-time'); 
 });
 
@@ -49,14 +49,14 @@ app.get('/mlabs/server-time', (req, res) => {
 const upload = multer();
 
 // convert img
-app.post('/mlabs/convert-image', upload.single('image'), async (req, res) => {
+app.post('/mlabolatories/convert-image', upload.single('image'), async (req, res) => {
   try {
     const { format } = req.body;
 
     // 이미지 변환 (sharp 모듈 사용)
     const convertedImageBuffer = await sharp(req.file.buffer).toFormat(format).toBuffer();
 
-    // HTTP 응답 헤더 설정
+    // HTTP 응답mlabolatories 헤더 설정
     res.setHeader('Content-Type', `image/${format}`);
     res.setHeader('Content-Disposition', `attachment; filename=converted_image.${format}`);
 
@@ -69,7 +69,7 @@ app.post('/mlabs/convert-image', upload.single('image'), async (req, res) => {
 });
 
 
-app.post('/mlabs/get-server-time', async (req, res) => {
+app.post('/mlabolatories/get-server-time', async (req, res) => {
   try {
       const targetUrl = req.body.url;
 

@@ -102,7 +102,7 @@
     function getServerTime(clientTime) {
         const targetUrl = urlInput.value;
 
-        fetch("/mlabs/get-server-time", {
+        fetch("/mlabolatories/get-server-time", {
           method: 'POST',
           headers: {'Content-Type': 'application/json',},
           body: JSON.stringify({ url: targetUrl }),
