@@ -8,6 +8,8 @@ const axios = require('axios');
 const app = express();
 const port = 9500;
 
+const router = Router();
+
 // EJS 템플릿 엔진 설정
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -99,6 +101,6 @@ app.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
 
-api.use("/api/", router);
+app.use("/api/", router);
 
-export const handler = serverless(api);
+export const handler = serverless(app);
