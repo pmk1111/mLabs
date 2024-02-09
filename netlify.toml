@@ -1,4 +1,4 @@
 [[redirects]]
 from = "/*"
 to = "index.ejs"
-statue = "200"
+status = 200
