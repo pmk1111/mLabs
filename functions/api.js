@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
 const serverless = require("serverless-http");
 const path = require('path');
 const multer = require('multer'); // multer 모듈을 require
 const sharp = require('sharp');
 const axios = require('axios');
 
+const router = express.Router();
 const api = express();
 const port = 9500;
 
@@ -101,6 +101,6 @@ api.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
 
-api.use("/api/", router);
+api.use("/.netlify.functions/api", router);
 
 module.exports.handler = serverless(api);
