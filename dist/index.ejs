@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('../views/nav') %>
+    
+<div id="Accordion_wrap">
+  <div class="menu">
+    <div class="menu_container">
+      <div class="menu_content">
+        <p class="content_type">금융/수학</p>
+        <ul class="content_list">
+          <li><a href="mlabolatories/views/bokkli">간편 복리 계산기</a></li>
+          <li><a href="mlabolatories/views/cal">공학용 계산기</a></li>
+        </ul>
+      </div>
+      <div class="menu_content">
+        <p class="content_type">음향/음악</p>
+        <ul class="content_list">
+          <li><a href="mlabolatoriesviews/frequency" >가청 주파수 테스트</a></li>
+          <li><a href="mlabolatoriesviews/metronome" >온라인 메트로놈</a></li>
+          <!-- <li><a>절대음감 테스트</a></li> -->
+        </ul>
+      </div>
+      
+      <div class="menu_content">
+        <p class="content_type">생성기</p>
+        <ul class="content_list">
+          <li><a href="mlabolatories/lotto">로또 번호 생성하기</a></li>
+          <li><a href="mlabolatories/barcode">바코드/QR코드 생성기</a></li>
+        </ul>
+      </div>
+      
+      <div class="menu_content">
+        <p class="content_type">기타</p>
+        <ul class="content_list">
+          <li><a href="mlabolatories/img-convert">이미지 확장자 변환기</a></li>
+          <li><a href="mlabolatories/server-time">서버 시간 확인하기</a></li>
+          <li><a href="mlabolatories/myip">내 IP 주소 확인하기</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="menu_btn">
+    <span>메뉴</span>
+  </div>
+
+</div>
+
+    
+    <!-- main -->
+    <main>
+      <div class="container">
+        <div class="search_result_container">
+          <div class="search_container">
+            <input
+              type="text"
+              class="search"
+              placeholder="검색할 콘텐츠를 입력하세요"
+            />
+          </div>
+          <div class="result_container">
+            <ul class="result_ul"></ul>
+          </div>
+        </div>
+        <div class="how_to_use">
+          <div class="htu_h3"><h3>사이트 소개</h3></div>
+          <div class="step">
+            <p>1. M.Labs는 다양한 기능들을 모아 둔 웹 사이트입니다.</p>
+            <p>2. 메뉴 항목에서 다양한 콘텐츠를 찾아 이용할 수 있습니다.</p>
+            <p>3. 검색창에 콘텐츠 제목을 입력해 간편하게 찾아보세요.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <%- include('../views/footer') %>
+
+    <script>
+      // 여기에 추가적인 JavaScript 코드 작성
+    </script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

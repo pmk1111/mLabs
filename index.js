@@ -10,12 +10,13 @@ const port = 9500;
 // EJS 템플릿 엔진 설정
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('index', path.join(__dirname, 'dist'));
 
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 
 app.get('/mlabolatories', (req, res) => {
-  res.render('index'); 
+  res.render(path.join(__dirname, 'dist', 'index'));
 });
 app.get('/mlabolatories/frequency', (req, res) => {
   res.render('frequency'); 
