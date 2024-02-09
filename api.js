@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require("serverless-http");
 const path = require('path');
 const multer = require('multer'); // multer 모듈을 require
 const sharp = require('sharp');
@@ -97,3 +98,7 @@ app.post('/mlabolatories/get-server-time', async (req, res) => {
 app.listen(port, () => {
   console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
+
+api.use("/api/", router);
+
+export const handler = serverless(api);
