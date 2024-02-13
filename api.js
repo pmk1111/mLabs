@@ -12,13 +12,13 @@ const port = 9500;
 
 // EJS 템플릿 엔진 설정
 api.set('view engine', 'ejs');
-api.set('views', path.join(__dirname, '..', 'views'));
+api.set('views', path.join(__dirname, 'views'));
 
-api.use(express.static(path.join(__dirname, '..', 'static')));
+api.use(express.static(path.join(__dirname, 'static')));
 api.use(express.json());
 
 api.get('/mlaboratories', (req, res) => {
-  res.render(path.join(__dirname, '..', 'index'));
+  res.render(path.join(__dirname, 'index'));
 });
 api.get('/mlaboratories/frequency', (req, res) => {
   res.render('frequency'); 
