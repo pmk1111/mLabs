@@ -17,34 +17,34 @@ api.set('views', path.join(__dirname, '..', 'views'));
 api.use(express.static(path.join(__dirname, '..', 'static')));
 api.use(express.json());
 
-api.get('/mlabolatories', (req, res) => {
+api.get('/mlaboratories', (req, res) => {
   res.render(path.join(__dirname, '..', 'index'));
 });
-api.get('/mlabolatories/frequency', (req, res) => {
+api.get('/mlaboratories/frequency', (req, res) => {
   res.render('frequency'); 
 });
-api.get('/mlabolatories/barcode', (req, res) => {
+api.get('/mlaboratories/barcode', (req, res) => {
   res.render('barcode'); 
 });
-api.get('/mlabolatories/bokkli', (req, res) => {
+api.get('/mlaboratories/bokkli', (req, res) => {
   res.render('bokkli'); 
 });
-api.get('/mlabolatories/cal', (req, res) => {
+api.get('/mlaboratories/cal', (req, res) => {
   res.render('cal'); 
 });
-api.get('/mlabolatories/img-convert', (req, res) => {
+api.get('/mlaboratories/img-convert', (req, res) => {
   res.render('img-convert'); 
 });
-api.get('/mlabolatories/lotto', (req, res) => {
+api.get('/mlaboratories/lotto', (req, res) => {
   res.render('lotto'); 
 });
-api.get('/mlabolatories/metronome', (req, res) => {
+api.get('/mlaboratories/metronome', (req, res) => {
   res.render('metronome'); 
 });
-api.get('/mlabolatories/myip', (req, res) => {
+api.get('/mlaboratories/myip', (req, res) => {
   res.render('myip'); 
 });
-api.get('/mlabolatories/server-time', (req, res) => {
+api.get('/mlaboratories/server-time', (req, res) => {
   res.render('server-time'); 
 });
 
@@ -52,7 +52,7 @@ api.get('/mlabolatories/server-time', (req, res) => {
 const upload = multer();
 
 // convert img
-api.post('/mlabolatories/convert-image', upload.single('image'), async (req, res) => {
+api.post('/mlaboratories/convert-image', upload.single('image'), async (req, res) => {
   try {
     const { format } = req.body;
 
@@ -72,7 +72,7 @@ api.post('/mlabolatories/convert-image', upload.single('image'), async (req, res
 });
 
 
-api.post('/mlabolatories/get-server-time', async (req, res) => {
+api.post('/mlaboratories/get-server-time', async (req, res) => {
   try {
       const targetUrl = req.body.url;
 
