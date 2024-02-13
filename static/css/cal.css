@@ -78,7 +78,6 @@ nav.nav_dark {
 
 .toggleSwitch,
 .toggleButton {
-  ;
 }
 
 .toggleButton {
@@ -94,6 +93,7 @@ nav.nav_dark {
 .toggleSwitch.blue .toggleButton {
   background: #5151e5;
 }
+
 
 /* display mode img */
 .display_mode_icon {
@@ -213,7 +213,7 @@ footer h4{
   font-size: 14px;
   background-color: white;
   box-shadow: 0 0 10px 0px rgba(0 0 0 / 15%);
-   /* �뒳�씪�씠�뱶 �뾽/�떎�슫 �슚怨쇰�� �쐞�븳 �듃�옖吏��뀡 異붽� */
+  transition: all 0.2s ease;
 }
 .menu.open{
   height: 250px;

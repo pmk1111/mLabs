@@ -170,7 +170,7 @@ function convertImage() {
 
     // GIF 또는 TIFF가 선택된 경우 서버에 요청
     if (outputFormat === "gif" || outputFormat === "tiff") {
-      fetch("/mlabolatories/convert-image", {
+      fetch("/convert-image", {
         method: "POST",
         body: formData,
       })
