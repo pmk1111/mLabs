@@ -17,34 +17,34 @@ api.set('views', path.join(__dirname, 'views'));
 api.use(express.static(path.join(__dirname, 'static')));
 api.use(express.json());
 
-api.get('/mlaboratories', (req, res) => {
+api.get('/', (req, res) => {
   res.render(path.join(__dirname, 'index'));
 });
-api.get('/mlaboratories/frequency', (req, res) => {
+api.get('/frequency', (req, res) => {
   res.render('frequency'); 
 });
-api.get('/mlaboratories/barcode', (req, res) => {
+api.get('/barcode', (req, res) => {
   res.render('barcode'); 
 });
-api.get('/mlaboratories/bokkli', (req, res) => {
+api.get('/bokkli', (req, res) => {
   res.render('bokkli'); 
 });
-api.get('/mlaboratories/cal', (req, res) => {
+api.get('/cal', (req, res) => {
   res.render('cal'); 
 });
-api.get('/mlaboratories/img-convert', (req, res) => {
+api.get('/img-convert', (req, res) => {
   res.render('img-convert'); 
 });
-api.get('/mlaboratories/lotto', (req, res) => {
+api.get('/lotto', (req, res) => {
   res.render('lotto'); 
 });
-api.get('/mlaboratories/metronome', (req, res) => {
+api.get('/metronome', (req, res) => {
   res.render('metronome'); 
 });
-api.get('/mlaboratories/myip', (req, res) => {
+api.get('/myip', (req, res) => {
   res.render('myip'); 
 });
-api.get('/mlaboratories/server-time', (req, res) => {
+api.get('/server-time', (req, res) => {
   res.render('server-time'); 
 });
 
@@ -52,7 +52,7 @@ api.get('/mlaboratories/server-time', (req, res) => {
 const upload = multer();
 
 // convert img
-api.post('/mlaboratories/convert-image', upload.single('image'), async (req, res) => {
+api.post('/convert-image', upload.single('image'), async (req, res) => {
   try {
     const { format } = req.body;
 
@@ -72,7 +72,7 @@ api.post('/mlaboratories/convert-image', upload.single('image'), async (req, res
 });
 
 
-api.post('/mlaboratories/get-server-time', async (req, res) => {
+api.post('/get-server-time', async (req, res) => {
   try {
       const targetUrl = req.body.url;
 
