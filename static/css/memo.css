@@ -1,0 +1,183 @@
+.options {
+    height: 80px;
+    border: 1px solid lightgrey;
+    border-top-style: none;
+  }
+  .options.option-dark {
+    border: 1px solid #3a3a3a;
+    border-top-style: none;
+  }
+
+  #memo {
+    width: 95.5%;
+    height: calc(100vh - 170px);
+    padding-left: 4.5%;
+    border-style: none;
+    outline: none;
+    font-size: 14px;
+    font-family: "Arial", sans-serif;
+    resize: none;
+    position: relative;
+    background-color: transparent;
+    color: #333;
+    background-image: -webkit-linear-gradient(
+        90deg,
+        #d0a090 1px,
+        #d0a090 1px
+      ),
+      linear-gradient(
+        #ffffff,
+        #ffffff 23px,
+        #ccd 23px,
+        #ccd 24px,
+        #fdf8c8 24px
+      );
+    background-image: -moz-linear-linear-gradient(
+        90deg,
+        #d0a090 1px,
+        #d0a090 1px
+      ),
+      linear-gradient(
+        #ffffff,
+        #ffffff 23px,
+        #ccd 23px,
+        #ccd 24px,
+        #fdf8c8 24px
+      );
+    background-image: -ms-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #ffffff,
+        #ffffff 23px,
+        #ccd 23px,
+        #ccd 24px,
+        #fdf8c8 24px
+      );
+    background-image: -o-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #ffffff,
+        #ffffff 23px,
+        #ccd 23px,
+        #ccd 24px,
+        #fdf8c8 24px
+      );
+    background-image: linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #ffffff,
+        #ffffff 23px,
+        #ccd 23px,
+        #ccd 24px,
+        #fdf8c8 24px
+      );
+    background-size: 2px 100%, 100% 24px;
+    background-position: 40px top, left 0px;
+    background-repeat: no-repeat, repeat;
+    line-height: 24px !important;
+    background-attachment: local;
+  }
+  #memo.memo-dark{
+    color: #a8a8a8;
+    background-image: -webkit-linear-gradient(
+        90deg,
+        #df3333 1px,
+        #df3333 1px
+      ),
+      linear-gradient(
+        #2f2f2f,
+        #2f2f2f 23px,
+        rgb(130, 130, 130) 23px,
+        rgb(130, 130, 130) 24px,
+        #fdf8c8 24px
+      );
+    background-image: -moz-linear-linear-gradient(
+        90deg,
+        #df3333 1px,
+        #df3333 1px
+      ),
+      linear-gradient(
+        #2f2f2f,
+        #2f2f2f 23px,
+        rgb(130, 130, 130) 23px,
+        rgb(130, 130, 130) 24px,
+        #fdf8c8 24px
+      );
+    background-image: -ms-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #2f2f2f,
+        #2f2f2f 23px,
+        rgb(130, 130, 130) 23px,
+        rgb(130, 130, 130) 24px,
+        #fdf8c8 24px
+      );
+    background-image: -o-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #2f2f2f,
+        #2f2f2f 23px,
+        rgb(130, 130, 130) 23px,
+        rgb(130, 130, 130) 24px,
+        #fdf8c8 24px
+      );
+    background-image: linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+      linear-gradient(
+        #2f2f2f,
+        #2f2f2f 23px,
+        rgb(130, 130, 130) 23px,
+        rgb(130, 130, 130) 24px,
+        #fdf8c8 24px
+      );
+  }
+  textarea {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding-top: 3px;
+    padding-left: 50px;
+    background: #fdf8c8;
+    font-family: verdana;
+    font-family: Arial, Helvetica, Sans-serif;
+    font-size: large;
+    outline: none;
+    border: 0;
+    resize: none;
+  }
+
+  #saveBtn {
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .btn-container {
+    display: flex;
+    position: relative;
+    width: 140px;
+    height: 35px;
+    top: 45px;
+  }
+  .btn-container button {
+    width: 50%;
+    border: 1px solid lightgrey;
+    border-bottom-style: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    cursor: pointer;
+    outline: none;
+  }
+  .btn-container button:hover {
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+  .btn-container button.active {
+    background-color: #6aaee8;
+    border-style: none;
+    color: white;
+  }
+  .btn-container button.btn-dark {
+    background-color: #151515;
+    border: 1px solid #3a3a3a;
+    color: white;
+  }
+  .btn-container button.btn-dark.active {
+    background-color: #3a3a3a;
+    border-style: none;
+    color: white;
+  }
