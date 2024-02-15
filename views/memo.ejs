@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 메모장</title>
+
+    <link rel="icon" href="/images/logo.png" />
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="/summernotes/summernote-lite.js"></script>
+    <script src="/summernotes/lang/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="/summernotes/summernote-lite.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .memo-container {
+        height: 100vh;
+        background-size: 2px 100%, 100% 24px;
+        background-position: 40px top, left 0px;
+        background-repeat: no-repeat, repeat;
+        line-height: 24px;
+        background-attachment: local;
+        margin-top: 72px;
+      }
+
+      .options {
+        height: 80px;
+        border: 1px solid lightgrey;
+        border-top-style: none;
+      }
+      .options.option-dark {
+        border: 1px solid #3a3a3a;
+        border-top-style: none;
+      }
+
+      #memo {
+        width: 95.5%;
+        height: calc(100vh - 170px);
+        padding-left: 4.5%;
+        border-style: none;
+        outline: none;
+        font-size: 14px;
+        font-family: "Arial", sans-serif;
+        resize: none;
+        position: relative;
+        background-color: transparent;
+        color: #333;
+        background-image: -webkit-linear-gradient(
+            90deg,
+            #d0a090 1px,
+            #d0a090 1px
+          ),
+          linear-gradient(
+            #ffffff,
+            #ffffff 23px,
+            #ccd 23px,
+            #ccd 24px,
+            #fdf8c8 24px
+          );
+        background-image: -moz-linear-linear-gradient(
+            90deg,
+            #d0a090 1px,
+            #d0a090 1px
+          ),
+          linear-gradient(
+            #ffffff,
+            #ffffff 23px,
+            #ccd 23px,
+            #ccd 24px,
+            #fdf8c8 24px
+          );
+        background-image: -ms-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #ffffff,
+            #ffffff 23px,
+            #ccd 23px,
+            #ccd 24px,
+            #fdf8c8 24px
+          );
+        background-image: -o-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #ffffff,
+            #ffffff 23px,
+            #ccd 23px,
+            #ccd 24px,
+            #fdf8c8 24px
+          );
+        background-image: linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #ffffff,
+            #ffffff 23px,
+            #ccd 23px,
+            #ccd 24px,
+            #fdf8c8 24px
+          );
+        background-size: 2px 100%, 100% 24px;
+        background-position: 40px top, left 0px;
+        background-repeat: no-repeat, repeat;
+        line-height: 24px !important;
+        background-attachment: local;
+      }
+      #memo.memo-dark{
+        color: #a8a8a8;
+        background-image: -webkit-linear-gradient(
+            90deg,
+            #df3333 1px,
+            #df3333 1px
+          ),
+          linear-gradient(
+            #2f2f2f,
+            #2f2f2f 23px,
+            rgb(130, 130, 130) 23px,
+            rgb(130, 130, 130) 24px,
+            #fdf8c8 24px
+          );
+        background-image: -moz-linear-linear-gradient(
+            90deg,
+            #df3333 1px,
+            #df3333 1px
+          ),
+          linear-gradient(
+            #2f2f2f,
+            #2f2f2f 23px,
+            rgb(130, 130, 130) 23px,
+            rgb(130, 130, 130) 24px,
+            #fdf8c8 24px
+          );
+        background-image: -ms-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #2f2f2f,
+            #2f2f2f 23px,
+            rgb(130, 130, 130) 23px,
+            rgb(130, 130, 130) 24px,
+            #fdf8c8 24px
+          );
+        background-image: -o-linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #2f2f2f,
+            #2f2f2f 23px,
+            rgb(130, 130, 130) 23px,
+            rgb(130, 130, 130) 24px,
+            #fdf8c8 24px
+          );
+        background-image: linear-gradient(90deg, #d0a090 1px, #d0a090 1px),
+          linear-gradient(
+            #2f2f2f,
+            #2f2f2f 23px,
+            rgb(130, 130, 130) 23px,
+            rgb(130, 130, 130) 24px,
+            #fdf8c8 24px
+          );
+      }
+      textarea {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding-top: 3px;
+        padding-left: 50px;
+        background: #fdf8c8;
+        font-family: verdana;
+        font-family: Arial, Helvetica, Sans-serif;
+        font-size: large;
+        outline: none;
+        border: 0;
+        resize: none;
+      }
+
+      #saveBtn {
+        margin-top: 10px;
+        cursor: pointer;
+      }
+      .btn-container {
+        display: flex;
+        position: relative;
+        width: 140px;
+        height: 35px;
+        top: 45px;
+      }
+      .btn-container button {
+        width: 50%;
+        border: 1px solid lightgrey;
+        border-bottom-style: none;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        cursor: pointer;
+        outline: none;
+      }
+      .btn-container button:hover {
+        opacity: 0.8;
+        transition: 0.2s;
+      }
+      .btn-container button.active {
+        background-color: #6aaee8;
+        border-style: none;
+        color: white;
+      }
+      .btn-container button.btn-dark {
+        background-color: #151515;
+        border: 1px solid #3a3a3a;
+        color: white;
+      }
+      .btn-container button.btn-dark.active {
+        background-color: #3a3a3a;
+        border-style: none;
+        color: white;
+      }
+      .note-editor.note-frame {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %> 
+    <%- include('./accordion') %>
+
+    <div class="memo-container">
+      <div class="options">
+        <div class="btn-container">
+          <button class="normal active">일반</button>
+          <button class="editor">에디터</button>
+        </div>
+      </div>
+      <textarea id="memo" placeholder="메모를 입력하세요..."></textarea>
+      <textarea class="summernote" name="editordata"></textarea>
+      <!-- <button id="saveBtn" onclick="saveMemo()">저장</button> -->
+    </div>
+
+    <script src="/js/common.js"></script>
+    <script>
+      window.onload = function () {
+        const body = document.querySelector("body");
+        const nav = document.querySelector("nav");
+        const toggleList = document.querySelectorAll(".toggleSwitch");
+        const toggleImg = document.querySelector(".display_mode_icon");
+        const menuBtn = document.querySelector(".menu_btn");
+        const menu = document.querySelector(".menu");
+        const navBar = document.querySelector(".nav_bar");
+        const menuLink = document.querySelectorAll(".menu_container a");
+        const footer = document.querySelector("footer");
+
+        const normalTxt = document.querySelector(".normal");
+        const editorTxt = document.querySelector(".editor");
+        const memo = document.querySelector("#memo");
+        const memoEditor = document.querySelector(".note-editor.note-frame");
+        const option = document.querySelector('.options');
+
+        const noteToolBar = document.querySelector('.note-toolbar');
+        const noteToolBarBtn = noteToolBar.querySelectorAll('button');
+
+        let txtValue = "";
+        var isActive = true;
+
+        // 다크모드
+        toggleList.forEach(($toggle) => {
+          $toggle.onclick = () => {
+            isActive = $toggle.classList.contains("active");
+            let noteEditable = document.querySelector(".note-editable");
+
+            if (isActive) {
+              $toggle.classList.remove("active");
+              toggleImg.setAttribute("src", "/images/sun.png");
+              body.classList.remove("dark");
+
+              nav.classList.remove("nav_dark");
+
+              menuBtn.classList.remove("menu_btn_dark");
+              menu.classList.remove("menu_dark");
+              for (item of menuLink) {
+                item.classList.remove("link_dark");
+              }
+
+              option.classList.remove('option-dark');
+              normalTxt.classList.remove('btn-dark');
+              editorTxt.classList.remove('btn-dark');
+
+              noteToolBar.style.backgroundColor = "#f5f5f5";
+              for(let i of noteToolBarBtn){
+                i.style.backgroundColor = 'fff';
+                i.style.color = '#333';
+              }
+              noteEditable.style.color = '#333';
+              memo.classList.remove('memo-dark');
+            } else {
+              $toggle.classList.add("active");
+              toggleImg.setAttribute("src", "/images/moon.png");
+              body.classList.add("dark");
+
+              nav.classList.add("nav_dark");
+
+              menuBtn.classList.add("menu_btn_dark");
+              menu.classList.add("menu_dark");
+
+              option.classList.add('option-dark');
+              normalTxt.classList.add('btn-dark');
+              editorTxt.classList.add('btn-dark');
+
+              noteToolBar.style.backgroundColor = "#3a3a3a";
+              for(let i of noteToolBarBtn){
+                i.style.backgroundColor = '#151515';
+                i.style.color = '#a8a8a8';
+              }
+              noteEditable.style.color = '#a8a8a8';
+              memo.classList.add('memo-dark');
+            }
+          };
+        });
+
+        normalTxt.addEventListener("click", function () {
+          if (!normalTxt.classList.contains("active")) {
+            normalTxt.classList.add("active");
+            editorTxt.classList.remove("active");
+
+            let noteEditable = document.querySelector(".note-editable");
+            let pTag = noteEditable.querySelectorAll("p");
+
+            txtValue = "";
+            for (let i = 0; i < pTag.length; i++) {
+              if (i == pTag.length - 1) {
+                txtValue += pTag[i].textContent;
+              } else {
+                txtValue += pTag[i].textContent + "\n";
+              }
+            }
+            console.log(txtValue);
+            memo.value = txtValue;
+
+            memo.style.display = "block";
+            memoEditor.style.display = "none";
+          }
+        });
+        editorTxt.addEventListener("click", function () {
+          if (!editorTxt.classList.contains("active")) {
+            let noteEditable = document.querySelector(".note-editable");
+            while (noteEditable.firstChild) {
+              noteEditable.removeChild(noteEditable.firstChild);
+            }
+            console.log("editorBnt click");
+
+            editorTxt.classList.add("active");
+            normalTxt.classList.remove("active");
+
+            if (txtValue) {
+              txtValue = memo.value
+                .split("\n")
+                .map((line) => `<p>${line}</p>`)
+                .join("");
+            }
+            noteEditable.innerHTML = txtValue;
+            console.log(txtValue);
+
+            memoEditor.style.display = "block";
+            memo.style.display = "none";
+          }
+        });
+
+        // 페이지 로드 시 저장된 메모 불러오기
+        window.onload = function () {
+          loadMemo();
+        };
+
+        memo.addEventListener("input", saveMemo);
+        memoEditor.addEventListener("input", saveMemo);
+
+        function saveMemo() {
+          if (normalTxt.classList.contains("active")) {
+            const memoText = memo.value;
+            localStorage.setItem("memo", memoText);
+          } else {
+            const memoEditorText = memoEditor.value;
+            console.log(memoEditorText);
+            let noteEditable = document.querySelector(".note-editable");
+            let pTag = noteEditable.querySelectorAll("p");
+
+            txtValue = "";
+            for (let p of pTag) {
+              txtValue += p.textContent + "\n";
+            }
+
+            localStorage.setItem("memo", txtValue);
+          }
+        }
+        // 저장된 메모 불러오기
+        function loadMemo() {
+          const storedMemo = localStorage.getItem("memo");
+          console.log(storedMemo);
+          if (storedMemo) {
+            const memoText = storedMemo;
+
+            // Set the memo and memoEditor values
+            memo.value = memoText;
+            txtValue = memoText;
+          }
+        }
+        loadMemo();
+      };
+    </script>
+    <script>
+      $(".summernote").summernote({
+        height: 450,
+        lang: "ko-KR",
+      });
+    </script>
+  </body>
+</html>

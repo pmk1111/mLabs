@@ -47,6 +47,9 @@ api.get('/myip', (req, res) => {
 api.get('/server-time', (req, res) => {
   res.render('server-time'); 
 });
+api.get('/memo', (req, res) => {
+  res.render('memo');
+})
 
 // 파일 업로드를 위한 multer 설정
 const upload = multer();
@@ -94,7 +97,6 @@ api.post('/get-server-time', async (req, res) => {
       res.status(500).json({ error: '서버 에러가 발생했습니다.' });
   }
 });
-
 
 // 서버 시작
 api.listen(port, () => {

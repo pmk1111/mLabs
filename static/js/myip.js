@@ -1,9 +1,6 @@
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
 
-// const bodyClassList = bodyTag.classList;
-const logo = document.querySelector(".logo");
-
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
 
