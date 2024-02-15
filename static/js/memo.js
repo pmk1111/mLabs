@@ -14,6 +14,7 @@ window.onload = function () {
     const memo = document.querySelector("#memo");
     const memoEditor = document.querySelector(".note-editor.note-frame");
     const option = document.querySelector('.options');
+    const about = document.querySelector('.about');
 
     const noteToolBar = document.querySelector('.note-toolbar');
     const noteToolBarBtn = noteToolBar.querySelectorAll('button');
@@ -43,6 +44,7 @@ window.onload = function () {
           option.classList.remove('option-dark');
           normalTxt.classList.remove('btn-dark');
           editorTxt.classList.remove('btn-dark');
+          about.classList.remove('about-dark');
 
           noteToolBar.style.backgroundColor = "#f5f5f5";
           for(let i of noteToolBarBtn){
@@ -60,10 +62,14 @@ window.onload = function () {
 
           menuBtn.classList.add("menu_btn_dark");
           menu.classList.add("menu_dark");
+          for(item of menuLink){
+            item.classList.add("link_dark");
+          }
 
           option.classList.add('option-dark');
           normalTxt.classList.add('btn-dark');
           editorTxt.classList.add('btn-dark');
+          about.classList.add('about-dark');
 
           noteToolBar.style.backgroundColor = "#3a3a3a";
           for(let i of noteToolBarBtn){

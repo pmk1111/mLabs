@@ -9,9 +9,9 @@
   }
 
   #memo {
-    width: 95.5%;
+    width: calc(100% - 50px);
     height: calc(100vh - 170px);
-    padding-left: 4.5%;
+    padding-left: 50px;
     border-style: none;
     outline: none;
     font-size: 14px;
@@ -147,12 +147,13 @@
   .btn-container {
     display: flex;
     position: relative;
-    width: 140px;
+    width: 210px;
     height: 35px;
     top: 45px;
   }
   .btn-container button {
-    width: 50%;
+    width: 70px;
+    height: 35px;
     border: 1px solid lightgrey;
     border-bottom-style: none;
     border-top-left-radius: 3px;

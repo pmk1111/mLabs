@@ -40,6 +40,44 @@
       .note-editor.note-frame {
         display: none;
       }
+
+
+
+
+    .tooltip {
+      width: 70px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .about{
+      width: 70px;
+    }
+    .about.about-dark{
+      background-color: #151515;
+      border: 1px solid #3a3a3a
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #151515;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
     </style>
   </head>
   <body>
@@ -51,11 +89,15 @@
         <div class="btn-container">
           <button class="normal active">일반</button>
           <button class="editor">에디터</button>
+          <div class="tooltip">
+            <button class="about">❕</button>
+            <div class="tooltiptext">입력한 텍스트는 클라이언트 캐시에 저장됩니다.<br>캐시 삭제 시 입력한 메모가 삭제되므로 주의하시길 바랍니다.</div>
+          </div>
+
         </div>
       </div>
       <textarea id="memo" placeholder="메모를 입력하세요..."></textarea>
       <textarea class="summernote" name="editordata"></textarea>
-      <!-- <button id="saveBtn" onclick="saveMemo()">저장</button> -->
     </div>
 
     <script src="/js/common.js"></script>
