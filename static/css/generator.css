@@ -124,7 +124,7 @@ main {
   justify-content: center;
 }
 .container {
-  width: 520px;
+  width: 700px;
   padding: 0 20px;
   margin: 50px 0;
 }
@@ -140,7 +140,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 130px;
+  width: 25%;
   height: 35px;
   font-size: 16px;
   cursor: pointer;
@@ -189,7 +189,7 @@ main {
 #bar_frequency {
   -webkit-appearance: none;
   appearance: none; 
-  width: 400px;
+  width: 91%;
   cursor: pointer;
   outline: none;
   overflow: hidden;
@@ -327,7 +327,7 @@ label[for="bar_frequency"]{
 
 .how_to_use{
   margin: 40px 0 20px 0;
-  width: 520px;
+  width: 100%;
   border: 1px solid #5884ab;
   border-radius: 3px;
 }

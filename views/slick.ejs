@@ -121,22 +121,72 @@
 		  		</div>
 		  	</a>
 		  </div>
+
+		  <div class="slick-container">
+			<a href="./memo">
+				<div class="slick-content">
+					<div class="slick-img-wrap">
+					  <img class="slick-img" src="/images/logo.png">
+						<span class="overlay"></span>
+					</div>
+					<div class="slick-content-name-wrap">
+						<p class="slick-content-name">온라인 메모장</p>
+						<span class="slick-content-desc">클라이언트 캐시에 저장되는 온라인 메모장</span>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="slick-container">
+			<a href="./memo">
+			  <div class="slick-content">
+				<div class="slick-img-wrap">
+				  <img class="slick-img" src="/images/logo.png">
+				  <span class="overlay"></span>
+				</div>
+				<div class="slick-content-name-wrap">
+				  <p class="slick-content-name">png, jpg pdf 변환</p>
+				  <span class="slick-content-desc">png, jpg 파일을 pdf로 변환해줍니다.</span>
+				</div>
+			  </div>
+			</a>
+		  </div>
 		  
 
 		</div>
-		
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/slick.min.js"></script>
   <script>
-    $(document).ready(function () {
-			$('.slider').slick({
-  			slidesToShow: 3,
-  			slidesToScroll: 1,
-  			autoplay: false,
-  			centerMode: true,
-			});
-    });
+$(document).ready(function () {
+  $('.slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    centerMode: true,
+    responsive: [
+      {
+        breakpoint: 426, // If the viewport width is 426px or more
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          autoplay: false,
+          centerMode: true,
+        }
+      },
+      {
+        breakpoint: 425, // If the viewport width is 425px or less
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: false,
+          centerMode: true,
+        }
+      }
+    ]
+  });
+});
+
   </script>
 
-	  </div>
+	  
 

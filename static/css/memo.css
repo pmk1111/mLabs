@@ -182,3 +182,38 @@
     border-style: none;
     color: white;
   }
+
+  .tooltip {
+    width: 70px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .about{
+    width: 70px;
+  }
+  .about.about-dark{
+    background-color: #151515;
+    border: 1px solid #3a3a3a
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #151515;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image to PDF Converter</title>
+
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/slider.css"/>
+    <link rel="stylesheet" href="/slick/slick.css" />
+    <link rel="stylesheet" href="/slick/slick-theme.css"/>
+
+    <style>
+      footer {
+	position: relative;
+	margin-top: 80px;
+}
+nav{top:0}
+#Accordion_wrap {
+	position: fixed;
+	width: 100%;
+}
+.container{margin-top: 120px;}
+.slick-container{width: 820px;}
+
+      #uploadArea {
+        width: 820px;
+        height: 600px;
+        margin: 20px;
+        position: relative;
+        overflow: auto;
+      }
+      .upload-area{border: 2px dashed #ccc;}
+      .upload-area.dark{border: 2px dashed #3a3a3a;}
+
+      .thumbnail {
+        width: 180px;
+        height: 180px;
+        margin: 10px;
+        float: left;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .thumbnail .download-btn {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+      }
+
+      .thumbnail .cancel-btn {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 50%;
+        border: 3px solid red;
+        background-color: transparent;
+      }
+      .cancel-btn-img{
+        width: 40px;
+        height: 40px;
+
+      }
+      .here{
+        position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+      }
+      .add-img{
+        width: 120px;
+        height: 120px;
+      }
+      .add-txt{
+        color: #ccc;
+      }
+      .file-name-div{
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    width: 136px;
+    height: 30px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+      }
+      .file-name-div span{
+        position: relative;
+    top: -2px;
+    font-size: 13px;
+      }
+      .file-name-div.dark{
+        color:white;
+        background-color: #3a3a3a;
+      }
+      .convert-all-btn{
+        width: 820px;
+        height: 50px;
+        background-color: #609fd6;
+        border-style: none;
+        border-radius: 3px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        visibility: hidden;
+      }
+      .convert-all-btn:hover{
+        opacity: .9;
+        transition: .2s;
+      }
+      .convert-all-btn.dark{background-color: #3a3a3a; color: white;}
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+
+    <div class="container">
+    <div id="uploadArea" class="upload-area" onclick="handleClick(event)" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+      <input type="file" class="upload" accept=".png, .jpg" id="fileInput" style="display: none" onchange="handleFileSelect()" multiple/>
+      <div class="here">
+        <img id="addImg" class="add-img" src="/images/folder-add.svg" />
+        <p class="add-txt">또는 여기에 파일을 끌어다 놓으세요</p>
+      </div>
+    </div>
+    <button class="convert-all-btn" type="button" onclick="convertAll()">모두 변환하기</button>
+    <div class="slick-container" th:fragment = "slick">
+      <p class="more-content"><span style="font-weight: 700; color:#3a3a3a";>M.Labs의</span> 더 많은 콘텐츠</p>
+      <div class="slider" >
+        <div class="slick-container">
+          <a href="./frequency">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+                <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">가청 주파수 테스트</p>
+                <span class="slick-content-desc">20~20000HZ 사이의 주파수를 출력해 줍니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./barcode'">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">바코드/QR코드 생성기</p>
+                <span class="slick-content-desc">온라인으로 간편하게 바코드, QR 생성 후 다운로드할 수 있습니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./server-time">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">서버 시간 확인하기</p>
+                <span class="slick-content-desc">내가 원하는 웹 사이트의 url로 해당 서버의 시간을 확인할 수 있습니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./myip">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">내 ip 주소 확인하기</p>
+                <span class="slick-content-desc">내 ip 주소가 궁금하다면?</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./lotto">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">로또 번호 생성기</p>
+                <span class="slick-content-desc">로또 번호를 생성해서 당첨의 기회를 노려보세요.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./img-convert">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">이미지 확장자 변환기</p>
+                <span class="slick-content-desc">이미지 파일의 확장자를 변경해 다운로드할 수 있습니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./bokkli">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">간편 복리 계산기</p>
+                <span class="slick-content-desc">복리를 계산해 투자 전략을 세울 수 있습니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <div class="slick-container">
+          <a href="./cal">
+            <div class="slick-content">
+              <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+                <span class="overlay"></span>
+              </div>
+              <div class="slick-content-name-wrap">
+                <p class="slick-content-name">공학용 계산기</p>
+                <span class="slick-content-desc">간편한 공학용 계산기입니다.</span>
+              </div>
+            </div>
+          </a>
+        </div>
+  
+        <div class="slick-container">
+        <a href="./memo">
+          <div class="slick-content">
+            <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+              <span class="overlay"></span>
+            </div>
+            <div class="slick-content-name-wrap">
+              <p class="slick-content-name">온라인 메모장</p>
+              <span class="slick-content-desc">클라이언트 캐시에 저장되는 온라인 메모장</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="slick-container">
+        <a href="./pdf-convert.ejs">
+          <div class="slick-content">
+            <div class="slick-img-wrap">
+              <img class="slick-img" src="/images/logo.png">
+              <span class="overlay"></span>
+            </div>
+            <div class="slick-content-name-wrap">
+              <p class="slick-content-name">png, jpg pdf 변환기</p>
+              <span class="slick-content-desc">png, jpg 파일을 pdf로 변환해줍니다.</span>
+            </div>
+          </div>
+        </a>
+      </div>
+        
+    </div>
+      </div>
+      
+
+    </div>
+
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/slick.min.js"></script>
+    <script src="/js/pdf-convert.js"></script>
+
+    <script>
+      $(document).ready(function () {
+  $('.slider').slick({
+    slidesToShow: 3.5,
+    slidesToScroll: 1,
+    autoplay: false,
+    centerMode: true
+  });
+});
+    </script>
+  </body>
+</html>
