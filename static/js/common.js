@@ -2,6 +2,9 @@ var isMenuOpened = false;
 var isContentOpened = false;
 var browserWidth = window.innerWidth;
 let contentType = document.querySelectorAll(".content_type");
+const triangle = document.querySelector('.triangle');
+const appIcon = document.querySelector('.app-icon');
+const menuBtnDiv = document.querySelector(".menu_btn");
 
 document.addEventListener("DOMContentLoaded", function () {
   let menuBtn = document.querySelector(".menu_btn");
@@ -20,12 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
 function slideToggle(menu) {
   if (isMenuOpened) {
     menu.classList.remove("open");
+    triangle.textContent = "▼";
     isMenuOpened = false;
   } else {
     menu.classList.add("open");
+    triangle.textContent = "▲";
     isMenuOpened = true;
   }
 }

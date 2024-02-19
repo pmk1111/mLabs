@@ -1,6 +1,8 @@
-
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -33,6 +35,9 @@ toggleList.forEach(($toggle) => {
       body.classList.remove("dark");
 
       nav.classList.remove("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
 
       menuBtn.classList.remove("menu_btn_dark");
       menu.classList.remove("menu_dark");
@@ -58,6 +63,9 @@ toggleList.forEach(($toggle) => {
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
 
       menuBtn.classList.add("menu_btn_dark");
       menu.classList.add("menu_dark");

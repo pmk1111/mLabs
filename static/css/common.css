@@ -32,11 +32,11 @@ body.dark {
 nav {
   position: fixed;
   width: 100%;
-  height: 80px;
-  color: white;
-  background-color: #609fd6;
-  border-bottom: 1px solid #609fd6;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
+  height: 70px;
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid #d3d3d3;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
   z-index: 11
 }
 
@@ -50,9 +50,15 @@ nav.nav_dark {
   align-items: center;
   justify-content: space-between;
   padding: 10px 40px;
-  height: 60px;
+  height: 50px;
 }
-
+.owner_text_container, .owner_text_container a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.title_container{margin-left: 12px;}
+.title_container h1{ color: #151515; font-size: 28px;}
 /* toggle */
 .toggleSwitch {
   width: 55px;
@@ -120,36 +126,31 @@ nav.nav_dark {
   position: relative;
   z-index: 11;
   color: black;
-  top:80px;
+  top:70px;
   height: 10px;
 }
+.app-icon{width: 29px;}
 .menu_btn {
+  margin-left: 32px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  background-color: white;
-  width: 100px;
-  height: 20px;
-  padding: 8px 0;
+  width: 97px;
+  height: 70px;
   cursor: pointer;
-  font-size: 14px;
   margin-top:1px;
-  border: 1px solid rgb(195, 195, 195);
-  border-top-style: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  box-shadow: 0 0 16px 0px rgba(0 0 0 / 15%);
   box-sizing: content-box;
+  font-size: 19px;
+  letter-spacing:1px;
+  font-weight: 300;
 }
-
 .menu_btn.menu_btn_dark{
-  background-color: #3a3a3a;
   color:white;
   border-style: none;
 }
+.menu_btn:hover{border-bottom: 2px solid #151515;}
+.menu_btn_dark:hover{border-bottom: 2px solid white;}
 .menu_btn.on > span {
   font-weight: bold;
   color: #006633;
