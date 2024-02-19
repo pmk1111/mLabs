@@ -56,6 +56,9 @@ api.get('/memo', (req, res) => {
 api.get('/pdf-convert', (req, res) => {
   res.render('pdf-convert')
 })
+api.get('/pdf-to-jpg', (req, res) =>{
+  res.render('pdf-to-jpg')
+})
 
 // 파일 업로드를 위한 multer 설정
 const upload = multer();
@@ -110,9 +113,7 @@ api.post('/convert-to-pdf', upload.single('image'), async (req, res) => {
   }
 
   try {
-      // 이미지를 sharp를 사용하여 읽고 처리
       const imageBuffer = await sharp(req.file.buffer).toBuffer();
-
       const imageSize = await sharp(req.file.buffer).metadata();
       const pdfDoc = new PDFDocument({ autoFirstPage: false });
       const pdfStream = res.type('application/pdf');
@@ -167,10 +168,10 @@ api.post('/convert-all-to-pdf', upload.array('image[]'), async (req, res) => {
 
     pdfDoc.end();
   } catch (error) {
-    // console.error('Error:', error);
-    // res.status(500).send('Internal Server Error');
+
   }
 });
+
 
 
 // 서버 시작

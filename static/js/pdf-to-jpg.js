@@ -1,0 +1,211 @@
+
+const body = document.querySelector("body");
+const nav = document.querySelector("nav");
+
+const toggleList = document.querySelectorAll(".toggleSwitch");
+const toggleImg = document.querySelector(".display_mode_icon");
+
+const menuBtn = document.querySelector(".menu_btn");
+const menu = document.querySelector(".menu");
+// const htu = document.querySelectorAll(".how_to_use");
+// const descH3 = document.querySelectorAll(".htu_h3");
+// const description = document.querySelectorAll(".description");
+
+const menuLink = document.querySelectorAll(".menu_container a");
+
+const footer = document.querySelector("footer");
+
+const dropArea = document.querySelector(".drop-file");
+const fileInput = document.getElementById("pdfInput");
+const here = document.querySelector('.here');
+const convertBtn = document.querySelector('.do-convert');
+
+var isActive = true;
+// 다크모드
+toggleList.forEach(($toggle) => {
+  $toggle.onclick = () => {
+
+    isActive = $toggle.classList.contains("active");
+    const fileNameDivs = document.querySelectorAll('.file-name-div');
+    if (isActive) {
+      $toggle.classList.remove("active");
+      toggleImg.setAttribute("src", "/images/sun.png");
+      body.classList.remove("dark");
+
+      nav.classList.remove("nav_dark");
+
+      menuBtn.classList.remove("menu_btn_dark");
+      menu.classList.remove("menu_dark");
+      for(item of menuLink){
+        item.classList.remove("link_dark");
+      }
+      dropArea.classList.remove('dark');
+      convertBtn.classList.remove('dark');
+    //   for(item of htu){
+    //   	item.classList.remove("htu_dark");
+    //   }
+	// 		for(item of descH3){
+    //   	item.classList.remove("htu_h3_dark");
+    //   }
+    //   for(item of description){
+    //   	item.classList.remove("desc_dark");
+    //   }
+
+      footer.classList.remove("footer_dark");
+    } else {
+      $toggle.classList.add("active");
+      toggleImg.setAttribute("src", "/images/moon.png");
+      body.classList.add("dark");
+
+      nav.classList.add("nav_dark");
+
+      menuBtn.classList.add("menu_btn_dark");
+      menu.classList.add("menu_dark");
+      for(item of menuLink){
+        item.classList.add("link_dark");
+      }
+      dropArea.classList.add('dark');
+      convertBtn.classList.add('dark');
+    //   for(item of htu){
+    //   	item.classList.add("htu_dark");
+    //   }
+	// 		for(item of descH3){
+    //   	item.classList.add("htu_h3_dark");
+    //   }
+    //   for(item of description){
+    //   	item.classList.add("desc_dark");
+    //   }
+
+      footer.classList.add("footer_dark");
+      console.log(fileNameDivs.length)
+    }
+  };
+});
+
+
+// 드래그 앤 드롭 이벤트 처리
+dropArea.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropArea.style.backgroundColor = "#eee";
+});
+
+dropArea.addEventListener("dragleave", () => {
+  dropArea.style.backgroundColor = "#fff";
+});
+
+dropArea.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropArea.style.backgroundColor = "#fff";
+  handleFiles(e.dataTransfer.files);
+  showUploadedFile(e.dataTransfer.files[0]);
+});
+
+// 파일 입력 필드 변경 이벤트 처리
+fileInput.addEventListener("change", () => {
+  fileInput.file = fileInput.files[0];
+  showUploadedFile(fileInput.files[0]);
+});
+
+// 클릭 이벤트 처리
+dropArea.addEventListener("click", () => {
+  fileInput.click();
+});
+
+function handleFiles(files) {
+  if (files.length === 0) {
+    return;
+  }
+
+  // Update fileInput.files directly
+  fileInput.files = files;
+}
+
+function showUploadedFile(file) {
+  dropArea.innerHTML = '';
+  const fileDiv = document.createElement('div');
+  const fileIcon = document.createElement('img');
+  const fileName = document.createElement('span');
+  const size = document.createElement('span');
+
+  fileDiv.className = 'file-div';
+  fileIcon.className = 'pdf-icon';
+  fileName.className = 'file-name';
+  size.className = 'file-size';
+
+  fileName.textContent = file.name;
+  if(file.size/1024/1024 >= 1){
+    size.textContent = Math.round(file.size/1024/1024) + 'GB';
+  } else if(file.size/1024 >= 1){
+    size.textContent = Math.round(file.size/1024) + 'KB';
+  } else{
+    size.textContent = file.size + 'Byte';
+  }
+
+  fileIcon.setAttribute('src', '/images/pdf-icon.png');
+
+  fileDiv.appendChild(fileIcon);
+  fileDiv.appendChild(fileName);
+  fileDiv.appendChild(size)
+  dropArea.appendChild(fileDiv);
+
+  convertBtn.style.display = "block";
+}
+
+function convertAndDownload() {
+  const pdfInput = document.getElementById("pdfInput");
+
+  if (!pdfInput.files || pdfInput.files.length === 0) {
+    alert("pdf 파일을 업로드하세요.");
+    return;
+  }
+
+  const pdfFile = pdfInput.files[0];
+
+  pdfjsLib
+    .getDocument(URL.createObjectURL(pdfFile))
+    .promise.then((pdf) => {
+      const totalPages = pdf.numPages;
+      const zip = new JSZip();
+
+      // Convert each page to JPG
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.getPage(i).then((page) => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          const viewport = page.getViewport({ scale: 1.5 });
+
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          };
+
+          page.render(renderContext).promise.then(() => {
+            // Convert canvas to data URL
+            const imageDataURL = canvas.toDataURL("image/jpeg");
+
+            // Add image to zip file
+            zip.file(`page${i}.jpg`, imageDataURL.split(",")[1], {
+              base64: true,
+            });
+
+            // If all pages are processed, create and download the zip file
+            if (i === totalPages) {
+              zip.generateAsync({ type: "blob" }).then((blob) => {
+                const zipFileName = pdfFile.name.replace(
+                  ".pdf",
+                  "_converted.zip"
+                );
+                const downloadLink = document.createElement("a");
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = zipFileName;
+                downloadLink.click();
+              });
+            }
+          });
+        });
+      }
+    });
+}
