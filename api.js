@@ -54,10 +54,13 @@ api.get('/memo', (req, res) => {
   res.render('memo');
 })
 api.get('/pdf-convert', (req, res) => {
-  res.render('pdf-convert')
+  res.render('pdf-convert');
 })
 api.get('/pdf-to-jpg', (req, res) =>{
-  res.render('pdf-to-jpg')
+  res.render('pdf-to-jpg');
+})
+api.get('/color-picker', (req, res) => {
+  res.render('color-picker');
 })
 
 // 파일 업로드를 위한 multer 설정
