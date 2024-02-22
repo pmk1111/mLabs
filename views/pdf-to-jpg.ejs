@@ -8,26 +8,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <!-- jszip library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
-    
+
     <link rel="icon" href="/images/logo.png" />
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/slider.css"/>
+    <link rel="stylesheet" href="/css/slider.css" />
     <link rel="stylesheet" href="/slick/slick.css" />
-    <link rel="stylesheet" href="/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="/slick/slick-theme.css" />
 
     <style>
-            footer {
-	      position: relative;
-	      margin-top: 110px;
+      footer {
+        position: relative;
+        margin-top: 110px;
       }
-      nav{top:0}  
+      nav {
+        top: 0;
+      }
       #Accordion_wrap {
-	      position: fixed;
-	      width: 100%;
+        position: fixed;
+        width: 100%;
       }
-      .container{margin-top: 120px;}
+      .container {
+        margin-top: 80px;
+      }
 
-      .upload-file{
+      .upload-file {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -35,7 +39,7 @@
         width: 80%;
       }
       .drop-file {
-        display:  flex;
+        display: flex;
         justify-content: center;
         align-items: center;
         width: 80%;
@@ -44,11 +48,13 @@
         border: 2px dashed lightgrey;
         border-radius: 3px;
       }
-      .drop-file.dark{
+      .drop-file.dark {
         border: 2px dashed #3a3a3a;
       }
-      #pdfInput{display: none;}
-      .here{
+      #pdfInput {
+        display: none;
+      }
+      .here {
         width: 160px;
         height: 160px;
         display: flex;
@@ -58,24 +64,34 @@
         font-size: 14px;
         color: #b4b4b4;
       }
-      .add-img{
-        width: 120px; height: auto;
+      .add-img {
+        width: 120px;
+        height: auto;
       }
-      .file-div{
+      .file-div {
         width: 260px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
-      .file-div span{
+      .file-div span {
         display: inline-block;
         margin: 3px 0;
       }
-      .file-name{font-size: 15px; font-weight: 600;}
-      .file-size{font-size: 13px; color: #b4b4b4;}
-      .pdf-icon{width: 100px; height: auto;}
-      .do-convert{
+      .file-name {
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .file-size {
+        font-size: 13px;
+        color: #b4b4b4;
+      }
+      .pdf-icon {
+        width: 100px;
+        height: auto;
+      }
+      .do-convert {
         margin: 20px 0;
         width: 100%;
         height: 45px;
@@ -86,30 +102,36 @@
         font-size: 18px;
         cursor: pointer;
       }
-      .do-convert:hover{opacity: .9; transition: .2s;}
-      .do-convert.dark{background-color: #3a3a3a;}
+      .do-convert:hover {
+        opacity: 0.9;
+        transition: 0.2s;
+      }
+      .do-convert.dark {
+        background-color: #3a3a3a;
+      }
     </style>
   </head>
   <body>
+    <%- include('./nav') %> <%- include('./accordion') %>
+    <main>
+      <div class="container">
+        <div class="upload-file">
+          <h1>파일을 업로드하세요.</h1>
+          <input type="file" id="pdfInput" />
+          <button class="do-convert" onclick="convertAndDownload()">
+            변환 후 다운로드
+          </button>
+        </div>
 
-    <%- include('./nav') %>
-    <%- include('./accordion') %>
-
-    <div class="container">
-    <div class="upload-file">
-      <h1>파일을 업로드하세요.</h1>
-      <input type="file" id="pdfInput">
-      <button class="do-convert" onclick="convertAndDownload()">변환 후 다운로드</button>
-    </div>
-    
-    <div class="drop-file">
-      <div class="here">
-        <img id="addImg" class="add-img" src="/images/folder-add.svg" />
-        <span>클릭 또는 파일을 드래그</span>
+        <div class="drop-file">
+          <div class="here">
+            <img id="addImg" class="add-img" src="/images/folder-add.svg" />
+            <span>클릭 또는 파일을 드래그</span>
+          </div>
+        </div>
+        <%- include('./slick') %>
       </div>
-    </div>
-    <%- include('./slick') %>
-  </div>
+    </main>
 
     <%- include('./footer') %>
     <script src="/js/common.js"></script>

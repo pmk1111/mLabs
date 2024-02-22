@@ -3,6 +3,9 @@ const bodyClassList = bodyTag.classList;
 
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
+const logo = document.querySelector(".logo");
+const SiteTitle = document.querySelector('.title');
+const appIcon = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -14,6 +17,7 @@ const menuLink = document.querySelectorAll(".menu_container a");
 const form = document.querySelector("form");
 const calBtn = document.querySelectorAll(".cal_btn");
 const calWriteIntpt = document.querySelector(".write_input");
+const td = document.querySelectorAll('td');
 
 const main = document.querySelector("main");
 const footer = document.querySelector("footer");
@@ -37,11 +41,17 @@ toggleList.forEach(($toggle) => {
       }
 
       nav.classList.remove("nav_dark"); 
+      logo.setAttribute('src', "/images/logo_black.svg");
+      SiteTitle.style.color = '#151515';
+      appIcon.setAttribute('src', '/images/apps-black.svg');
       main.classList.remove("main_dark");
 
       form.classList.remove("form_dark");
       for(item of calBtn){
         item.classList.remove("cal_btn_dark");
+      }
+      for(item of td){
+        item.classList.remove('dark');
       }
       calWriteIntpt.classList.remove("write_input_dark");
 
@@ -59,11 +69,17 @@ toggleList.forEach(($toggle) => {
       }
 
       nav.classList.add("nav_dark");
+      logo.setAttribute('src', "/images/logo_white.svg");
+      SiteTitle.style.color = 'white';
+      appIcon.setAttribute('src', '/images/apps-white.svg');
       main.classList.add("main_dark");
 
       form.classList.add("form_dark");
       for(item of calBtn){
         item.classList.add("cal_btn_dark");
+      }
+      for(item of td){
+        item.classList.add('dark');
       }
       calWriteIntpt.classList.add("write_input_dark");
 

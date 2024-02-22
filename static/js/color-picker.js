@@ -1,3 +1,101 @@
+window.onload = function () {
+  const body = document.querySelector("body");
+
+  const nav = document.querySelector("nav");
+  const logo = document.querySelector('.logo');
+  const SiteTitle = document.querySelector('.title');
+
+  const toggleList = document.querySelectorAll(".toggleSwitch");
+  const toggleImg = document.querySelector(".display_mode_icon");
+
+  const menuBtn = document.querySelector(".menu_btn");
+  const menu = document.querySelector(".menu");
+  // const htu = document.querySelectorAll(".how_to_use");
+  // const descH3 = document.querySelectorAll(".htu_h3");
+  // const description = document.querySelectorAll(".description");
+
+  const menuLink = document.querySelectorAll(".menu_container a");
+  const footer = document.querySelector("footer");
+
+  const spContainer = document.querySelector(".sp-container");
+  const colorInfo = document.querySelector(".color-info");
+  const colorBarInput = document.querySelectorAll(".color-val-type input");
+  const colorGroup = document.querySelectorAll('.color-group');
+  const colorUl = document.querySelectorAll('ul');
+  const colorList = document.querySelectorAll("ul li");
+
+  var isActive = true;
+  // 다크모드
+  toggleList.forEach(($toggle) => {
+    $toggle.onclick = () => {
+      isActive = $toggle.classList.contains("active");
+      const fileNameDivs = document.querySelectorAll(".file-name-div");
+      if (isActive) {
+        $toggle.classList.remove("active");
+        toggleImg.setAttribute("src", "/images/sun.png");
+        body.classList.remove("dark");
+        logo.setAttribute('src', "/images/logo_black.svg");
+        SiteTitle.style.color = '#151515';
+        appIcon.setAttribute('src', '/images/apps-black.svg');
+        nav.classList.remove("nav_dark");
+
+        menuBtn.classList.remove("menu_btn_dark");
+        menu.classList.remove("menu_dark");
+        for (item of menuLink) {
+          item.classList.remove("link_dark");
+        }
+
+        footer.classList.remove("footer_dark");
+
+        spContainer.classList.remove("dark");
+        colorInfo.classList.remove("dark");
+        for(item of colorGroup){
+          item.classList.remove('dark');
+        }
+        for (item of colorBarInput) {
+          item.classList.remove("dark");
+        }
+        for(item of colorUl){
+          item.classList.remove('dark');
+        }
+        for (item of colorList) {
+          item.classList.remove("dark");
+        }
+      } else {
+        $toggle.classList.add("active");
+        toggleImg.setAttribute("src", "/images/moon.png");
+        body.classList.add("dark");
+        logo.setAttribute('src', "/images/logo_white.svg");
+        SiteTitle.style.color = 'white';
+        appIcon.setAttribute('src', '/images/apps-white.svg');
+        nav.classList.add("nav_dark");
+
+        menuBtn.classList.add("menu_btn_dark");
+        menu.classList.add("menu_dark");
+        for (item of menuLink) {
+          item.classList.add("link_dark");
+        }
+
+        footer.classList.add("footer_dark");
+
+        spContainer.classList.add("dark");
+        colorInfo.classList.add("dark");
+        for(item of colorGroup){
+          item.classList.add('dark');
+        }
+        for (item of colorBarInput) {
+          item.classList.add("dark");
+        }
+        for(item of colorUl){
+          item.classList.add('dark');
+        }
+        for (item of colorList) {
+          item.classList.add("dark");
+        }
+      }
+    };
+  });
+};
 const hexVal = document.querySelector(".hex");
 const rVal = document.querySelector(".r");
 const gVal = document.querySelector(".g");

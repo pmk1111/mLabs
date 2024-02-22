@@ -115,7 +115,7 @@
             }
         })
         .then(data => {
-            const serverTimestamp = Date.parse(data);
+          const serverTimestamp = Date.parse(JSON.parse(data).serverTime);
             if (!isNaN(serverTimestamp)) {
                 serverTime = new Date(serverTimestamp);
                 updateDisplay(); // 최초 가져온 시간을 화면에 표시

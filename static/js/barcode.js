@@ -32,6 +32,9 @@ barTxt.value = "Example 1234";
 
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
+const logo = document.querySelector('.logo');
+const SiteTitle = document.querySelector('.title');
+// const appIcon = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -77,6 +80,9 @@ toggleList.forEach(($toggle) => {
       }
 
       nav.classList.remove("nav_dark");
+      logo.setAttribute('src', "/images/logo_black.svg");
+      SiteTitle.style.color = '#151515';
+      appIcon.setAttribute('src', '/images/apps-black.svg');
 
       content.classList.remove("content-dark");
       content.classList.add("content-color");
@@ -143,6 +149,9 @@ toggleList.forEach(($toggle) => {
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
+      logo.setAttribute('src', "/images/logo_white.svg");
+      SiteTitle.style.color = 'white';
+      appIcon.setAttribute('src', '/images/apps-white.svg');
       menuBtn.classList.add("menu_btn_dark");
       menu.classList.add("menu_dark");
       for (item of menuLink) {

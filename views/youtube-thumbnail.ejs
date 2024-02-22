@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/slider.css" />
+    <link rel="stylesheet" href="/slick/slick.css" />
+    <link rel="stylesheet" href="/slick/slick-theme.css" />
+    <style>
+      .url-input {
+        width: calc(100% - 20px);
+        padding: 3px 10px;
+        height: 50px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        outline: none;
+        outline: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: #151515;
+      }
+      .submit-url {
+        width: 100%;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        background-color: #0068df;
+        border-style: none;
+        border-radius: 3px;
+        margin: 30px 0;
+        cursor: pointer;
+      }
+      .submit-url:hover{
+        opacity: .9;
+        transition: .2s;
+      }
+      .submit-url:active{
+        width: 99%;
+        height: 49px;
+        font-size: 17px;
+      }
+      .content {
+        width: 100%;
+      }
+      .selector-container {
+        display: flex;
+        width: 100%;
+      }
+      .selector {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #c3c3c3;
+        width: 50%;
+        height: 35px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .selector:hover{
+        opacity: .9;
+        transform: .2s;
+      }
+      .selector.selected {
+        background-color: #0068df;
+        border: 1px solid #0068df;
+        color: white;
+      }
+      .download-thumbnail-container, .thumbnail-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 81px;
+        padding: 30px 0;
+      }
+      .thumbnail-container {
+        display: none;
+      }
+      .img-info-div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        margin: 15px 0;
+        cursor: pointer;
+      }
+      .img-info-div:hover{
+        width: 103%;
+        height: 55px;
+        opacity: .8;
+        transition: .2s;
+      }
+      .img-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 20%;
+        height: 100%;
+        border: 1px solid lightgrey;
+        border-left-style: none;
+      }
+      .img-wrapper img{
+        border-radius: 3px;
+      }
+      .download-txt-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 100%;
+        color: #151515;
+      }
+      .thumbnail{
+        width: 80%;
+        height: auto;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+      .thumbnail:hover{
+        width: 83%;
+        height: auto;
+        opacity: .8;
+        transition: .2s;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %> <%- include('./accordion') %>
+
+    <main>
+      <div class="container">
+        <input class="url-input" type="text" placeholder="url 입력" />
+        <button type="button" class="submit-url">썸네일 추출</button>
+        <div class="content">
+          <div class="selector-container">
+            <div class="selector show-download selected">
+              <span>다운로드탭</span>
+            </div>
+            <div class="selector show-img">
+              <span>이미지보기</span>
+            </div>
+          </div>
+          <div class="result">
+            <div class="download-thumbnail-container"></div>
+            <div class="thumbnail-container"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+    <script src="/js/common.js"></script>
+
+    <script>
+      const submitBtn = document.querySelector(".submit-url");
+      const downloadItem = document.querySelector(".show-download");
+      const imgItem = document.querySelector('.show-img');
+      const downloadThumbnailContainer = document.querySelector(".download-thumbnail-container");
+      const thumbnailDiv = document.querySelector(".thumbnail-container");
+
+      downloadItem.addEventListener('click', function(){
+        selectContent(this);
+      });
+      imgItem.addEventListener('click', function(){
+        selectContent(this);
+      })
+
+      submitBtn.addEventListener("click", function () {
+        const url = document.querySelector(".url-input").value;
+        if (url) {
+          let index = "";
+          let videoId = "";
+          if (url.includes("v=")) {
+            index = url.indexOf("v=");
+            videoId = url.substring(index + 2);
+          } else if (url.includes("shorts/")) {
+            index = url.indexOf("shorts/");
+            videoId = url.substring(index + 7);
+          }
+          const imgUrl =
+            "https://i1.ytimg.com/vi/" + videoId + "/maxresdefault.jpg";
+
+          const img = document.createElement("img");
+          img.className = "thumbnail";
+          img.setAttribute("src", imgUrl);
+          thumbnailDiv.appendChild(img);
+
+          const downloadDiv = document.createElement("div");
+          downloadDiv.className = "img-info-div";
+
+          const imgWrapper = document.createElement("div");
+          imgWrapper.className = "img-wrapper";
+
+          const downloadTxt = document.createElement("div");
+          downloadTxt.className = "download-txt-wrapper";
+
+          const downloadIcon = document.createElement("img");
+          downloadIcon.setAttribute("src", "/images/download-black.svg");
+
+          const renderImg = document.createElement("img");
+          renderImg.src = imgUrl;
+
+          const span = document.createElement("span");
+          span.style.fontWeight = "600";
+          span.textContent = "다운로드";
+
+          imgWrapper.appendChild(renderImg);
+          downloadTxt.appendChild(downloadIcon);
+          downloadTxt.appendChild(span);
+          downloadDiv.appendChild(imgWrapper);
+          downloadDiv.appendChild(downloadTxt);
+          downloadThumbnailContainer.appendChild(downloadDiv);
+
+          downloadDiv.addEventListener("click", function () {
+            downloadImage(imgUrl);
+          });
+
+          img.addEventListener("click", function () {
+            downloadImage(imgUrl);
+          });
+        } else {
+          alert("올바른 url을 입력하세요");
+        }
+      });
+
+      function downloadImage(imgUrl) {
+        fetch("/download-thumbnail", {
+          method: "POST", // POST 메서드로 변경
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imgUrl: imgUrl }), // 이미지 URL을 JSON 형태로 보냄
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.blob();
+          })
+          .then((blob) => {
+            // 이미지 다운로드 링크 생성
+            const downloadLink = document.createElement("a");
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = "image.jpg";
+
+            // 가상으로 클릭 이벤트 발생
+            downloadLink.click();
+          })
+          .catch((error) => {
+            console.error("Error during image download:", error);
+          });
+      }
+
+      function selectContent(clickedElement){
+        if(!clickedElement.classList.contains('selected')){
+          if(clickedElement.classList.contains('show-download')){
+            clickedElement.classList.add("selected");
+            imgItem.classList.remove("selected");
+            downloadThumbnailContainer.style.display = "flex";
+            thumbnailDiv.style.display = "none";
+          } else if(clickedElement.classList.contains('show-img')){
+            clickedElement.classList.add("selected");
+            downloadItem.classList.remove("selected");
+            thumbnailDiv.style.display = "flex";
+            downloadThumbnailContainer.style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

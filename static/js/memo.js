@@ -1,6 +1,8 @@
 window.onload = function () {
     const body = document.querySelector("body");
     const nav = document.querySelector("nav");
+    const logo = document.querySelector(".logo");
+    const SiteTitle = document.querySelector('.title');
     const toggleList = document.querySelectorAll(".toggleSwitch");
     const toggleImg = document.querySelector(".display_mode_icon");
     const menuBtn = document.querySelector(".menu_btn");
@@ -34,6 +36,9 @@ window.onload = function () {
           body.classList.remove("dark");
 
           nav.classList.remove("nav_dark");
+          logo.setAttribute('src', "/images/logo_black.svg");
+          SiteTitle.style.color = '#151515';
+          appIcon.setAttribute('src', '/images/apps-black.svg');
 
           menuBtn.classList.remove("menu_btn_dark");
           menu.classList.remove("menu_dark");
@@ -48,8 +53,8 @@ window.onload = function () {
 
           noteToolBar.style.backgroundColor = "#f5f5f5";
           for(let i of noteToolBarBtn){
-            i.style.backgroundColor = 'fff';
-            i.style.color = '#333';
+            i.style.backgroundColor = 'white';
+            i.style.color = '#000000';
           }
           noteEditable.style.color = '#333';
           memo.classList.remove('memo-dark');
@@ -59,6 +64,9 @@ window.onload = function () {
           body.classList.add("dark");
 
           nav.classList.add("nav_dark");
+          logo.setAttribute('src', "/images/logo_white.svg");
+          SiteTitle.style.color = 'white';
+          appIcon.setAttribute('src', '/images/apps-white.svg');
 
           menuBtn.classList.add("menu_btn_dark");
           menu.classList.add("menu_dark");

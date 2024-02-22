@@ -8,6 +8,9 @@ const multer = require('multer'); // multer 모듈을 require
 const sharp = require('sharp');
 const axios = require('axios');
 
+const fetch = require('node-fetch');
+
+
 const router = express.Router();
 const api = express();
 const port = 9500;
@@ -52,19 +55,40 @@ api.get('/server-time', (req, res) => {
 });
 api.get('/memo', (req, res) => {
   res.render('memo');
-})
+});
 api.get('/pdf-convert', (req, res) => {
   res.render('pdf-convert');
-})
+});
 api.get('/pdf-to-jpg', (req, res) =>{
   res.render('pdf-to-jpg');
-})
+});
 api.get('/color-picker', (req, res) => {
   res.render('color-picker');
-})
+});
+api.get('/youtube-thumbnail', (req, res) => {
+  res.render('youtube-thumbnail');
+});
 
 // 파일 업로드를 위한 multer 설정
 const upload = multer();
+
+api.post('/download-thumbnail', async (req, res) => {
+  try {
+    const imgUrl = req.body.imgUrl;
+
+    // 이미지 다운로드
+    const response = await fetch(imgUrl);
+    const imageBuffer = await response.arrayBuffer();
+
+    // 이미지를 클라이언트에 전송
+    res.set('Content-Type', 'image/jpeg');
+    res.set('Content-Disposition', 'attachment; filename=image.jpg');
+    res.send(Buffer.from(imageBuffer));
+  } catch (error) {
+    console.error('Error during image download:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // convert img
 api.post('/convert-image', upload.single('image'), async (req, res) => {
@@ -89,24 +113,11 @@ api.post('/convert-image', upload.single('image'), async (req, res) => {
 // 서버 시간 가져오기
 api.post('/get-server-time', async (req, res) => {
   try {
-      const targetUrl = req.body.url;
-
-      if (!targetUrl) {
-          return res.status(400).json({ error: 'URL이 제공되지 않았습니다.' });
-      }
-
-      // 서버에서 targetUrl로 GET 요청을 보내 응답 헤더의 Date를 추출
-      const response = await axios.post(targetUrl);
-      const serverTime = response.headers.date;
-
-      if (!serverTime) {
-          return res.status(500).json({ error: '서버 시간을 가져올 수 없습니다.' });
-      }
-
-      res.send(serverTime);
+    const serverTime = new Date().toUTCString();
+    res.status(200).json({ serverTime });
   } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: '서버 에러가 발생했습니다.' });
+    console.error('Error:', error);
+    res.status(500).json({ error: '서버 에러가 발생했습니다.' });
   }
 });
 

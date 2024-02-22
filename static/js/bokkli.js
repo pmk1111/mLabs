@@ -3,6 +3,8 @@ const nav = document.querySelector("nav");
 
 // const bodyClassList = bodyTag.classList;
 const logo = document.querySelector(".logo");
+const SiteTitle = document.querySelector('.title');
+const appIcon = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -42,6 +44,9 @@ toggleList.forEach(($toggle) => {
   $toggle.onclick = () => {
     const table = document.querySelector("table");
     const tr = table.querySelectorAll(".profit_detail_table tr");
+    const th = table.querySelectorAll('.profit_detail_table th');
+    const td = table.querySelectorAll('.profit_detail_table td');
+
     isActive = $toggle.classList.contains("active");
 
     if (isActive) {
@@ -51,6 +56,9 @@ toggleList.forEach(($toggle) => {
       body.classList.add("lite");
 
       nav.classList.remove("nav_dark");
+      logo.setAttribute('src', "/images/logo_black.svg");
+      SiteTitle.style.color = '#151515';
+      appIcon.setAttribute('src', '/images/apps-black.svg');
       main.classList.remove("main_dark");
 
       menuBtn.classList.remove("menu_btn_dark");
@@ -63,6 +71,12 @@ toggleList.forEach(($toggle) => {
       
       for(item of tr){
         item.classList.remove("tr_dark");
+      }
+      for(item of th){
+        item.classList.remove("dark");
+      }
+      for(item of td){
+        item.classList.remove("dark");
       }
 
       calArea.classList.remove("cal_area_dark");
@@ -85,6 +99,9 @@ toggleList.forEach(($toggle) => {
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
+      logo.setAttribute('src', "/images/logo_white.svg");
+      SiteTitle.style.color = 'white';
+      appIcon.setAttribute('src', '/images/apps-white.svg');
       main.classList.add("main_dark");
 
       menuBtn.classList.add("menu_btn_dark");
@@ -97,6 +114,12 @@ toggleList.forEach(($toggle) => {
 
       for(item of tr){
         item.classList.add("tr_dark");
+      }
+      for(item of th){
+        item.classList.add("dark");
+      }
+      for(item of td){
+        item.classList.add("dark");
       }
 
       calArea.classList.add("cal_area_dark");
@@ -164,6 +187,14 @@ function doCal() {
     existCsvBtn.remove();
   }
   const csvBtn = document.createElement("button");
+  const downloadImg = document.createElement('img');
+  const downloadText = document.createTextNode('CSV로 다운로드');
+
+  downloadImg.setAttribute('src', '/images/download.svg');
+
+  csvBtn.appendChild(downloadImg);
+  csvBtn.appendChild(downloadText);
+
   csvBtn.classList.add("csv_btn");
   csvBtn.type = "button";
   csvBtn.addEventListener("click", function () {
@@ -171,7 +202,6 @@ function doCal() {
   });
 
   csvBtn.classList.add("csv_btn");
-  csvBtn.textContent = "CSV로 다운로드"
   // 언어에 따라 csv 버튼의 텍스트 설정
 
   // switch (selectedLanguage) {
@@ -217,6 +247,14 @@ function doCal() {
   const th2 = document.createElement("th");
   const th3 = document.createElement("th");
   const th4 = document.createElement("th");
+
+  if(!isActive){
+    firstTr.classList.add('tr_dark');
+    th1.classList.add('dark');
+    th2.classList.add('dark');
+    th3.classList.add('dark');
+    th4.classList.add('dark');
+  }
 
   th1.classList.add("duration");
   th2.classList.add("profit");
@@ -284,6 +322,13 @@ function doCal() {
     const td3 = document.createElement("td");
     const td4 = document.createElement("td");
 
+    if(!isActive){
+      tr.classList.add('tr_dark');
+      td1.classList.add('dark');
+      td2.classList.add('dark');
+      td3.classList.add('dark');
+      td4.classList.add('dark');
+    }
     // 값 설정
     td1.textContent = i + "";
     td2.textContent =
