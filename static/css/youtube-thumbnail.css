@@ -15,6 +15,31 @@
   margin: 27px;
   letter-spacing: 0.2px;
 }
+.open-help{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0 0 0;
+  cursor: pointer;
+  width: 140px;
+  height: 23px;
+  border-radius: 3px;
+}
+.open-help:hover{
+  opacity: .8;
+  transition: .2s;
+}
+.open-help span{ 
+  margin: 0;
+  font-size: 15px;
+}
+.help-icon{
+  position: relative;
+  top: 1px;
+  width: 19px;
+  height: auto;
+  margin-left: 5px;
+}
 .url-input,
 .img-size-selector {
   width: calc(100% - 60px);
@@ -219,4 +244,60 @@ main {
   background-color: white;
   z-index: 10;
   cursor: pointer;
+}
+
+.help-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.modal-content.dark{
+  background-color: #3a3a3a;
+}
+.modal-content-wrapper{
+  position: relative;
+  padding: 25px 30px;
+}
+.close-modal{
+  position: absolute;
+  top:6%;
+  right:3%;
+  width: 14px;
+  height: auto;
+  cursor: pointer;
+}
+.close-modal:hover{
+  width: 15px;
+  height: auto;
+  opacity: .8;
+  transition: .2s;
+}
+.modal-content-wrapper p{
+  margin:15px 0;
 }

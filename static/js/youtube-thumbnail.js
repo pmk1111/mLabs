@@ -19,6 +19,12 @@ const imgSizeSelector = document.querySelector('select[name="img-size-selector"]
 const urlinput = document.querySelector(".url-input");
 const submitBtn = document.querySelector(".submit-url");
 const downloadAllBtn = document.querySelector('.download-all');
+const openHelp = document.querySelector('.open-help');
+const helpIcon = document.querySelector('.help-icon');
+const helpModal = document.querySelector('.help-modal');
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector('.modal-content');
+const closeModalBtn = document.querySelector('.close-modal');
 
 var isActive = true;
 // 다크모드
@@ -50,6 +56,9 @@ toggleList.forEach(($toggle) => {
       urlinput.classList.remove('dark');
       submitBtn.classList.remove('dark');
       downloadAllBtn.classList.remove('dark');
+      helpIcon.setAttribute('src', '/images/help.svg');
+      modalContent.classList.remove('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn.svg');
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
@@ -73,6 +82,9 @@ toggleList.forEach(($toggle) => {
       urlinput.classList.add('dark');
       submitBtn.classList.add('dark');
       downloadAllBtn.classList.add('dark');
+      helpIcon.setAttribute('src', '/images/help-white.svg');
+      modalContent.classList.add('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn-white.svg');
     }
   };
 });
@@ -251,3 +263,15 @@ function downloadAll(){
       console.error("Error during bulk image download:", error);
   });      
 }
+
+openHelp.addEventListener('click', function(){
+  helpModal.style.display = 'block';
+});
+
+closeModalBtn.addEventListener('click', function(){
+  helpModal.style.display = 'none';
+});
+
+modalOverlay.addEventListener('click', function(){
+  helpModal.style.display = 'none';
+});

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/slick/slick-theme.css" />
     <link rel="stylesheet" href="/css/youtube-thumbnail.css" />
   </head>
+
   <body>
     <%- include('./nav') %> <%- include('./accordion') %>
 
@@ -29,6 +30,7 @@
  
           <input class="url-input" type="text" placeholder="여기에 url을 입력하세요" />
           <!-- <span>Size 선택</span> -->
+          
           <select class="img-size-selector" name="img-size-selector">
             <option value="select-size" selected>사이즈 선택(기본 1920×1080)</option>
             <option value="default">120×90</option>
@@ -39,11 +41,28 @@
           </select>
           <button type="button" class="submit-url">썸네일 추출</button>
           <button type="button" class="download-all" onclick="downloadAll()">모두 다운로드</button>
-        </div>
+          <div class="open-help">
+            <span>도움말(클릭)</span>
+            <img class="help-icon" src="/images/help.svg">
+          </div>
         </div>
     </main>
 
     <%- include('./footer') %>
+    <div class="help-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-content-wrapper">
+          <img class="close-modal" src="/images/deletebtn.svg">
+          <h1 style="margin-bottom: 30px;">사용방법</h1>
+          <p>1. 입력란에 유튜브 url을 입력합니다.</p>
+          <p>2. <b>"썸네일 추출 버튼"</b>을 클릭합니다.</p>
+          <p>3. 생성된 이미지를 클릭해 다운로드합니다.</p>
+          <p>4. 생성된 이미지에 마우스를 올려 나타나는 <b>"x"</b>버튼을 클릭해 삭제를 할 수 있습니다.</p>
+          <p>4. <b>"모두 다운로드"</b>를 클릭해 추출한 모든 썸네일을 다운로드합니다.</p>
+        </div>
+      </div>
+    </div>
     <script src="/js/common.js"></script>
     <script src="/js/youtube-thumbnail.js"></script>
 
