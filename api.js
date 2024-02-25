@@ -9,7 +9,7 @@ const sharp = require('sharp');
 const axios = require('axios');
 
 const fetch = require('node-fetch');
-
+const archiver = require("archiver");
 
 const router = express.Router();
 const api = express();
@@ -87,6 +87,33 @@ api.post('/download-thumbnail', async (req, res) => {
   } catch (error) {
     console.error('Error during image download:', error);
     res.status(500).send('Internal Server Error');
+  }
+});
+
+api.post("/download-all-thumbnail", async (req, res) => {
+  try {
+    const imageUrls = req.body.imageUrls;
+
+    const archive = archiver("zip", {
+      zlib: { level: 9 }, 
+    });
+
+    archive.pipe(res);
+
+    for (let i = 0; i < imageUrls.length; i++) {
+      const imageUrl = imageUrls[i];
+      const response = await fetch(imageUrl);
+      const imageBuffer = await response.buffer();
+      
+      const uniqueFilename = `image_${i + 1}.jpg`;
+      
+      archive.append(imageBuffer, { name: uniqueFilename });
+    }
+
+    archive.finalize();
+  } catch (error) {
+    console.error("이미지 일괄 다운로드 중 오류 발생:", error);
+    res.status(500).send('서버 내부 오류');
   }
 });
 

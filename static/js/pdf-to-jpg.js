@@ -9,9 +9,6 @@ const toggleImg = document.querySelector(".display_mode_icon");
 
 const menuBtn = document.querySelector(".menu_btn");
 const menu = document.querySelector(".menu");
-// const htu = document.querySelectorAll(".how_to_use");
-// const descH3 = document.querySelectorAll(".htu_h3");
-// const description = document.querySelectorAll(".description");
 
 const menuLink = document.querySelectorAll(".menu_container a");
 
@@ -21,6 +18,10 @@ const dropArea = document.querySelector(".drop-file");
 const fileInput = document.getElementById("pdfInput");
 const here = document.querySelector('.here');
 const convertBtn = document.querySelector('.do-convert');
+
+// const htu = document.querySelectorAll(".how_to_use");
+// const descH3 = document.querySelectorAll(".htu_h3");
+// const description = document.querySelectorAll(".description");
 
 var isActive = true;
 // 다크모드
