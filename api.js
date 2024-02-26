@@ -118,24 +118,60 @@ api.post("/download-all-thumbnail", async (req, res) => {
 });
 
 // convert img
-api.post('/convert-image', upload.single('image'), async (req, res) => {
+// api.post('/convert-image', upload.array('image[]'), async (req, res) => {
+//   try {
+//     const { format } = req.body;
+
+//     // 이미지 변환 (sharp 모듈 사용)
+//     const convertedImageBuffer = await sharp(req.file.buffer).toFormat(format).toBuffer();
+
+//     // HTTP 응답mlabolatories 헤더 설정
+//     res.setHeader('Content-Type', `image/${format}`);
+//     res.setHeader('Content-Disposition', `attachment; filename=converted_image.${format}`);
+
+//     // 변환된 이미지 응답
+//     res.send(convertedImageBuffer);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
+
+
+api.post('/convert-all-img', upload.array('image[]'), async (req, res) => {
   try {
     const { format } = req.body;
+    const archive = archiver('zip', { zlib: { level: 9 } });
+    
+    // Iterate through each uploaded file
+    for (let i = 0; i < req.files.length; i++) {
+      const file = req.files[i];
 
-    // 이미지 변환 (sharp 모듈 사용)
-    const convertedImageBuffer = await sharp(req.file.buffer).toFormat(format).toBuffer();
+      // Use await to ensure that toBuffer() completes before proceeding
+      const convertedImageBuffer = await sharp(file.buffer).toFormat(format).toBuffer();
 
-    // HTTP 응답mlabolatories 헤더 설정
-    res.setHeader('Content-Type', `image/${format}`);
-    res.setHeader('Content-Disposition', `attachment; filename=converted_image.${format}`);
+      archive.append(convertedImageBuffer, { name: `image_${i + 1}.${format}` });
+    }
 
-    // 변환된 이미지 응답
-    res.send(convertedImageBuffer);
+    // Set HTTP response headers for the zip file
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename=converted_images.zip`);
+
+    // Pipe the zip file to the response stream
+    archive.pipe(res);
+
+    // Finalize the archive and send the response
+    await new Promise((resolve) => {
+      archive.finalize();
+      archive.on('end', resolve);
+    });
+
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 // 서버 시간 가져오기
 api.post('/get-server-time', async (req, res) => {

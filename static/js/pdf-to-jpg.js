@@ -3,25 +3,17 @@ const nav = document.querySelector("nav");
 const logoImg = document.querySelector('.logo');
 const title = document.querySelector('.title');
 const apps = document.querySelector('.app-icon');
-
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
-
 const menuBtn = document.querySelector(".menu_btn");
 const menu = document.querySelector(".menu");
-
 const menuLink = document.querySelectorAll(".menu_container a");
-
 const footer = document.querySelector("footer");
 
 const dropArea = document.querySelector(".drop-file");
 const fileInput = document.getElementById("pdfInput");
 const here = document.querySelector('.here');
 const convertBtn = document.querySelector('.do-convert');
-
-// const htu = document.querySelectorAll(".how_to_use");
-// const descH3 = document.querySelectorAll(".htu_h3");
-// const description = document.querySelectorAll(".description");
 
 var isActive = true;
 // 다크모드
@@ -45,17 +37,9 @@ toggleList.forEach(($toggle) => {
       for(item of menuLink){
         item.classList.remove("link_dark");
       }
+
       dropArea.classList.remove('dark');
       convertBtn.classList.remove('dark');
-    //   for(item of htu){
-    //   	item.classList.remove("htu_dark");
-    //   }
-	// 		for(item of descH3){
-    //   	item.classList.remove("htu_h3_dark");
-    //   }
-    //   for(item of description){
-    //   	item.classList.remove("desc_dark");
-    //   }
 
       footer.classList.remove("footer_dark");
     } else {
@@ -75,16 +59,7 @@ toggleList.forEach(($toggle) => {
       }
       dropArea.classList.add('dark');
       convertBtn.classList.add('dark');
-    //   for(item of htu){
-    //   	item.classList.add("htu_dark");
-    //   }
-	// 		for(item of descH3){
-    //   	item.classList.add("htu_h3_dark");
-    //   }
-    //   for(item of description){
-    //   	item.classList.add("desc_dark");
-    //   }
-
+      
       footer.classList.add("footer_dark");
       console.log(fileNameDivs.length)
     }

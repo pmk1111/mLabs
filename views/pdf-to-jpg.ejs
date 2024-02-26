@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/slider.css" />
     <link rel="stylesheet" href="/slick/slick.css" />
     <link rel="stylesheet" href="/slick/slick-theme.css" />
-
+    <link rel="stylesheet" href="/css/pdf-to-jpg.css" />
     <style>
       footer {
         position: relative;
@@ -31,84 +31,7 @@
         margin-top: 80px;
       }
 
-      .upload-file {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-      }
-      .drop-file {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        min-width: 300px;
-        height: 200px;
-        border: 2px dashed lightgrey;
-        border-radius: 3px;
-      }
-      .drop-file.dark {
-        border: 2px dashed #3a3a3a;
-      }
-      #pdfInput {
-        display: none;
-      }
-      .here {
-        width: 160px;
-        height: 160px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 14px;
-        color: #b4b4b4;
-      }
-      .add-img {
-        width: 120px;
-        height: auto;
-      }
-      .file-div {
-        width: 260px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .file-div span {
-        display: inline-block;
-        margin: 3px 0;
-      }
-      .file-name {
-        font-size: 15px;
-        font-weight: 600;
-      }
-      .file-size {
-        font-size: 13px;
-        color: #b4b4b4;
-      }
-      .pdf-icon {
-        width: 100px;
-        height: auto;
-      }
-      .do-convert {
-        margin: 20px 0;
-        width: 100%;
-        height: 45px;
-        border-style: none;
-        border-radius: 3px;
-        background-color: rgb(255, 74, 19);
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-      }
-      .do-convert:hover {
-        opacity: 0.9;
-        transition: 0.2s;
-      }
-      .do-convert.dark {
-        background-color: #3a3a3a;
-      }
+      
     </style>
   </head>
   <body>
@@ -116,8 +39,8 @@
     <main>
       <div class="container">
         <div class="upload-file">
-          <h1>파일을 업로드하세요.</h1>
-          <input type="file" id="pdfInput" />
+          <h1 style="margin-bottom: 40px;">PDF 파일을 JPG로 변환하세요.</h1>
+          <input type="file" id="pdfInput"/>
           <button class="do-convert" onclick="convertAndDownload()">
             변환 후 다운로드
           </button>
@@ -129,7 +52,7 @@
             <span>클릭 또는 파일을 드래그</span>
           </div>
         </div>
-        <%- include('./slick') %>
+        <!-- <%- include('./slick') %> -->
       </div>
     </main>
 

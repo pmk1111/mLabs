@@ -239,9 +239,9 @@ nav.nav_dark {
 /* main */
 main {
   flex: 1;
-  padding: 40px 0;
+  padding: 0;
   height : auto;
-  margin-top: 80px;
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   position: relative;
