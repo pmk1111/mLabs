@@ -12,17 +12,6 @@
     <link rel="stylesheet" href="/slick/slick.css" />
     <link rel="stylesheet" href="/slick/slick-theme.css"/>
     <link rel="stylesheet" href="/css/color-picker.css">
-
-    <style>
-      footer{position: relative;}
-      .color-ul{width: 820px; color: #3a3a3a; border: 1px solid rgb(222, 222, 222); border-radius: 3px; margin-bottom: 40px;}
-      .color-list{display: flex; justify-content: space-between; align-items: center; height: 60px; border-top: 1px solid rgb(222, 222, 222); font-weight: 600;}
-      .color-list div{margin:0 30px;}
-      .color-list div:nth-child(3){width: 150px; text-align: center;}
-      .first-li{color: #C3C3C3; border-top-style: none;}
-      .actual-color{width: 70px; height: 32px; border-radius: 3px;}
-      .color-ul-group{display: none;}
-    </style>
   </head>
   <body>
     <%- include('./nav') %>
@@ -30,6 +19,20 @@
 <main>
     <div class="container">
       <h1 class="content-name">HTML 색상표</h1>
+      <div class="color-info-summary">
+        <div class="now-color">
+          <div class="color-now"></div>
+        </div>
+        <div class="color-hex-info" onclick="copy()">
+          <span class="hex-text">#000000</span>
+        </div>
+        <div class="color-rgb-info" onclick="copy()">
+          <span class="rgb-text">rgb(0, 0, 0)</span>
+        </div>
+        <div class="color-hsl-info" onclick="copy()">
+          <span class="hsl-text">hsl(0, 0%, 0%)</span>
+        </div>
+      </div>
       <div class="color-container">
         <input id="color-picker" value="#000000" />
         <div class="pd-10-0">

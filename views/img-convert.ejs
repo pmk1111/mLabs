@@ -24,7 +24,7 @@
           <div class="upload-area" onclick="handleClick(event)" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
             <div class="here">
               <img id="addImg" class="add-img" src="/images/folder-add.svg" />
-              <p class="add-txt">클릭 또는 여기에 파일을 끌어다 놓으세요</p>
+              <p class="add-txt">클릭 또는 파일을 끌어다 놓으세요.</p>
             </div>
           </div>
           <div class="convert_wrap">
@@ -41,39 +41,35 @@
                 <option value="tiff">TIFF</option>
                 <option value="webp">WEBP</option>
               </select>              
+              <div class="open-help">
+                <span>도움말(클릭)</span>
+                <img class="help-icon" src="/images/help.svg">
+              </div>
               <button class="convert-all-btn" type="button" onclick="convertAllImage()">변환 후 다운로드</button>
                 
             <!-- </div> -->
           </div>
-        <!-- </form> -->
-        <br />
-        <!-- <%- include('./slick') %> -->
-        <!-- <div class="how_to_use">
-          <div class="htu_h3"><h3>기능 소개 및 사용법</h3></div>
-          <div class="step">
-            <p>간편하게 다양한 이미지 파일을 내가 원하는 확장자로 변경하는 기능입니다. 
-            <br>변경 가능한 타입은 jpg, jpeg, bmp, gif, png, tiff 입니다.
-            이미지의 확장자를 변경해서 호환성 및 지원 형식 변경, 파일 크기 최적화를 해보세요.</p>
-            <br>
-            <h3>사용 방법</h3>
-            <br>
-            <p>1. 파일 업로드 버튼을 클릭 또는 이미지 영역에 드래그 & 드롭을 통해 파일을 업로드 하세요</p>
-            <br>
-            <p>2. 변경하고 싶은 확장자를 선택하세요</p>
-            <br>
-            <p>3. 이미지 변환 버튼을 누르면, 해당 확장자로 이미지 파일이 변환되며, 다운로드 버튼이 표시됩니다.</p>
-            <br>
-            <p>4. 다운로드 버튼을 누르면 변환된 이미지 파일이 다운로드됩니다.</p>
-            
-          </div>
-        </div> -->
+
     </main>
+    <div class="help-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-content-wrapper">
+          <img class="close-modal" src="/images/deletebtn.svg">
+          <h1 style="margin-bottom: 30px;">사용방법</h1>
+          <p>1. <b>"이미지 업로드"</b> 버튼을 클릭하여 변환하고자 하는 이미지를 업로드합니다.</p>
+          <p>2. 또는 <b>좌측 영역을 클릭</b>하거나, <b>파일을 끌어다 놓아 줍니다.</b></p>
+          <p>3. 변환하고 싶은 확장자를 선택합니다.</p>
+          <p>4. <b>"변환 후 다운로드"</b> 버튼을 눌러 업로드한 이미지들을 선택한 확장자로 변환합니다.</p>
+        </div>
+      </div>
+    </div>
 
     <!-- footer -->
     <%- include('./footer') %>
 
-    <script src="/js/common.js"></script>
     <script src="/js/img-convert.js"></script>
+    <script src="/js/common.js"></script>
 
     <script></script>
   </body>

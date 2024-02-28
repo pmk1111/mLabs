@@ -83,3 +83,15 @@ function handleResize() {
     
     // 브라우저 크기가 변할 때마다 실행
     window.addEventListener("resize", handleResize);
+
+    openHelp.addEventListener('click', function(){
+      helpModal.style.display = 'block';
+    });
+    
+    closeModalBtn.addEventListener('click', function(){
+      helpModal.style.display = 'none';
+    });
+    
+    modalOverlay.addEventListener('click', function(){
+      helpModal.style.display = 'none';
+    });

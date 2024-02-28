@@ -45,8 +45,8 @@
   width: calc(100% - 60px);
   padding: 3px 10px;
   height: 40px;
-  border: 3px solid #aed2fb;
-  border-radius: 3px;
+  border: 2px solid #aed2fb;
+  border-radius: 5px;
   outline: none;
   outline: none;
   font-size: 15px;
@@ -59,7 +59,7 @@
   height: 50px;
 }
 .url-input.dark, .img-size-selector.dark{
-  border: 3px solid #3a3a3a;
+  border: 2px solid #3a3a3a;
   background-color: #151515;
   color: white;
 }
@@ -75,7 +75,7 @@
   color: white;
   background-color: #2770c4;
   border-style: none;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 30px 0 0 0;
   cursor: pointer;
 }
@@ -86,12 +86,12 @@
   display: none;
   background-color: transparent;
   color: #2770c4;
-  border: 3px solid #2770c4;
+  border: 2px solid #2770c4;
 }
 .download-all.dark{
   background-color: transparent;
   color: white;
-  border: 3px solid #3a3a3a;
+  border: 2px solid #3a3a3a;
 }
 .submit-url:hover {
   opacity: 0.9;

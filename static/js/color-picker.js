@@ -10,13 +10,11 @@ window.onload = function () {
 
   const menuBtn = document.querySelector(".menu_btn");
   const menu = document.querySelector(".menu");
-  // const htu = document.querySelectorAll(".how_to_use");
-  // const descH3 = document.querySelectorAll(".htu_h3");
-  // const description = document.querySelectorAll(".description");
 
   const menuLink = document.querySelectorAll(".menu_container a");
   const footer = document.querySelector("footer");
 
+  const colorSummary = document.querySelector('.color-info-summary');
   const spContainer = document.querySelector(".sp-container");
   const colorInfo = document.querySelector(".color-info");
   const colorBarInput = document.querySelectorAll(".color-val-type input");
@@ -47,6 +45,7 @@ window.onload = function () {
 
         footer.classList.remove("footer_dark");
 
+        colorSummary.classList.remove('dark');
         spContainer.classList.remove("dark");
         colorInfo.classList.remove("dark");
         for(item of colorGroup){
@@ -78,6 +77,7 @@ window.onload = function () {
 
         footer.classList.add("footer_dark");
 
+        colorSummary.classList.add('dark');
         spContainer.classList.add("dark");
         colorInfo.classList.add("dark");
         for(item of colorGroup){
@@ -126,8 +126,14 @@ $("#color-picker").on("move.spectrum", function (e, tinycolor) {
   const rgba = tinycolor.toRgb();
   const hsl = rgbToHSL(rgb);
 
+  const colorNow = document.querySelector('.color-now');
+  const hexText = document.querySelector('.hex-text');
+  const rgbText = document.querySelector('.rgb-text');
+  const hslText = document.querySelector('.hsl-text');
+
   selectedColor.style.backgroundColor = "#" + hex;
   selectedColor.style.borderColor = "#" + hex;
+
   hexVal.value = hex;
   rVal.value = rgb[0];
   gVal.value = rgb[1];
@@ -135,6 +141,11 @@ $("#color-picker").on("move.spectrum", function (e, tinycolor) {
   hVal.value = hsl[0];
   sVal.value = hsl[1];
   lVal.value = hsl[2];
+
+  colorNow.style.backgroundColor = "#" + hex;
+  hexText.textContent = "#" + hex;
+  rgbText.textContent = "rgb(" + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ")";
+  hslText.textContent = "hsl(" + hsl[0] + ", " + hsl[1] + "%, " + hsl[2] + "%)";
 });
 
 function hexColorToRGB(hexColor) {
@@ -213,4 +224,21 @@ function hslChange() {
   inputVal.value = "hsl(" + h + ", " + s + ", " + l + ")";
   var inputEvent = new Event("change");
   inputVal.dispatchEvent(inputEvent);
+}
+
+function copy(e){
+  var colorInfo = event.currentTarget.querySelector('span').textContent;
+
+  var textarea = document.createElement("textarea");
+  textarea.value = colorInfo;
+  document.body.appendChild(textarea);
+
+  // textarea를 선택하고 복사 명령을 수행합니다.
+  textarea.select();
+  document.execCommand('copy');
+
+  // 생성한 textarea 엘리먼트를 제거합니다.
+  document.body.removeChild(textarea);
+
+  alert("텍스트가 복사되었습니다: " + colorInfo);
 }

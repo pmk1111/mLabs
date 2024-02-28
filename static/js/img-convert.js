@@ -17,10 +17,12 @@ const formatSelector = document.querySelector('.format-selector');
 const uploadBtn = document.querySelector(".upload-img-btn");
 const convertAllBtn = document.querySelector(".convert-all-btn");
 
-const htu = document.querySelector(".how_to_use");
-const htuH3 = document.querySelector(".htu_h3");
-const step = document.querySelector(".step");
-const desc = document.querySelectorAll(".step p");
+const openHelp = document.querySelector('.open-help');
+const helpIcon = document.querySelector('.help-icon');
+const helpModal = document.querySelector('.help-modal');
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector('.modal-content');
+const closeModalBtn = document.querySelector('.close-modal');
 
 var isActive = true;
 // 다크모드
@@ -53,6 +55,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.remove("footer_dark");
+      helpIcon.setAttribute('src', '/images/help.svg');
+      modalContent.classList.remove('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn.svg');
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
@@ -78,6 +83,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.add("footer_dark");
+      helpIcon.setAttribute('src', '/images/help-white.svg');
+      modalContent.classList.add('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn-white.svg');
     }
   };
 });

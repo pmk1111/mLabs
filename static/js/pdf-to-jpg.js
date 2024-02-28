@@ -15,6 +15,13 @@ const fileInput = document.getElementById("pdfInput");
 const here = document.querySelector('.here');
 const convertBtn = document.querySelector('.do-convert');
 
+const openHelp = document.querySelector('.open-help');
+const helpIcon = document.querySelector('.help-icon');
+const helpModal = document.querySelector('.help-modal');
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector('.modal-content');
+const closeModalBtn = document.querySelector('.close-modal');
+
 var isActive = true;
 // 다크모드
 toggleList.forEach(($toggle) => {
@@ -42,6 +49,9 @@ toggleList.forEach(($toggle) => {
       convertBtn.classList.remove('dark');
 
       footer.classList.remove("footer_dark");
+      helpIcon.setAttribute('src', '/images/help.svg');
+      modalContent.classList.remove('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn.svg');
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
@@ -61,7 +71,9 @@ toggleList.forEach(($toggle) => {
       convertBtn.classList.add('dark');
       
       footer.classList.add("footer_dark");
-      console.log(fileNameDivs.length)
+      helpIcon.setAttribute('src', '/images/help-white.svg');
+      modalContent.classList.add('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn-white.svg');
     }
   };
 });

@@ -42,7 +42,7 @@ nav {
   color: black;
   background-color: white;
   border-bottom: 1px solid #d3d3d3;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+  box-shadow: 0 3px 6px 0 rgba(50,50,50,.2); 
   z-index: 11
 }
 

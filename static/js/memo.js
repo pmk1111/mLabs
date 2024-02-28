@@ -7,9 +7,7 @@ window.onload = function () {
     const toggleImg = document.querySelector(".display_mode_icon");
     const menuBtn = document.querySelector(".menu_btn");
     const menu = document.querySelector(".menu");
-    const navBar = document.querySelector(".nav_bar");
     const menuLink = document.querySelectorAll(".menu_container a");
-    const footer = document.querySelector("footer");
 
     const normalTxt = document.querySelector(".normal");
     const editorTxt = document.querySelector(".editor");
@@ -106,7 +104,6 @@ window.onload = function () {
             txtValue += pTag[i].textContent + "\n";
           }
         }
-        console.log(txtValue);
         memo.value = txtValue;
 
         memo.style.display = "block";
@@ -119,7 +116,6 @@ window.onload = function () {
         while (noteEditable.firstChild) {
           noteEditable.removeChild(noteEditable.firstChild);
         }
-        console.log("editorBnt click");
 
         editorTxt.classList.add("active");
         normalTxt.classList.remove("active");
@@ -131,7 +127,6 @@ window.onload = function () {
             .join("");
         }
         noteEditable.innerHTML = txtValue;
-        console.log(txtValue);
 
         memoEditor.style.display = "block";
         memo.style.display = "none";
@@ -152,7 +147,6 @@ window.onload = function () {
         localStorage.setItem("memo", memoText);
       } else {
         const memoEditorText = memoEditor.value;
-        console.log(memoEditorText);
         let noteEditable = document.querySelector(".note-editable");
         let pTag = noteEditable.querySelectorAll("p");
 
@@ -167,7 +161,6 @@ window.onload = function () {
     // 저장된 메모 불러오기
     function loadMemo() {
       const storedMemo = localStorage.getItem("memo");
-      console.log(storedMemo);
       if (storedMemo) {
         const memoText = storedMemo;
 
