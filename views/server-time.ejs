@@ -18,22 +18,6 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/server-time.css" />
     
-    
-    
-    <style>
-     	footer {
-	    	position: relative;
-        margin-top:100px;
-      } 
-      #Accordion_wrap {
-        position: fixed;
-        width: 100%;
-      }
-      main {
-				margin-top: 0;
-	  	}
-	  	.container{margin: 150px 0 30px 0;}
-    </style>
   </head>
   <body>
     <%- include('./nav') %>
@@ -45,51 +29,56 @@
     		<div class="url-input-wrap">
     			<input type="text" class="search" id="urlInput" placeholder="웹사이트 url을 입력하세요." />
     		</div>
-    		<button class="get-time-btn" onclick="checkUrl()">서버 시간 가져오기</button>
+        <div class="btn-wrap">
+    		  <button class="get-time-btn" onclick="checkUrl()">서버 시간 가져오기</button>
+        </div>
     		<div class="result-container">
     			<div class="url-data-wrap">
-    				<p id="url-data"></p>
+    				<span id="url-data"></span>
     			</div>
     			<div class="server-time-wrap">
     				<p id="serverTime"></p>
     			</div>
 
     		</div>
-    		
-    		<div class="how_to_use">
-          <div class="htu_h3"><h3>소개</h3></div>
-          <div class="description">
-           <p><span style="font-weight: 600;">"서버 시간 확인하기"</span>는 사용자가 입력한 URL을 통해 특정 웹 사이트에 HTTP 요청을 보내고, 
-           해당 사이트로부터 받은 응답 헤더에서 서버의 시간 정보를 추출하여 사용자에게 제공합니다.</p>
 
-					<p>이 서비스는 사용자가 확인하고자 하는 웹 사이트의 URL을 입력하면, 
-					그 웹 사이트에 대해 HTTP 요청을 보내, HTTP 응답을 생성하여 응답 헤더를 반환하는데, 이 중 해당 웹 서버의 현재 시간을 나타내는 'Date' 필드를 추출해 사용자에게 제공해 줍니다.</p>
-
-					<p>이러한 기능은 다양한 상황에서 활용될 수 있습니다. 
-					예를 들어, 수강 신청이나 티켓 예매와 같은 선착순 작업에서 정확한 시간 정보는 매우 중요합니다. 
-					서버 시간을 확인함으로써 사용자는 해당 작업을 제 시간에 수행할 수 있게 됩니다. 이 서비스는 사용자에게 편의성을 제공하며, 
-					선착순 작업에 참여하는 데 도움이 될 수 있습니다.</p>
-
-            
-          </div>
+        <div class="open-help">
+          <span>소개/사용법(클릭)</span>
+          <img class="help-icon" src="/images/help.svg">
         </div>
-    		
-    		<div class="how_to_use">
-          <div class="htu_h3"><h3>사용 방법</h3></div>
-          <div class="description">
-            <p>1. 서버 시간을 알고 싶은 웹 사이트의 url을 복사합니다(https://example.com)</p>
-            <p>2. <span style="font-weight: 600;">"서버 시간 가져오기"</span> 버튼을 클릭합니다.</p>
-            <p>3. 하단에 url과 해당 웹 서버의 시간이 표시됩니다.</p>
-          </div>
-        </div>
-    	</div>
+ 
+    	<!-- </div> -->
     </main>
         
     <!-- footer -->
     <%- include('./footer') %>
+    <div class="help-modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-content-wrapper">
+          <img class="close-modal" src="/images/deletebtn.svg">
+          <h1 style="margin-bottom: 30px;">소개</h1>
+          <p><b>"서버 시간 확인하기"</b>는 사용자가 입력한 URL을 통해 특정 웹 사이트에 HTTP 요청을 보내고, 
+            해당 사이트로부터 받은 응답 헤더에서 서버의 시간 정보를 추출하여 사용자에게 제공합니다.</p>
+ 
+           <p>이 서비스는 사용자가 확인하고자 하는 웹 사이트의 URL을 입력하면, 
+           그 웹 사이트에 대해 HTTP 요청을 보내, HTTP 응답을 생성하여 응답 헤더를 반환하는데, 이 중 해당 웹 서버의 현재 시간을 나타내는 'Date' 필드를 추출해 사용자에게 제공해 줍니다.</p>
+ 
+           <p>이러한 기능은 다양한 상황에서 활용될 수 있습니다. 
+           예를 들어, 수강 신청이나 티켓 예매와 같은 선착순 작업에서 정확한 시간 정보는 매우 중요합니다. 
+           서버 시간을 확인함으로써 사용자는 해당 작업을 제 시간에 수행할 수 있게 됩니다. 이 서비스는 사용자에게 편의성을 제공하며, 
+           선착순 작업에 참여하는 데 도움이 될 수 있습니다.</p>
+           <h1 style="margin: 30px 0;">사용법</h1>
+           <p>1. 서버 시간을 알고 싶은 웹 사이트의 url을 복사합니다(https://example.com)</p>
+           <p>2. <span style="font-weight: 600;">"서버 시간 가져오기"</span> 버튼을 클릭합니다.</p>
+           <p>3. 하단에 url과 해당 웹 서버의 시간이 표시됩니다.</p>
+           <p>4. 만약 올바른 url이 아닐 경우, 내 서버 시간이 표시됩니다.</p>
+        </div>
+      </div>
+    </div>
 
-    <script src="/js/common.js"></script>
     <script src="/js/server-time.js"></script>
+    <script src="/js/common.js"></script>
 
     <script>
     const urlInput = document.querySelector("#urlInput");

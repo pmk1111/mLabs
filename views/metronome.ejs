@@ -15,19 +15,7 @@
   <link rel="stylesheet" href="/css/metronome.css" />
   
   <style>
-  body {user-select: none}
-  footer {
-	position: relative;
-	margin-top: 100px;
-}
-main {
-	margin-top: 0;
-}
-#Accordion_wrap {
-	position: fixed;
-	width: 100%;
-}
-.how_to_use{width: 600px; margin-top:50px}
+
   </style>
 
 </head>
@@ -36,7 +24,8 @@ main {
     <%- include('./accordion') %>
 
 	<main>
-  	<div class="metronome-container">
+  	<div class="container">
+      <h1 style="margin-bottom: 20px;">온라인 메트로놈</h1>
     	<div class="metronome">
       	<div class="bpm-display">
         	<span class="tempo">140</span>
@@ -62,24 +51,41 @@ main {
       	<span class="beats-per-measure-text">Beats per Measure</span>
     	</div>
     	
-    	<div class="how_to_use">
-      	<div class="htu_h3"><h3>소개 / 사용방법</h3></div>
-          <div class="description">
-            <p><span style="font-weight: 700">&#183</span> <span style="font-weight: 600">메트로놈</span>은 일정한 속도로 음악의 빠르기를 나타내는 기계로, 
-            		일정한 시간 간격으로 소리를 내며, 악기를 연주하는 사람들이 박자 감각을 훈련하기 위해 사용합니다.</p>
-            <p><span style="font-weight: 700">&#183</span> 본 웹 사이트가 제공하는 온라인 메트로놈은 <span style="font-weight: 600">20~300 bpm</span>의 속도를 제공합니다. 스크롤 바를 조절하거나, 
-            	 스크롤 바를 감싸고 있는 <span style="font-weight: 600">"+", "-"</span> 버튼을 클릭하여 조절할 수 있습니다.</p>
-            <p><span style="font-weight: 700">&#183</span> 마디의 첫 번째 박자와 나머지 박자의 소리는 다르게 구별됩니다.</p>
-            <p><span style="font-weight: 700">&#183</span> 하단의 작은 <span style="font-weight: 600">"+", "-"</span> 버튼을 클릭하여, 마디 당 박자 수를 조절할 수 있습니다.</p>
-            	 
+		<div class="open-help">
+            <span>도움말(클릭)</span>
+            <img class="help-icon" src="/images/help.svg">
           </div>
-        </div>
+
   	</div>
   </main>
+
+  <div class="help-modal">
+	<div class="modal-overlay"></div>
+	<div class="modal-content">
+	  <div class="modal-content-wrapper">
+		<img class="close-modal" src="/images/deletebtn.svg">
+		<h1 style="margin-bottom: 30px;">사용방법</h1>
+		<p><span style="font-weight: 700">&#183</span> <span style="font-weight: 600">메트로놈</span>은 일정한 속도로 음악의 빠르기를 나타내는 기계로, 
+			일정한 시간 간격으로 소리를 내며, 악기를 연주하는 사람들이 박자 감각을 훈련하기 위해 사용합니다.</p>
+	<p><span style="font-weight: 700">&#183</span> 본 웹 사이트가 제공하는 온라인 메트로놈은 <span style="font-weight: 600">20~300 bpm</span>의 속도를 제공합니다. 스크롤 바를 조절하거나, 
+		 스크롤 바를 감싸고 있는 <span style="font-weight: 600">"+", "-"</span> 버튼을 클릭하여 조절할 수 있습니다.</p>
+	<p><span style="font-weight: 700">&#183</span> 마디의 첫 번째 박자와 나머지 박자의 소리는 다르게 구별됩니다.</p>
+	<p><span style="font-weight: 700">&#183</span> 하단의 작은 <span style="font-weight: 600">"+", "-"</span> 버튼을 클릭하여, 마디 당 박자 수를 조절할 수 있습니다.</p>
+	  </div>
+	</div>
+  </div>
   
   <%- include('./footer') %>
+  <script>
+	const openHelp = document.querySelector('.open-help');
+const helpIcon = document.querySelector('.help-icon');
+const helpModal = document.querySelector('.help-modal');
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector('.modal-content');
+const closeModalBtn = document.querySelector('.close-modal');
+  </script>
 
-  <script src="/js/common.js"></script>
   <script src="/js/metronome.js" type="module"></script>
+  <script src="/js/common.js"></script>
 </body>
 </html>

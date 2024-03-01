@@ -312,6 +312,7 @@
 }
 
 .modal-content {
+  min-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -347,3 +348,32 @@
 .modal-content-wrapper p{
   margin:15px 0;
 }
+
+@media screen and (max-width: 1128px) {
+  main{
+   flex-direction: column-reverse;
+  } 
+  .convert_wrap, .upload-area{
+   min-height: 30vh;
+   width: 99.94%;
+   border-bottom: 1px solid rgb(218, 218, 218);
+  }
+  .upload-area{
+    min-height: 50vh;
+    width: calc(99.94% - 40px);
+  }
+  .convert_wrap.dark{
+   border-bottom: 1px solid #3a3a3a;
+  }
+  .url-input{
+   width: 90%;
+  }
+  .upload-img-btn, .format-selector,
+  .convert-all-btn{
+   width: calc(90% + 25px);
+  }
+  .thumbnail-container{
+   width: calc(99.94% - 40px);
+   min-height: 50vh;
+  }
+ }

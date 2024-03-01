@@ -80,7 +80,7 @@
         <div class="contents_style">
          
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(검정, 회색 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -115,7 +115,7 @@
           </div>
 
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(파랑 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -416,7 +416,7 @@
           </div>
           
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(초록 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -675,7 +675,7 @@
           </div>
           
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(분홍 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -878,7 +878,7 @@
           </div>
           
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(노랑, 주황, 갈색 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -1193,7 +1193,7 @@
           </div>
           
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(빨강 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -1368,7 +1368,7 @@
           </div>
           
           <div class="color-group">
-          <div class="see-all" onclick="openColorGroup()">
+          <div class="see-all" onclick="openColorGroup(this)">
             <span>색상표 전체보기(보라 계열)</span><span class="up-down-arrow">▼</span>
           </div>
           <div class="color-ul-group">
@@ -1499,15 +1499,18 @@
     <script src="/js/common.js"></script>
     <script src="/js/color-picker.js"></script>
     <script>
-      function openColorGroup(){
-        const seeAll = event.target.parentElement;
-        const colorGroup = seeAll.parentElement;
+      function openColorGroup(e){
+        const seeAll = e.parentElement;
+        const arrow = e.querySelector('.up-down-arrow');
+        const colorGroup = e.parentElement;
         const colorUlGroup = colorGroup.querySelector('.color-ul-group');
         
         if(colorUlGroup.style.display === 'block'){
           colorUlGroup.style.display = 'none';
+          arrow.textContent = '▼';
         } else{
           colorUlGroup.style.display = 'block'
+          arrow.textContent = '▲';
         }
       }
     </script>

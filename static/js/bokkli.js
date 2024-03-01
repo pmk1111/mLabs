@@ -29,6 +29,7 @@ const step = document.querySelectorAll(".step");
 const navBar = document.querySelector(".nav_bar");
 const main = document.querySelector("main");
 const calAreaWrap = document.querySelector(".cal_area");
+const line = document.querySelectorAll('.line');
 
 const menuLink = document.querySelectorAll(".menu_container a");
 
@@ -90,7 +91,9 @@ toggleList.forEach(($toggle) => {
         htuH3[i].classList.remove("htu_h3_dark");
         step[i].classList.remove("step_dark");
       }
-
+      for(i of line){
+        i.classList.remove('dark');
+      }
       footer.classList.remove("footer_dark");
     } else {
       $toggle.classList.add("active");
@@ -133,13 +136,28 @@ toggleList.forEach(($toggle) => {
         htuH3[i].classList.add("htu_h3_dark");
         step[i].classList.add("step_dark");
       }
+      for(i of line){
+        i.classList.add('dark');
+      }
 
       footer.classList.add("footer_dark");
     }
   };
 });
 
-
+function openStep(e){
+  console.log(e)
+  const parent = e.parentElement;
+  const arrow = parent.querySelector('.up-down-arrow');
+  const step = parent.querySelector('.step');
+  if(step.style.display === 'block'){
+    step.style.display = 'none';
+    arrow.textContent = '▼';
+  } else{
+    step.style.display = 'block';
+    arrow.textContent = '▲';
+  }
+}
 
 
 

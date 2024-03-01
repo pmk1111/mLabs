@@ -44,6 +44,9 @@ table th, td{
   padding: 0 10px;
   outline: none;
 }
+#display::placeholder{
+  color: #c3c3c3;
+}
 td {
   width: 20%;
 }

@@ -14,28 +14,10 @@
 	<link rel="stylesheet" href="/slick/slick-theme.css"/>
 		
     <style>
-    	footer {
-	    	position: relative;
-	   	 	bottom: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 170px;
-        margin-top:100px;
-        background-color: rgb(227, 227, 227);
-        transition: all 0.2s ease-in;
+      .container{
+        padding: 0;
       }
-      #Accordion_wrap {
-        position: fixed;
-        width: 100%;
-      }
-      main {
-				margin-top: 0;
-	  	}
-	  	.container{margin: 150px 0 30px 0;}
-
+    
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -46,7 +28,26 @@
   	
   	<main>
     	<div class="container">
-    		<div class="select-content-wrap">
+        <div class="content-wrapper">
+        <div class="barcode-qr-wrapper">
+          <div class="barcode-wrap">
+            <img id="barcode" />
+            <span class="wrong-value">올바른 값을 입력해 주세요.</span>
+          </div>
+          <div class="qrcode-wrap">
+            <div id="qrcode"></div>
+          </div>
+          <button id="barcode-download" onclick="downloadBarCode()">
+            <img src="/images/download.svg" style="margin-right: 3px;">
+            다운로드</button>
+            <button id="qr-download" onclick="downloadQRCode()" style="display: none;">
+              <img src="/images/download.svg" style="margin-right: 3px" />다운로드
+            </button>
+        </div>
+
+
+        <div class="settings">
+        <div class="select-content-wrap">
     			<button type="button" id="show-barcode" class="content selected-content" onclick="showBarcodeContent()">
     				<img class="content-img" src="/images/barcode.png">
     				<span>바코드</span>
@@ -56,9 +57,183 @@
     				<span>QR코드</span>
     			</button>
     		</div>
-			<%- include('./bar') %>
-			<%- include('./qr') %>
-			<%- include('./slick') %>
+        
+    <div class="barcode-container">
+
+      <div class="barcode-setting-wrap">
+
+        <div class="bar-txt-wrap wrapper">
+        	<span>텍스트 & 포멧</span>
+          <div class="txt-wrap wrap">
+            <input id="barcode-txt" type="text" onkeyup="setBarTxt()" />
+          </div>
+        </div>
+
+        <div class="format-wrapper wrapper"> 
+          <div class="format-wrap wrap">
+            <select id="barcode-format" onchange="setBarFormat()">
+              <option value="CODE128" selected>CODE128</option>
+              <option value="CODE128A">CODE128A</option>
+              <option value="CODE128B">CODE128B</option>
+              <option value="CODE128C">CODE128C</option>
+              <option value="CODE39">CODE39</option>
+              <option value="EAN8">EAN8</option>
+              <option value="EAN5">EAN5</option>
+              <option value="EAN2">EAN2</option>
+              <option value="upc">UPC</option>
+              <option value="ITF">ITF</option>
+              <option value="MSI10">MSI10</option>
+              <option value="MSI11">MSI11</option>
+              <option value="MSI1010">MSI1010</option>
+              <option value="MSI1110">MSI1110</option>
+              <option value="pharmacode">Pharmacode</option>
+              <option value="CODABAR">Codabar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="txt-visibility-wrap wrapper">
+        	<span>텍스트</span>
+        	<div class="text-visibility-input-wrap wrap">
+          	<div class="show-txt-wrap radio-wrapper selected-radio" style="width: 50%;">
+            	<input type="radio" id="set-txt-show" class="txt-visibility" name="txt-visibility" value="true" 
+            				 onclick="setTxtVisibility()" checked/>
+            	<label for="set-txt-show">표시</label>
+          	</div>
+          	<div class="hide-txt-wrap radio-wrapper" style="width: 50%; border-left-style:none;">
+            	<input type="radio" id="set-txt-hide" class="txt-visibility" name="txt-visibility" value="false" 
+            				 onclick="setTxtVisibility()"/>
+            	<label for="set-txt-hide">숨기기</label>
+          	</div>
+          </div>
+        </div>
+        
+        <div class="text-option">
+					<div class="txt-position-wrap wrapper">
+        		<div class="pos-input-wrap wrap">
+        	
+          		<div class="txt-top-wrap radio-wrapper" style="width: 25%;">
+           			<input type="radio" id="set-txt-top" class="txt-position" name="txt-position" value="top" onclick="setTxtPos()" />
+            		<label for="set-txt-top">top</label>
+          		</div>
+          		<div class="txt-bottom-wrap selected-radio" style="width: 25%; border-left-style:none; border-radius: 0px">
+           	 		<input type="radio" id="set-txt-bottom" class="txt-position" name="txt-position" value="bottom" onclick="setTxtPos()" checked />
+            		<label for="set-txt-bottom">bottom</label>
+          		</div>
+
+							<div class="left-wrap radio-wrapper" style="width: 25%; border-left-style:none; border-radius: 0px">
+  	          	<input type="radio" class="txt-align" id="txt-left" name="txt-align" value="left" onclick="setTxtAlign()"/>
+    	        	<label for="txt-left">left</label>
+      	    	</div>
+        	  	<div class="center-wrap selected-radio" style="width: 25%; border-left-style:none;">
+          	  	<input type="radio" class="txt-align" id="txt-center" name="txt-align" value="center" onclick="setTxtAlign()" checked />
+         		   	<label for="txt-center">center</label>
+          		</div>
+          		<div class="right-wrap radio-wrapper" style="width: 25%; border-left-style:none;">
+            		<input type="radio" class="txt-align" id="txt-right" name="txt-align" value="right" onclick="setTxtAlign()"/>
+        	    	<label for="txt-right">right</label>
+          		</div>
+          	</div>
+        	</div>
+        	
+        	<div class="txt-size-wrap wrapper">
+        		<div class="range-wrap wrap">
+          		<input type="range" id="set-txt-size" min="8" max="40" oninput="setTxtSize()" />
+          		<div class="val-wrap">
+          			<p class="txt-size-val val"></p>
+                <p>px</p>
+          		</div>
+          	</div>
+        	</div>
+        	
+        	<div class="txt-margin-wrap wrapper">
+        		<div class="range-wrap wrap">
+          		<input type="range" id="set-txt-margin" min="0" max="15" oninput="setTxtMargin()" />
+          		<div class="val-wrap">
+          			<p class="txt-margin-val val"></p>
+          		</div>
+          	</div>
+       	 	</div>
+        </div>
+       
+       	<div class="width-wrap wrapper">
+        	<span>바코드 크기 (넓이, 높이)</span>
+        	<div class="range-wrap wrap">
+         		<input type="range" id="set-width" class="range" min="1" max="3" oninput="setBarWidth()"/>
+         		<div class="val-wrap">
+         			<p class="bar-width-val val"></p>
+         		</div>
+         	</div>
+        </div>
+        
+        <div class="height-wrap wrapper">
+
+        	<div class="range-wrap wrap">
+         		<input type="range" id="set-heigth" min="10" max="150" oninput="setBarHeight()"/>
+         		<div class="val-wrap">
+         			<p class="bar-height-val val"></p>
+         		</div>
+         	</div>
+        </div>
+        
+        <div class="bar-color-wrap wrapper">
+        	<span>배경 & 바코드 색상</span>
+          <div class="color-container">
+        	  <div class="bar-bg-color color-wrap  wrap">
+          	  <input type="color" id="set-bg-color" oninput="setBarBgColor()" />
+            </div>
+
+        	  <div class="bar-line-color color-wrap wrap">
+          	  <input type="color" id="set-line-color" oninput="setBarLineColor()" />
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- barcode end -->
+
+    <!-- qr code -->
+    
+    <div class="qrcode-container">
+
+      <div class="qr-setting-wrap wrap">
+        <div class="qr-url-wrap wrapper">
+          <span>QR 텍스트</span>
+          <div class="txt-wrap wrap">
+            <input type="text" id="qr-url" onkeyup="setQrUrl()" />
+          </div>
+        </div>
+
+        <div class="set-w-h-wrap wrapper">
+          <span>크기</span>
+          <div class="range-wrap wrap">
+            <input type="range" id="w-h" name="w-h" placeholder="1~250" min="1" max="250" value="128" oninput="setQrSize()"/>
+            <div class="val-wrap">
+              <p class="qr-size-val val"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-bg-color-wrap wrapper">
+          <span>배경 & QR 색상</span>
+          <div class="color-container">
+            <div class="qr-bg-color color-wrap wrap">
+              <input type="color" id="set-qr-bg-color" oninput="setQrBgColor()" />
+            </div>
+          <div class="qr-color-wrap wrap">
+            <div class="qr-line-color color-wrap wrap">
+              <input type="color" id="set-qr-color" oninput="setQrLineColor()" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- qr code end -->
+
+			<!-- <%- include('./slick') %> -->
+    </div>
     	</div>
     </main>
 
@@ -71,6 +246,8 @@
     <script>
     	const barcodeBtn = document.querySelector("#show-barcode");
     	const qrcodeBtn = document.querySelector("#show-qrcode");
+      const barcodeWrapper = document.querySelector('.barcode-wrap');
+      const qrcodeWrapper = document.querySelector('.qrcode-wrap');
     	const barcodeContainer = document.querySelector(".barcode-container");
     	const qrcodeContainer = document.querySelector(".qrcode-container");
     	
@@ -78,6 +255,10 @@
     		if(!barcodeBtn.classList.contains("selected-content")){
     			barcodeContainer.style.display = "flex";
     			qrcodeContainer.style.display = "none";
+          barcodeWrapper.style.display = 'block';
+          qrcodeWrapper.style.display = 'none';
+          barCodeDownloadBtn.style.display = "block";
+          qrDownLoadBtn.style.display = "none";
 					
     			if(!isActive){
     					barcodeBtn.classList.remove("content-dark");
@@ -98,6 +279,10 @@
     		if(!qrcodeContainer.classList.contains("selected-content")){
     			qrcodeContainer.style.display = "block";
     			barcodeContainer.style.display = "none";
+          qrcodeWrapper.style.display = 'block';
+          barcodeWrapper.style.display = 'none';
+          qrDownLoadBtn.style.display = "block";
+          barCodeDownloadBtn.style.display = "none";
     			
     			if(!isActive){
     				qrcodeBtn.classList.remove("content-dark");
@@ -113,7 +298,6 @@
     		
     		}
     	}
-    	
     </script>
   </body>
 </html>

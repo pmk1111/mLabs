@@ -1,13 +1,16 @@
 @charset "UTF-8";
 
 .frequency-container{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 400px;
 }
 
 .wave_select_wrap {
-  width: 820px;
+  min-width: 320px;
+  width: 60%;
   display: flex;
 }
 .radio_wave {
@@ -22,14 +25,13 @@
   height: 45px;
   font-size: 16px;
   cursor: pointer;
-  background-color: rgb(233, 210, 210);
-  border: 1px solid rgb(234, 193, 193);
+  background-color: #6b96c9;
+  border: 1px solid #5c8ecb;
   color: black;
 }
-
 .custom-radio:checked + label {
-  background-color: #db4040; 
-  border: 1px solid #db4040;
+  background-color: #2770c4; 
+  border: 1px solid #2770c4;
   color: white;
   
 }
@@ -50,7 +52,8 @@
 .frequency_wrap{
   display: flex;
   flex-direction: column;
-  width: 820px;
+  width: 60%;
+  min-width: 320px;
   height: 100px;
 }
 .flex_center{
@@ -98,8 +101,8 @@
   width: 20px;
   background-color: #fff;
   border-radius: 50%;
-  border: 2px solid #db4040;
-  box-shadow: -407px 0 0 400px #db4040;
+  border: 2px solid #2770c4;
+  box-shadow: -407px 0 0 400px #2770c4;
   
 }
 
@@ -108,8 +111,8 @@
   width: 20px;
   background-color: #fff;
   border-radius: 50%;
-  border: 1px solid #db4040;
-  box-shadow: -407px 0 0 400px #db4040;
+  border: 1px solid #2770c4;
+  box-shadow: -407px 0 0 400px #2770c4;
   
 }
 
@@ -190,10 +193,10 @@ label[for="bar_frequency"]{
 #btn{
   width: 100%;
   height: 50px;
-  background-color: #db4040;
+  background-color: #2770c4;
   color: white;
   border-style: none;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -216,7 +219,8 @@ label[for="bar_frequency"]{
 /* table */
 table{
   margin: 40px 0 20px 0;
-  width: 100%;
+  width: 80%;
+  min-width: 320px;
   border-collapse: collapse;
 }
 table th, td{
@@ -224,7 +228,7 @@ table th, td{
   width: 50%;
   height: 35px;
   text-align: center;
-  
+  padding: 5px;
 }
 table th{
   color: #c3c3c3;
@@ -257,7 +261,7 @@ label[for="auto_increment"] {
 }
 
 input[type="checkbox"]:checked + label {
-  background-color: #db4040; 
+  background-color: #2770c4; 
   color: white; 
   position: relative;
   
@@ -269,8 +273,8 @@ input[type="checkbox"]:checked + label.check_dark {
 }
 
 input[type="checkbox"]:checked + label::before {
-  content: '\2713'; /* 泥댄겕 紐⑥뼇 �쑀�땲肄붾뱶 */
-  font-size: 9px; /* 泥댄겕 紐⑥뼇 �겕湲� 議곗젅 */
+  content: '\2713';
+  font-size: 9px; 
   position: absolute;
   top: 50%;
   left: 50%;
@@ -278,3 +282,86 @@ input[type="checkbox"]:checked + label::before {
 }
 
 
+.open-help{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 140px;
+  height: 23px;
+  border-radius: 5px;
+}
+.open-help:hover{
+  opacity: .8;
+  transition: .2s;
+}
+.open-help span{ 
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.help-icon{
+  position: relative;
+  top: 1px;
+  width: 19px;
+  height: auto;
+  margin-left: 5px;
+}
+
+/* modal */
+.help-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.modal-content.dark{
+  background-color: #3a3a3a;
+}
+.modal-content-wrapper{
+  position: relative;
+  padding: 25px 30px;
+}
+.close-modal{
+  position: absolute;
+  top:6%;
+  right:3%;
+  width: 14px;
+  height: auto;
+  cursor: pointer;
+}
+.close-modal:hover{
+  width: 15px;
+  height: auto;
+  opacity: .8;
+  transition: .2s;
+}
+.modal-content-wrapper p{
+  margin:15px 0;
+}

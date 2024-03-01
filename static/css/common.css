@@ -41,15 +41,15 @@ nav {
   height: 70px;
   color: black;
   background-color: white;
-  border-bottom: 1px solid #d3d3d3;
-  box-shadow: 0 3px 6px 0 rgba(50,50,50,.2); 
+  /* border-bottom: 1px solid #f3f3f3; */
+  box-shadow: 0 3px 6px 0 rgba(80, 80, 80, 0.2); 
   z-index: 11
 }
 
 nav.nav_dark {
   background-color: #151515;
-  border-bottom: 1px solid #5f5f5f;
-  box-shadow: 0 2px 4px rgba(141, 141, 141, 0.2); /* 그림자 설정 */
+  /* border-bottom: 1px solid #5f5f5f; */
+  box-shadow: 0 2px 4px rgba(119, 118, 118, 0.2); /* 그림자 설정 */
 }
 .nav_container {
   display: flex;
@@ -252,7 +252,7 @@ main {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 820px;
+  width: 100%;
   padding: 0 5%;
   margin: 50px 0;
 }
@@ -265,15 +265,15 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 170px;
-  min-height: 170px;
-  background-color: rgb(227, 227, 227);
+  height: 80px;
+  min-height: 80px;
+  background-color: rgb(241, 241, 241);
+  border-top: 1px solid rgb(225, 225, 225);
+  color: rgb(177, 177, 177);
 }
 footer.footer_dark {
-  background-color: #2b2b2b;
-}
-
-footer h4 {
+  background-color: #151515;
+  border-top: 1px solid #292929;
   color: rgb(149, 149, 149);
 }
 
@@ -327,10 +327,6 @@ footer h4 {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
-
-.copyright {
-  color: rgb(162, 162, 162);
 }
 
 

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.set_lang{
+.set_lang {
   width: 60px;
   float: right;
   border-top-style: none;
@@ -10,7 +10,7 @@
   border-style: none;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
-.set_lang.set_lang_dark{
+.set_lang.set_lang_dark {
   color: white;
   background-color: #3a3a3a;
 }
@@ -27,7 +27,7 @@ input {
   font-weight: 600;
   outline: none;
 }
-input::placeholder{
+input::placeholder {
   color: #c3c3c3;
 }
 
@@ -37,7 +37,7 @@ input.input_dark {
   color: white;
 }
 
-main.main_dark{
+main.main_dark {
   background-color: #151515;
 }
 .main_wrap {
@@ -54,15 +54,17 @@ main.main_dark{
   border-radius: 5px;
   background-color: white;
 }
-.cal_area.cal_area_dark{
+.cal_area.cal_area_dark {
   background-color: #151515;
 }
-#calculation_title{width: 820px;}
+#calculation_title {
+  width: 820px;
+}
 .inner_container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 40px 0;
+  margin: 40px 0 0;
 }
 .inner_container_wrap {
   margin: 20px 0;
@@ -72,7 +74,7 @@ main.main_dark{
 .csv_btn {
   margin-top: 20px;
   width: 820px;
-  height: 50px;
+  height: 55px;
   border-radius: 3px;
   font-size: 18px;
   font-weight: 600;
@@ -80,11 +82,16 @@ main.main_dark{
   border-style: none;
   color: white;
 }
-.do_cal_btn{
-  background-color: #0068df;
+.do_cal_btn:hover,
+.csv_btn:hover{
+  opacity: .9;
+  transition: .2s;
+}
+.do_cal_btn {
+  background-color: #2770c4;
   cursor: pointer;
 }
-.do_cal_btn.cal_btn_dark{
+.do_cal_btn.cal_btn_dark {
   background-color: #212529;
   border-style: none;
 }
@@ -94,7 +101,9 @@ main.main_dark{
   align-items: center;
   background-color: rgb(0, 148, 69);
 }
-.csv_btn img{margin-right: 3px;}
+.csv_btn img {
+  margin-right: 3px;
+}
 
 .total_result_container {
   display: none;
@@ -158,7 +167,7 @@ tr:nth-child(2n) {
   background-color: lightgrey;
 }
 
-tr.tr_dark{
+tr.tr_dark {
   border: 1px solid #151515;
 }
 tr.tr_dark:nth-child(2n-1) {
@@ -181,17 +190,35 @@ tr td:nth-child(1) {
   justify-content: space-between;
 }
 
-
-.step{
+.step {
+  display: none;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   padding: 10px;
   background-color: white;
 }
-.step.step_dark{
+.step.step_dark {
   background-color: #151515;
 }
-.step p{
+.step p {
   margin: 10px 0;
 }
 
+.how_to_use {
+  margin: 20px;
+}
+.htu_h3 {
+  cursor: pointer;
+}
+.htu_h3:hover {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.line {
+  width: 100%;
+  border: 1px solid rgb(234, 234, 234);
+  margin-top: 10px;
+}
+.line.dark{
+  border-color: #3a3a3a;
+}

@@ -1,29 +1,28 @@
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
-const logo = document.querySelector(".logo");
+const logoImg = document.querySelector('.logo');
 const SiteTitle = document.querySelector('.title');
-
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
-
 const menuBtn = document.querySelector(".menu_btn");
 const menu = document.querySelector(".menu");
 const menuLink = document.querySelectorAll(".menu_container a");
-
 const waveLabels = document.querySelectorAll(".custom-radio + label");
 const range = document.querySelector("#bar_frequency");
 const frequencyInput = document.querySelector("#span_frequency");
 const generateBtn = document.querySelector("#btn");
-
-const htu = document.querySelector(".how_to_use");
-const descH3 = document.querySelector(".htu_h3");
-const description = document.querySelector(".description");
 
 const autoCheckBox = document.querySelector('label[for="auto_increment"]');
 const th = document.querySelectorAll("th");
 const td = document.querySelectorAll("td");
 
 const footer = document.querySelector("footer");
+const openHelp = document.querySelector('.open-help');
+const helpIcon = document.querySelector('.help-icon');
+const helpModal = document.querySelector('.help-modal');
+const modalOverlay = document.querySelector(".modal-overlay");
+const modalContent = document.querySelector('.modal-content');
+const closeModalBtn = document.querySelector('.close-modal');
 
 var isActive = true;
 // 다크모드
@@ -44,7 +43,7 @@ toggleList.forEach(($toggle) => {
       }
 
       nav.classList.remove("nav_dark");
-      logo.setAttribute('src', "/images/logo_black.svg");
+      logoImg.setAttribute('src', "/images/logo_black.svg");
       SiteTitle.style.color = '#151515';
       appIcon.setAttribute('src', '/images/apps-black.svg');
 
@@ -54,10 +53,6 @@ toggleList.forEach(($toggle) => {
       range.classList.remove("range_dark");
       frequencyInput.classList.remove("input_dark");
       generateBtn.classList.remove("btn_dark");
-
-      htu.classList.remove("htu_dark");
-      descH3.classList.remove("htu_h3_dark");
-      description.classList.remove("desc_dark");
 
       autoCheckBox.classList.remove("check_dark");
 
@@ -69,6 +64,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.remove("footer_dark");
+      helpIcon.setAttribute('src', '/images/help.svg');
+      modalContent.classList.remove('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn.svg');
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
@@ -76,7 +74,7 @@ toggleList.forEach(($toggle) => {
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
-      logo.setAttribute('src', "/images/logo_white.svg");
+      logoImg.setAttribute('src', "/images/logo_white.svg");
       SiteTitle.style.color = 'white';
       appIcon.setAttribute('src', '/images/apps-white.svg');
       menuBtn.classList.add("menu_btn_dark");
@@ -92,9 +90,6 @@ toggleList.forEach(($toggle) => {
       frequencyInput.classList.add("input_dark");
       generateBtn.classList.add("btn_dark");
       
-      htu.classList.add("htu_dark");
-      descH3.classList.add("htu_h3_dark");
-      description.classList.add("desc_dark");
 
       autoCheckBox.classList.add("check_dark");
       for(let item of th){
@@ -105,6 +100,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.add("footer_dark");
+      helpIcon.setAttribute('src', '/images/help-white.svg');
+      modalContent.classList.add('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn-white.svg');
     }
   };
 });

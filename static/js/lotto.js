@@ -1,5 +1,8 @@
 const body = document.querySelector("body");
 const nav = document.querySelector(".nav_bar");
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -36,6 +39,9 @@ toggleList.forEach(($toggle) => {
 
       nav.classList.remove("nav_dark");
       nav.classList.add("nav_lite");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
 
       LottogenerateBtn.classList.remove("btn_dark");
       LottogenerateBtn.classList.add("btn_lite");
@@ -65,6 +71,9 @@ toggleList.forEach(($toggle) => {
 
       nav.classList.remove("nav_lite");
       nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
 
       LottogenerateBtn.classList.remove("btn_lite");
       LottogenerateBtn.classList.add("btn_dark");
@@ -97,19 +106,28 @@ LottogenerateBtn.addEventListener("click", async function () {
     return;
   }
   generating = true; // 생성 중 플래그를 활성화
+  let lottoNumGroup = document.createElement('div');
+  lottoNumGroup.classList.add('lotto-num-group')
+  lottoNumContainer.appendChild(lottoNumGroup);
 
+  let lottoNum = [document.createElement('div'), document.createElement('div'), document.createElement('div'), 
+                  document.createElement('div'), document.createElement('div'), document.createElement('div')];
+  for(item of lottoNum){
+    item.classList.add('lotto_num_wrap');
+    lottoNumGroup.appendChild(item);
+  }
   lottoContainer.classList.add("vibration");
   // Set을 사용하여 중복을 방지하고 유일한 숫자를 저장
   let createdLottoNum = new Set();
-  lottoNumWrap[0].classList.remove("fade-in");
+  // lottoNumWrap[0].classList.remove("fade-in");
   await sleep(100);
 
   // 기존 로또 번호 초기화
-  for (let i = 0; i < 6; i++) {
-    lottoNumWrap[i].style.backgroundColor = "";
-    lottoNumWrap[i].classList.remove("fade-in");
-    lottoNum[i].textContent = "";
-  }
+  // for (let i = 0; i < 6; i++) {
+  //   lottoNumWrap[i].style.backgroundColor = "";
+  //   lottoNumWrap[i].classList.remove("fade-in");
+  //   lottoNum[i].textContent = "";
+  // }
 
   // 중복을 피하면서 유일한 숫자를 생성
   while (createdLottoNum.size < 6) {
@@ -124,22 +142,40 @@ LottogenerateBtn.addEventListener("click", async function () {
 
   // Set에서 숫자를 꺼내서 화면에 출력
   let index = 0;
+  // for (let num of sortedLottoSet) {
+  //   if (num <= 10) {
+  //     lottoNumWrap[index].style.backgroundColor = "#FFC107";
+  //   } else if (num <= 20) {
+  //     lottoNumWrap[index].style.backgroundColor = "#007BFF";
+  //   } else if (num <= 30) {
+  //     lottoNumWrap[index].style.backgroundColor = "#DC3545";
+  //   } else if (num <= 40) {
+  //     lottoNumWrap[index].style.backgroundColor = "grey";
+  //   } else {
+  //     lottoNumWrap[index].style.backgroundColor = "#28A745";
+  //   }
+  //   lottoNum[index].textContent = num;
+  //   lottoNumWrap[index].classList.add("fade-in");
+  //   index++;
+  //   await sleep(500);
+  // }
+
   for (let num of sortedLottoSet) {
     if (num <= 10) {
-      lottoNumWrap[index].style.backgroundColor = "#FFC107";
+      lottoNum[index].style.backgroundColor = "#FFC107";
     } else if (num <= 20) {
-      lottoNumWrap[index].style.backgroundColor = "#007BFF";
+      lottoNum[index].style.backgroundColor = "#007BFF";
     } else if (num <= 30) {
-      lottoNumWrap[index].style.backgroundColor = "#DC3545";
+      lottoNum[index].style.backgroundColor = "#DC3545";
     } else if (num <= 40) {
-      lottoNumWrap[index].style.backgroundColor = "grey";
+      lottoNum[index].style.backgroundColor = "grey";
     } else {
-      lottoNumWrap[index].style.backgroundColor = "#28A745";
+      lottoNum[index].style.backgroundColor = "#28A745";
     }
     lottoNum[index].textContent = num;
-    lottoNumWrap[index].classList.add("fade-in");
+    lottoNum[index].classList.add("fade-in");
     index++;
-    await sleep(800);
+    await sleep(500);
   }
   lottoContainer.classList.remove("vibration");
   generating = false; // 생성 완료 후 플래그를 비활성화

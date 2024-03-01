@@ -8,6 +8,7 @@
     <title>로또번호생성</title>
     
 	  <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/common.css" />
 	  <link rel="stylesheet" href="/css/lotto.css" />
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
@@ -16,9 +17,6 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2866511897521551"
      crossorigin="anonymous"></script>
      <style>
-     .main_container{
-     	margin-top: 80px;
-     }
       #Accordion_wrap{
         position: fixed !important;
         width: 100%;
@@ -30,7 +28,7 @@
     <%- include('./accordion') %>
 
     <main>
-      <div class="main_container">
+      <div class="container">
         <div class="lotto_machine_container">
           <img class="lotto_machine" src="/images/lotto_machine.png" />
         </div>
@@ -42,12 +40,7 @@
         <div class="lotto_container">
           <div class="top_bg"><span>생성된 번호가 여기에 표시됩니다.</span></div>
           <div class="lotto_num_container">
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
-            <div class="lotto_num_wrap"><span class="lotto_num"></span></div>
+
           </div>
         </div>
         <div class="rule_container">

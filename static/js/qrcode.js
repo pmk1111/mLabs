@@ -1,22 +1,27 @@
 const qrUrl = document.querySelector("#qr-url");
 const qrBgColor = document.querySelector("#set-qr-bg-color");
-const qrBgColorDiv = document.querySelector(".qr-bg-color-wrap");
+const qrBgColorDiv = document.querySelector(".qr-bg-color");
 const qrColor = document.querySelector("#set-qr-color");
-const qrColorDiv = document.querySelector(".qr-color-wrap");
+const qrColorDiv = document.querySelector(".qr-line-color");
 const qrSize = document.querySelector("#w-h");
 
 var qrSizeValP = document.querySelector(".qr-size-val");
-var qrBgColorValP = document.querySelector(".qr-bg-color-val");
-var qrColorValP = document.querySelector(".qr-color-val");
 
 qrSizeValP.textContent = qrSize.value;
-qrBgColorValP.textContent = qrBgColor.value;
-qrColorValP.textContent = qrColor.value;
 
 qrUrl.value = "https://www.example.com";
 qrSize.value = 128;
 qrBgColor.value = "#ffffff";
 qrColor.value = "#000000";
+qrBgColorDiv.style.backgroundColor = qrBgColor.value;
+qrColorDiv.style.backgroundColor = qrColor.value;
+
+qrBgColorDiv.addEventListener('click', function(){
+  qrBgColor.click();
+});
+qrColorDiv.addEventListener('click', function(){
+  qrColor.click();
+});
 
 // 입력값이 숫자인지 확인하는 함수
 function isNumeric(value) {
@@ -55,7 +60,6 @@ var qrcode = new QRCode(document.getElementById("qrcode"), {
   colorDark: qrColor.value,
   colorLight: qrBgColor.value,
 });
-console.log(qrcode.text);
 
 function downloadQRCode() {
   var imageDataUrl = document
@@ -86,7 +90,6 @@ function setQrSize() {
   let size = qrSize.value;
   qrSizeValP.textContent = size;
   size = parseInt(size);
-  console.log(size);
 
   if (size && !isNaN(size)) {
     document.getElementById("qrcode").innerHTML = "";
@@ -110,7 +113,7 @@ function openQrColorPicker(event, inputId) {
 // 바코드 배경 색
 function setQrBgColor() {
   let qrBgColorVal = qrBgColor.value;
-  qrBgColorValP.textContent = qrBgColorVal;
+  qrBgColorDiv.style.backgroundColor = qrBgColorVal;
   document.getElementById("qrcode").innerHTML = "";
 
   qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -125,7 +128,7 @@ function setQrBgColor() {
 // 바코드 선 색
 function setQrLineColor() {
   let qrColorVal = qrColor.value;
-  qrColorValP.textContent = qrColorVal;
+  qrColorDiv.style.backgroundColor = qrColorVal;
   document.getElementById("qrcode").innerHTML = "";
 
   qrcode = new QRCode(document.getElementById("qrcode"), {

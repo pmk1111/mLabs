@@ -45,7 +45,7 @@
   width: calc(100% - 60px);
   padding: 3px 10px;
   height: 40px;
-  border: 2px solid #aed2fb;
+  border: 3px solid #aed2fb;
   border-radius: 5px;
   outline: none;
   outline: none;
@@ -59,7 +59,7 @@
   height: 50px;
 }
 .url-input.dark, .img-size-selector.dark{
-  border: 2px solid #3a3a3a;
+  border: 5px solid #3a3a3a;
   background-color: #151515;
   color: white;
 }
@@ -91,13 +91,13 @@
 .download-all.dark{
   background-color: transparent;
   color: white;
-  border: 2px solid #3a3a3a;
+  border: 3px solid #3a3a3a;
 }
-.submit-url:hover {
+.submit-url:hover, .download-all:hover {
   opacity: 0.9;
   transition: 0.2s;
 }
-.submit-url:active {
+.submit-url:active, .download-all:active {
   width: calc(100% - 45px);
   height: 49px;
   font-size: 17px;
@@ -146,7 +146,7 @@
   width: 70%;
   height: 50px;
   border: 1px solid lightgrey;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 15px 0;
   cursor: pointer;
 }
@@ -259,6 +259,7 @@ main {
 }
 
 .modal-content {
+  min-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,6 +315,11 @@ main {
  .img-size-selector{
   width: calc(90% + 25px);
  }
+ .submit-url:active, .download-all:active {
+  width: calc(90%);
+  height: 49px;
+  font-size: 17px;
+}
  .thumbnail-container{
   width: calc(99.94% - 40px);
   min-height: 50vh;

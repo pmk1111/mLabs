@@ -26,23 +26,17 @@ let selectedCnts = [];
 
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
-
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
 
 const menuBtn = document.querySelector(".menu_btn");
 const menu = document.querySelector(".menu");
 
-
-const htu = document.querySelectorAll(".how_to_use");
-const descH3 = document.querySelectorAll(".htu_h3");
-const description = document.querySelectorAll(".description");
-
-const navBar = document.querySelector(".nav_bar");
 const main = document.querySelector("main");
-
 const menuLink = document.querySelectorAll(".menu_container a");
-
 const footer = document.querySelector("footer");
 
 var isActive = true;
@@ -58,6 +52,9 @@ toggleList.forEach(($toggle) => {
       body.classList.remove("dark");
 
       nav.classList.remove("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
       main.classList.remove("main_dark");
 
       menuBtn.classList.remove("menu_btn_dark");
@@ -77,24 +74,20 @@ toggleList.forEach(($toggle) => {
 			addBeats.classList.remove("add-beats-dark");
 			measureCount.classList.remove("measure-count-dark");
 			beatsPerMeasureText.classList.remove("beats-per-measure-text-dark");
-     
-      for(let i=0;i<htu.length;i++){
-      	htu[i].classList.remove("htu_dark");
-      }
-			for(let i=0;i<descH3.length;i++){
-      	descH3[i].classList.remove("htu_h3_dark");
-      }
-      for(let i=0;i<description.length;i++){
-      	description[0].classList.remove("desc_dark");
-      }
 
       footer.classList.remove("footer_dark");
+      helpIcon.setAttribute('src', '/images/help.svg');
+      modalContent.classList.remove('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn.svg');
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
       main.classList.add("main_dark");
 
       menuBtn.classList.add("menu_btn_dark");
@@ -114,18 +107,11 @@ toggleList.forEach(($toggle) => {
 			addBeats.classList.add("add-beats-dark");
 			measureCount.classList.add("measure-count-dark");
 			beatsPerMeasureText.classList.add("beats-per-measure-text-dark");
-
-      for(let i=0;i<htu.length;i++){
-      	htu[i].classList.add("htu_dark");
-      }
-			for(let i=0;i<descH3.length;i++){
-      	descH3[i].classList.add("htu_h3_dark");
-      }
-      for(let i=0;i<description.length;i++){
-      	description[0].classList.add("desc_dark");
-      }
       
       footer.classList.add("footer_dark");
+      helpIcon.setAttribute('src', '/images/help-white.svg');
+      modalContent.classList.add('dark');
+      closeModalBtn.setAttribute('src', '/images/deletebtn-white.svg');
     }
   }
 });
@@ -246,3 +232,15 @@ function addDotsBg(cnt){
     }
 }
 const metronome = new Timer(playClick, 60000 / bpm, {immediate: true});
+
+openHelp.addEventListener('click', function(){
+  helpModal.style.display = 'block';
+});
+
+closeModalBtn.addEventListener('click', function(){
+  helpModal.style.display = 'none';
+});
+
+modalOverlay.addEventListener('click', function(){
+  helpModal.style.display = 'none';
+});

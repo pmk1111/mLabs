@@ -11,21 +11,31 @@ const barMargin = document.querySelector("#set-margin");
 const barBgColor = document.querySelector("#set-bg-color");
 const barLineColor = document.querySelector("#set-line-color");
 const barWrap = document.querySelector(".barcode-wrap");
+const qrcodeWrap = document.querySelector('.qrcode-wrap');
 const barSettingWrap = document.querySelector(".barcode-setting-wrap");
-const qrWrap = document.querySelector("#qrcode-wrap");
 const qrSettingWrap = document.querySelector(".qr-setting-wrap");
 
 const txtSizeValP = document.querySelector(".txt-size-val");
 const txtMarginValP = document.querySelector(".txt-margin-val");
 const barWidthValP = document.querySelector(".bar-width-val");
 const barHeightValP = document.querySelector(".bar-height-val");
-const barMarginValP = document.querySelector(".bar-margin-val");
-const barBgColorValP = document.querySelector(".bar-bg-color-val");
-const barLineColorValP = document.querySelector(".bar-line-color-val");
 
 const barCodeDownloadBtn = document.querySelector("#barcode-download");
 const qrDownLoadBtn = document.querySelector("#qr-download");
 const qrUrlInput = document.querySelector("#qr-url");
+const barBgColorDiv = document.querySelector('.bar-bg-color');
+const barLineColorDiv = document.querySelector('.bar-line-color');
+
+barBgColor.value = "#ffffff";
+barBgColorDiv.style.backgroundColor = barBgColor.value;
+barLineColorDiv.style.backgroundColor = barLineColor.value;
+barBgColorDiv.addEventListener('click', function(){
+  barBgColor.click();
+});
+barLineColorDiv.addEventListener('click', function(){
+  barLineColor.click();
+});
+
 
 var barTxt = document.querySelector("#barcode-txt");
 barTxt.value = "Example 1234";
@@ -48,10 +58,6 @@ const rangeInputs = document.querySelectorAll('input[type="range"]');
 const valWraps = document.querySelectorAll(".val-wrap");
 const rangeWrap = document.querySelectorAll(".range-wrap");
 const colorWrap = document.querySelectorAll(".color-wrap");
-
-//const htu = document.querySelector(".how_to_use");
-//const descH3 = document.querySelector(".htu_h3");
-//const description = document.querySelector(".description");
 
 const footer = document.querySelector("footer");
 
@@ -94,7 +100,7 @@ toggleList.forEach(($toggle) => {
       barTxt.classList.remove("barcode-txt-dark");
 			barWrap.classList.remove("barcode-wrap-dark");
 			barSettingWrap.classList.remove("barcode-setting-wrap-dark");
-			qrWrap.classList.remove("qr-wrap-dark");
+      qrcodeWrap.classList.remove('qr-wrap-dark');
 			qrSettingWrap.classList.remove("qr-setting-wrap-dark");
 			
       for (item of spans) {
@@ -168,7 +174,6 @@ toggleList.forEach(($toggle) => {
       barTxt.classList.add("barcode-txt-dark");
       barWrap.classList.add("barcode-wrap-dark");
       barSettingWrap.classList.add("barcode-setting-wrap-dark");
-      qrWrap.classList.add("qr-wrap-dark");
 			qrSettingWrap.classList.add("qr-setting-wrap-dark");
 
       for (item of spans) {
@@ -202,6 +207,7 @@ toggleList.forEach(($toggle) => {
       }
 
       barCodeDownloadBtn.classList.add("download-btn-dark");
+      qrcodeWrap.classList.add('qr-wrap-dark');
       qrDownLoadBtn.classList.add("download-btn-dark");
       qrUrlInput.classList.add("qr-url-dark");
 
@@ -235,9 +241,6 @@ txtSizeValP.textContent = barTxtSize.value;
 txtMarginValP.textContent = barTxtMargin.value;
 barWidthValP.textContent = barWidth.value;
 barHeightValP.textContent = barHeight.value;
-barMarginValP.textContent = barMargin.value;
-barBgColorValP.textContent = barBgColor.value;
-barLineColorValP.textContent = barLineColor.value;
 
 function downloadBarCode() {
   var imageDataUrl = document.getElementById("barcode").src;
@@ -636,7 +639,7 @@ function openColorPicker(event, inputId) {
 // 바코드 배경 색
 function setBarBgColor() {
   let bgColor = barBgColor.value;
-  barBgColorValP.textContent = bgColor;
+  barBgColorDiv.style.backgroundColor = bgColor;
   document.getElementById("barcode").innerHTML = "";
 
   barcode = JsBarcode("#barcode", barTxt.value, {
@@ -660,7 +663,7 @@ function setBarBgColor() {
 // 바코드 선 색
 function setBarLineColor() {
   let lineColor = barLineColor.value;
-  barLineColorValP.textContent = lineColor;
+  barLineColorDiv.style.backgroundColor = lineColor;
   document.getElementById("barcode").innerHTML = "";
 
   // 새로운 바코드 생성

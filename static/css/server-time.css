@@ -8,14 +8,44 @@
 	color: white;
 }
 
-.url-input-wrap {
-	background-color: #609fd6;
+.url-input-wrap, .btn-wrap {
+	width: 70%;
 }
-
+.btn-wrap{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	height: 70px;
+	margin-top: 18px;
+}
 .url-input-wrap.url-input-wrap-dark {
 	background-color: #3a3a3a;
 }
-
+.search{
+	width: calc(100% - 30px);
+	height: 44px;
+	padding: 3px 10px;
+	border: 5px solid #2770c4;
+	border-radius: 5px;
+	font-size: 16px;
+	outline: none;
+}
+.search.dark{
+	border: 5px solid #3a3a3a;
+	background-color: #151515;
+	color: white;
+}
+.get-time-btn{
+	width: 100%;
+	height: 60px;
+	background-color: #2770c4;
+	color: white;
+	border-radius: 5px;
+	border-style: none;
+	font-size: 18px;
+	font-weight: 600;
+	cursor: pointer;
+}
 .search.search-dark {
 	background-color: #3a3a3a;
 	color: white;
@@ -29,19 +59,10 @@
 	color: lightgrey;
 }
 
-.get-time-btn {
-	margin: 30px 0;
-	background-color: #609fd6;
-	height: 50px;
-	border-style: none;
-	border-radius: 3px;
-	font-size: 16px;
-	color: white;
-	cursor: pointer;
-}
-
 .get-time-btn:active {
-	opacity: .8
+	width: 98%;
+	height: 58px;
+	opacity: .8;
 }
 
 .get-time-btn.get-time-btn-dark {
@@ -49,7 +70,10 @@
 }
 
 .url-data-wrap, .server-time-wrap {
-	margin-bottom: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .result-container {
@@ -58,6 +82,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 90%;
 }
 
 #url-data {
@@ -65,6 +90,8 @@
 	font-size: 20px;
 	font-weight: 300;
 	color: #3a3a3a;
+	text-align: center;
+	/* width: 100%; */
 }
 
 #url-data.url-data-dark {
@@ -74,7 +101,8 @@
 #serverTime {
 	font-family: 'Black Han Sans', sans-serif;
 	font-size: 50px;
-	color: #609fd6;
+	color: #2770c4;
+	text-align: center;
 }
 
 #serverTime.server-time-dark {
@@ -121,180 +149,88 @@
 	padding: 10px;
 }
 
-@media screen and (min-width: 1024px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 650px;
-		height: 60px;
-		margin: 10px 10%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 650px;
-	}
-	.search {
-		padding: 5px;
-		width: 620px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.get-time-btn {
-		width: 650px;
-	}
-	.result_container {
-		width: 650px;
-	}
-}
-
-@media screen and (max-width: 1023px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 500px;
-		height: 60px;
-		margin: 10px 10%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 500px;
-	}
-	.search {
-		padding: 5px;
-		width: 470px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.get-time-btn {
-		width: 500px;
-	}
-	.result_container {
-		width: 500px;
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 440px;
-		height: 60px;
-		margin: 10px 10%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 440px;
-	}
-	.search {
-		padding: 5px;
-		width: 410px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.get-time-btn {
-		width: 440px;
-	}
-	.result_container {
-		width: 440px;
-	}
-}
-
-@media screen and (max-width: 628px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 400px;
-		height: 60px;
-		margin: 10px 10%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 400px;
-	}
-	.search {
-		padding: 5px;
-		width: 370px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.get-time-btn {
-		width: 400px;
-	}
-	.result_container {
-		width: 400px;
-	}
-}
-
-@media screen and (max-width: 552px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 330px;
-		height: 60px;
-		margin: 10px 5%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 330px;
-	}
-	.search {
-		padding: 5px;
-		width: 300px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.search.search-dark {
-		background-color: #151515;
-		color: white;
-	}
-	.get-time-btn {
-		width: 330px;
-	}
-	.result_container {
-		width: 330px;
-	}
-}
-
-@media screen and (max-width: 424px) {
-	.url-input-wrap {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 260px;
-		height: 60px;
-		margin: 10px 5%;
-		border-radius: 3px;
-	}
-	.how_to_use {
-		width: 260px;
-	}
-	.search {
-		padding: 5px;
-		width: 230px;
-		height: 30px;
-		outline: none;
-		border-style: none;
-		border-radius: 3px;
-	}
-	.get-time-btn {
-		width: 260px;
-	}
-	.result_container {
-		width: 260px;
-	}
-}
+.open-help{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	cursor: pointer;
+	width: 140px;
+	height: 23px;
+	border-radius: 5px;
+  }
+  .open-help:hover{
+	opacity: .8;
+	transition: .2s;
+  }
+  .open-help span{ 
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+  }
+  .help-icon{
+	position: relative;
+	top: 1px;
+	width: 19px;
+	height: auto;
+	margin-left: 5px;
+  }
+  
+  /* modal */
+  .help-modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 12;
+  }
+  
+  .modal-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  }
+  
+  .modal-content {
+	min-width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  .modal-content.dark{
+	background-color: #3a3a3a;
+  }
+  .modal-content-wrapper{
+	position: relative;
+	padding: 25px 30px;
+  }
+  .close-modal{
+	position: absolute;
+	top:6%;
+	right:3%;
+	width: 14px;
+	height: auto;
+	cursor: pointer;
+  }
+  .close-modal:hover{
+	width: 15px;
+	height: auto;
+	opacity: .8;
+	transition: .2s;
+  }
+  .modal-content-wrapper p{
+	margin:15px 0;
+  }
+  

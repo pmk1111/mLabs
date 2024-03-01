@@ -1,0 +1,105 @@
+.txt-wrap {
+  margin: 30px 0;
+}
+.txt-wrap p {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: #151515;
+}
+.txt-wrap p.txt-dark {
+  color: white;
+}
+
+.my-ip-is {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 50px;
+  color: #2770c4;
+}
+.my-ip-is.my-ip-is-dark {
+  color: #dcb662;
+}
+
+.open-help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 140px;
+  height: 23px;
+  border-radius: 5px;
+}
+.open-help:hover {
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.open-help span {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.help-icon {
+  position: relative;
+  top: 1px;
+  width: 19px;
+  height: auto;
+  margin-left: 5px;
+}
+/* modal */
+.help-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content {
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.modal-content.dark {
+  background-color: #3a3a3a;
+}
+.modal-content-wrapper {
+  position: relative;
+  padding: 25px 30px;
+}
+.close-modal {
+  position: absolute;
+  top: 6%;
+  right: 3%;
+  width: 14px;
+  height: auto;
+  cursor: pointer;
+}
+.close-modal:hover {
+  width: 15px;
+  height: auto;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.modal-content-wrapper p {
+  margin: 15px 0;
+}
