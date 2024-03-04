@@ -7,35 +7,71 @@
 
     <link rel="icon" href="/images/logo.png" />
     <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/slider.css" />
+    <link rel="stylesheet" href="/slick/slick.css" />
+    <link rel="stylesheet" href="/slick/slick-theme.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <style>
+      .container {
+        padding: 0;
+        margin-top: 0;
+      }
+      .content-wrapper {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <%- include('views/nav') %>
-    
-    <%- include('views/accordion') %>
+    <%- include('views/nav') %> <%- include('views/accordion') %>
 
-    
     <!-- main -->
     <main>
-      <div class="container">
-        <div class="search_result_container">
-          <div class="search_container">
-            <input
-              type="text"
-              class="search"
-              placeholder="검색할 콘텐츠를 입력하세요"
-            />
-          </div>
-          <div class="result_container">
-            <ul class="result_ul"></ul>
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="hero">
+            <div class="overlay"></div>
+          <div class="search_result_container">
+            <div class="introduce">
+              <p class="p-36" style="color: #eae7f8; text-align: center; margin-bottom: 7px;">M.Labs에서 제공하는 다양한 온라인 기능을</p>
+              <p class="p-36" style="color: #eae7f8; text-align: center;">지금 바로 사용해 보세요.</p>
+              <!-- <span class="s-15 m-t-15">M.Labs에서는 다양한 온라인 기능을 무료로 제공합니다.<br>
+              </span> -->
+            </div>
+            <div class="search_container">
+              <input type="text" class="search" placeholder="검색할 콘텐츠를 입력하세요"/>
+            </div>
+            <div class="result_container">
+              <ul class="result_ul"></ul>
+            </div>
           </div>
         </div>
-        <div class="how_to_use">
-          <div class="htu_h3"><h3>사이트 소개</h3></div>
-          <div class="step">
-            <p>1. M.Labs는 다양한 기능들을 모아 둔 웹 사이트입니다.</p>
-            <p>2. 메뉴 항목에서 다양한 콘텐츠를 찾아 이용할 수 있습니다.</p>
-            <p>3. 검색창에 콘텐츠 제목을 입력해 간편하게 찾아보세요.</p>
+          
+          <div class="animation flex-start">
+            <div class="img-container">
+              <img class="main-img" src="/images/main-img1.png" onmouseover="showTooltip(this)" onmouseleave="hideTooltip(this)">
+              <div class="tooltiptext">Image from 30000011856, LovePik.com</div>
+            </div>
+            <div class="text p-l-30">
+              <p class="p-36 m-b-30 c-5742b2">무료 & 다양하고 강력한 기능</p>
+              <div class="desc c-8f8f8f f-w-600">
+                <p>M.Labs에서는 다양한 종류의 온라인 도구들을 무료로 이용할 수 있습니다.</p>
+                <p>계산 & 음악 & 파일 변환 등 다양한 종류의 도구들이 있습니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="animation flex-end">
+            <div class="text">
+              <p class="p-36 m-b-30 c-5742b2">직관적인 디자인 & 핵심 기능 위주</p>
+              <div class="desc c-8f8f8f f-w-600">
+                <p>M.Labs는 사용자의 이용 환경을 고려합니다.</p>
+                <p>편리한 사용을 위해 직관적인 UI & 불필요한 기능을 제거한 핵심 기능만을 제공합니다.</p>
+              </div>
+            </div>
+            <div class="img-container">
+              <img class="main-img" src="/images/main-img2.png" onmouseover="showTooltip(this)" onmouseleave="hideTooltip(this)">
+              <div class="tooltiptext">Image from 30000011856, LovePik.com</div>
+            </div>
           </div>
         </div>
       </div>
@@ -45,7 +81,19 @@
     <%- include('views/footer') %>
 
     <script>
-      // 여기에 추가적인 JavaScript 코드 작성
+      function showTooltip(e){
+        const imgContainer = e.parentElement;
+        const tooltipText = imgContainer.querySelector('.tooltiptext');
+        tooltipText.style.opacity = '1';
+        tooltipText.style.display = 'block';
+      }
+
+      function hideTooltip(e){
+        const imgContainer = e.parentElement;
+        const tooltipText = imgContainer.querySelector('.tooltiptext');
+        tooltipText.style.opacity = '0';
+        tooltipText.style.display = 'none';
+      }
     </script>
     <script src="/js/main.js"></script>
   </body>

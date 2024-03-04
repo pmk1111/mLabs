@@ -1,6 +1,18 @@
+let observer = new IntersectionObserver((e)=>{
+  e.forEach((i) => {
+    if(i.isIntersecting){
+      i.target.style.opacity = 1;
+    } else{
+      i.target.style.opacity = 0;
+    }
+  });
+});
 
 const body = document.querySelector("body");
 const nav = document.querySelector("nav");
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
 
 const toggleList = document.querySelectorAll(".toggleSwitch");
 const toggleImg = document.querySelector(".display_mode_icon");
@@ -9,22 +21,29 @@ const footer = document.querySelector("footer");
 const menuBtn = document.querySelector(".menu_btn");
 const menu = document.querySelector(".menu");
 const menuLink = document.querySelectorAll(".menu_container a");
+const hero = document.querySelector('.hero');
+const overlay = document.querySelector('.overlay');
 
-const searchInput = document.querySelector(".search");
 const searchContainer = document.querySelector(".search_container");
+const searchInput = document.querySelector('.search');
 const resultContainer = document.querySelector(".result_container");
 const resultUl = document.querySelector(".result_ul");
 
-const htu = document.querySelector(".how_to_use");
-const htuH3 = document.querySelector(".htu_h3");
-const desc = document.querySelectorAll(".step p");
+const animations = document.querySelectorAll('.animation');
+
+const noResultMessage = document.createElement("p");
+const menuContents = document.querySelectorAll(".menu_content");
+for(i of animations){
+  observer.observe(i);
+}
 
 var isActive = true;
 // 다크모드
 toggleList.forEach(($toggle) => {
   $toggle.onclick = () => {
     isActive = $toggle.classList.contains("active");
-
+    let searchIconImg = document.querySelectorAll(".result_img");
+    
     if (isActive) {
       $toggle.classList.remove("active");
       toggleImg.setAttribute("src", "/images/sun.png");
@@ -32,20 +51,22 @@ toggleList.forEach(($toggle) => {
       body.classList.add("lite");
 
       nav.classList.remove("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
       menuBtn.classList.remove("menu_btn_dark");
       menu.classList.remove("menu_dark");
       for(item of menuLink){
         item.classList.remove("link_dark");
       }
+      hero.classList.remove('dark');
+      overlay.classList.remove('dark');
 
       searchContainer.classList.remove("search_container_dark");
-      searchInput.classList.remove("searchInput_dark");
+      searchInput.classList.remove('searchInput_dark');
       resultContainer.classList.remove("result_container_dark");
-
-      htu.classList.remove("htu_dark");
-      htuH3.classList.remove("htu_h3_dark");
-      for(item of desc){
-        item.classList.remove("p_dark");
+      for(i of searchIconImg){
+        i.setAttribute('src', '/images/search.svg');
       }
 
       footer.classList.remove("footer_dark");
@@ -56,20 +77,22 @@ toggleList.forEach(($toggle) => {
       body.classList.add("dark");
 
       nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
       menuBtn.classList.add("menu_btn_dark");
       menu.classList.add("menu_dark");
       for(item of menuLink){
         item.classList.add("link_dark");
       }
+      hero.classList.add('dark');
+      overlay.classList.add('dark');
 
       searchContainer.classList.add("search_container_dark");
-      searchInput.classList.add("searchInput_dark")
+      searchInput.classList.add('searchInput_dark');
       resultContainer.classList.add("result_container_dark");
-
-      htu.classList.add("htu_dark");
-      htuH3.classList.add("htu_h3_dark");
-      for(item of desc){
-        item.classList.add("p_dark");
+      for(i of searchIconImg){
+        i.setAttribute('src', '/images/search-dark.svg');
       }
 
       footer.classList.add("footer_dark");
@@ -158,8 +181,6 @@ function handleResize() {
   window.addEventListener("resize", handleResize);
 
 // 검색 결과 표시
-  const noResultMessage = document.createElement("p");
-  const menuContents = document.querySelectorAll(".menu_content");
 
   noResultMessage.classList.add("no_result_found");
   noResultMessage.textContent = "검색 결과가 없습니다.";
@@ -192,7 +213,11 @@ function handleResize() {
               goToContent.classList.add("link_text_dark");
             }
 
-            contentImg.setAttribute("src", "images/logo.png");
+            if(isActive){
+              contentImg.setAttribute("src", "images/search.svg");
+            } else{
+              contentImg.setAttribute("src", "images/search-dark.svg");
+            }
             if(content === "간편 복리 계산기"){
               goToContent.setAttribute("href", "https://bokkli.netlify.app/");
             } else if(content === "공학용 계산기"){
@@ -216,8 +241,10 @@ function handleResize() {
       if (resultUl.childElementCount === 0) {
         noResultMessage.style.display = "block"; // 일치하는 검색 결과가 없을 때 메시지 표시
       }
+      searchInput.classList.add("active");
     } else {
       resultContainer.style.display = "none"; // 검색어가 없을 때 result_container를 숨김
+      searchInput.classList.remove('active');
     }
   });
 
@@ -226,5 +253,6 @@ function handleResize() {
   
     if (!searchResultContainer.contains(event.target)) {
       resultContainer.style.display = 'none';
+      searchInput.classList.remove('active');
     }
   });
