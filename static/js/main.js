@@ -33,6 +33,8 @@ const animations = document.querySelectorAll('.animation');
 
 const noResultMessage = document.createElement("p");
 const menuContents = document.querySelectorAll(".menu_content");
+
+const descP = document.querySelectorAll('.desc  p');
 for(i of animations){
   observer.observe(i);
 }
@@ -70,6 +72,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.remove("footer_dark");
+      for(i of descP){
+        i.style.color = '#241d2e';
+      }
     } else {
       $toggle.classList.add("active");
       toggleImg.setAttribute("src", "/images/moon.png");
@@ -96,6 +101,9 @@ toggleList.forEach(($toggle) => {
       }
 
       footer.classList.add("footer_dark");
+      for(i of descP){
+        i.style.color = 'white';
+      }
     }
   };
 });
@@ -138,13 +146,13 @@ function slideList(list){
     list.classList.remove("content_open");
     isContentOpened = false;
     if (window.innerWidth <= 768) {
-      span.textContent = "↓";   
+      span.textContent = "▼";   
     }
   } else{
     list.classList.add("content_open");
     isContentOpened = true;
     if (window.innerWidth <= 768) {
-      span.textContent = "↑";   
+      span.textContent = "▲";   
     }
   }
 
@@ -160,7 +168,7 @@ function handleResize() {
         arrow.classList.add("arrow")
         arrow.style.float = "right"
         arrow.style.paddingRight = "3px"
-        arrow.textContent = "↓";   
+        arrow.textContent = "▼";   
         item.appendChild(arrow);
       }
     });
