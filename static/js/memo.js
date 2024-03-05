@@ -1,3 +1,4 @@
+var summerNote;
 window.onload = function () {
     const body = document.querySelector("body");
     const nav = document.querySelector("nav");
@@ -18,6 +19,9 @@ window.onload = function () {
 
     const noteToolBar = document.querySelector('.note-toolbar');
     const noteToolBarBtn = noteToolBar.querySelectorAll('button');
+
+    summerNote = document.querySelector('.note-editable');
+    console.log(summerNote);
 
     let txtValue = "";
     var isActive = true;
@@ -171,3 +175,15 @@ window.onload = function () {
     }
     loadMemo();
   };
+
+  const spellCheckInput = document.querySelector('input[type="checkbox"]');
+
+  function spellCheck(){
+    if(spellCheckInput.checked){
+      memo.setAttribute('spellcheck', true);
+      summerNote.setAttribute('spellcheck', true);
+    } else{
+      memo.setAttribute('spellcheck', false);
+      summerNote.setAttribute('spellcheck', false);
+    }
+  }
