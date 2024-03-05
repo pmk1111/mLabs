@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <style>
+      .textarea {
+        font-family: "IBM Plex Sans KR", sans-serif;
+        padding: 15px;
+        width: calc(65% - 30px);
+        min-width: 270px;
+        height: 150px;
+        outline: none;
+        resize: none;
+        font-size: 15px;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+      }
+      .textarea::placeholder{
+        color: #c3c3c3;
+      }
+      .textarea.dark{
+        border: 1px solid #3a3a3a;
+        background-color: #3a3a3a;
+        color: #c3c3c3;
+      }
+      .btn-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        width: 65%;
+        min-width: 300px;
+        height: 60px;
+      }
+      .cal-btn{
+        width: 100%;
+        min-width: 300px;
+        height: 55px;
+        font-size: 18px;
+        font-weight: 600;
+        color: white;
+        background-color: #514170;
+        border-style: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .cal-btn:active{
+        opacity: .8;
+        width: 99%;
+        min-width: 280px;
+        height: 52px;
+        font-size: 17px;
+        transition: .2s;
+      }
+      .cal-btn.dark{
+        background-color: #3a3a3a;
+      }
+      .result-container{
+        margin-top: 20px;
+        padding: 15px;
+        width: calc(65%);
+        min-width: 300px;
+        height: 150px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #251d2f;
+      }
+      .result-container.dark{
+        color: #c3c3c3;
+      }
+      .result-container p{
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('nav') %> <%- include('accordion') %>
+
+    <main>
+      <div class="container">
+        <textarea class="textarea" placeholder='띄어쓰기(" ")로 구분'></textarea>
+        <div class="btn-container">
+          <button class="cal-btn">계산하기</button>
+        </div>
+        <div class="result-container">
+          <span style="display: inline-block; font-size: 16px; font-weight: 500; color: #c3c3c3; margin-bottom: 30px;">* 계산 결과가 여기에 표시됩니다.</span>
+          <p class="gcd"></p>
+          <p class="lcm"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <%- include('footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/gcd-lcm.js"></script>
+  </body>
+</html>

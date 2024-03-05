@@ -68,7 +68,9 @@ api.get('/color-picker', (req, res) => {
 api.get('/youtube-thumbnail', (req, res) => {
   res.render('youtube-thumbnail');
 });
-
+api.get('/gcd-lcm', (req, res) => {
+  res.render('gcd-lcm');
+});
 // 파일 업로드를 위한 multer 설정
 const upload = multer();
 
