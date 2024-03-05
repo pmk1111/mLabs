@@ -97,7 +97,7 @@
   animation-play-state: running;
 }
 .num_generate_btn.btn_lite {
-  background-color: #2770c4;
+  background-color: #514170;
   
 }
 .num_generate_btn.btn_dark {
@@ -182,7 +182,6 @@
 }
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
-  /* 珥덇린�뿉�뒗 �닾紐낅룄瑜� 0�쑝濡� �꽕�젙 */
 }
 
 @keyframes fadeIn {

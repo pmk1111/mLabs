@@ -59,7 +59,7 @@
 .bpm-display {
   width: 100%;
   text-align: center;
-  color: #2770c4;
+  color: #514170;
   font-weight: bold;
 }
 
@@ -90,20 +90,20 @@
 .tempo-setting .adjust-tempo-btn {
   width: 30px;
   height: 30px;
-  font-size: 40px;
+  font-size: 35px;
   border-radius: 50%;
   border: 1px solid #ddd;
   text-align: center;
   cursor: pointer;
-  line-height: 21px;
+  line-height: 28px;
 }
 
 .decrease-tempo:hover,
 .increase-tempo:hover,
 .subtrack-beats:hover,
 .add-beats:hover {
-  background-color: #2770c4;
-  border-color: #2770c4;
+  background-color: #514170;
+  border-color: #514170;
   color: white;
   transition: 0.2s;
 }
@@ -137,7 +137,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #2770c4;
+  background-color: #514170;
   cursor: pointer;
   margin-top: -6px;
 }
@@ -146,7 +146,7 @@ input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #2770c4;
+  background-color: #514170;
   border: none;
   cursor: pointer;
   margin-top: -6px;
@@ -200,7 +200,7 @@ input[type="range"]::-moz-range-track {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  background-color: #2770c4;
+  background-color: #514170;
   border-radius: 3px;
   color: #fff;
   line-height: 50px;
@@ -239,11 +239,11 @@ input[type="range"]::-moz-range-track {
   cursor: pointer;
 }
 .subtrack-beats {
-  line-height: 16px;
+  line-height: 18px;
 }
 
 .add-beats {
-  line-height: 18px;
+  line-height: 19px;
 }
 
 .beats-per-measure-text {

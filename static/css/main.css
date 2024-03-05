@@ -230,11 +230,11 @@
   justify-content: flex-end;
 }
 
-.c-5742b2 {
-  color: #5742b2;
+.c-514170 {
+  color: #514170;
 }
-.c-8f8f8f {
-  color: #8f8f8f;
+.c-2d2336 {
+  color: #2d2336;
 }
 
 .f-w-600 {
@@ -252,8 +252,9 @@
   padding: 5px;
   position: absolute;
   z-index: 1;
-  top: 75%;
+  top: 100%;
   left: 50%;
+  transform:translate(-50%, -50%);
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;

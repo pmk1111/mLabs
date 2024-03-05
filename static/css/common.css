@@ -22,15 +22,15 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  color: #251d2f;
 }
 
 /* darkmode */
 body.lite {
   background: white;
-  color: #151515;
 }
 body.dark {
-  background: #151515;
+  background: #121014;
   color: white;
 }
 
@@ -39,7 +39,7 @@ nav {
   position: fixed;
   width: 100%;
   height: 70px;
-  color: black;
+  color: #251d2f;
   background-color: white;
   /* border-bottom: 1px solid #f3f3f3; */
   box-shadow: 0 3px 6px 0 rgba(80, 80, 80, 0.2); 
@@ -47,7 +47,7 @@ nav {
 }
 
 nav.nav_dark {
-  background-color: #151515;
+  background-color: #121014;
   /* border-bottom: 1px solid #5f5f5f; */
   box-shadow: 0 2px 4px rgba(119, 118, 118, 0.2); /* 그림자 설정 */
 }
@@ -64,7 +64,7 @@ nav.nav_dark {
   text-decoration: none;
 }
 .title_container{margin-left: 12px;}
-.title_container h1{ color: #151515; font-size: 28px;}
+.title_container h1{ color: #251d2f; font-size: 28px;}
 /* toggle */
 .toggleSwitch {
   width: 55px;
@@ -180,7 +180,7 @@ nav.nav_dark {
 .menu_container{
   height: 210px;
   margin: 20px 0;
-  padding: 0 20px;
+  padding: 0 25px;
 }
 .menu_container a{
   text-decoration: none;
@@ -221,10 +221,29 @@ nav.nav_dark {
   .menu_content{
     width: 100%;
   }
-  .menu_content ul li, .menu_content p{
+  .menu_content p{
+    height: 40px;
     margin: 0 !important;
-    padding: 5px 0 !important;
-    border-bottom: 1px solid lightgray;
+    padding: 5px 15px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .menu_content p:hover{
+    opacity: .8;
+    transition: .2s;
+  }
+  .menu_content:not(:first-child) p{
+    border-top: 1px solid rgb(219, 219, 219);
+  }
+  .menu_content ul li{
+    margin: 0 !important;
+    padding: 5px 12px !important;
+    height: 30px;
+    display: flex;
+    align-items: center;
   }
   .menu_content ul{
     display: none;
@@ -232,7 +251,9 @@ nav.nav_dark {
   .menu_content ul.content_open{
     display: block;
   }
-
+  .arrow{
+    font-size: 11px;
+  }
 }
 
 

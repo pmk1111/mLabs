@@ -38,7 +38,7 @@ input.input_dark {
 }
 
 main.main_dark {
-  background-color: #151515;
+  background-color: #121014;
 }
 .main_wrap {
   display: flex;
@@ -55,7 +55,7 @@ main.main_dark {
   background-color: white;
 }
 .cal_area.cal_area_dark {
-  background-color: #151515;
+  background-color: #121014;
 }
 #calculation_title {
   width: 820px;
@@ -88,7 +88,7 @@ main.main_dark {
   transition: .2s;
 }
 .do_cal_btn {
-  background-color: #2770c4;
+  background-color: #514170;
   cursor: pointer;
 }
 .do_cal_btn.cal_btn_dark {

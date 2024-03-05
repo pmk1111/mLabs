@@ -344,7 +344,7 @@ label {
 	border-style: none;
 	width: 100%;
 	height: 55px;
-	background-color: #2770c4;
+	background-color: #514170;
 	border-radius: 5px;
 	font-size: 18px;
 	font-weight: 600;
@@ -406,8 +406,8 @@ input[type="range"]::-webkit-slider-thumb {
 	width: 15px;
 	background-color: #fff;
 	border-radius: 50%;
-	border: 2px solid #2770c4;
-	box-shadow: -407px 0 0 400px #2770c4;
+	border: 2px solid #514170;
+	box-shadow: -407px 0 0 400px #514170;
 	
 }
 
@@ -416,8 +416,8 @@ input[type="range"]::-moz-range-thumb {
 	width: 15px;
 	background-color: #fff;
 	border-radius: 50%;
-	border: 1px solid #2770c4;
-	box-shadow: -407px 0 0 400px #2770c4;
+	border: 1px solid #514170;
+	box-shadow: -407px 0 0 400px #514170;
 	
 }
 
@@ -495,7 +495,7 @@ input[type="color"]{
 	}
 	#barcode-download, #qr-download{margin-bottom: 50px;}
 	.txt-wrap, .qr-url-wrap .txt-wrap, .text-visibility-input-wrap, .pos-input-wrap,
-	.range-wrap, .range-wrap, .color-wrap{width: 100%}
+	.range-wrap, .range-wrap, .color-wrap{width: 100%; cursor: pointer;} 
 	#barcode-txt, #qr-txt{border: 1px solid lightgrey; border-radius: 3px; width: calc(100% - 22px)}
 	.format-wrap{width: 100%}
 }

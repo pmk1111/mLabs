@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 .upload-area:hover{
-  background-color: #f3f3f3;
+  opacity: .8;
   transition: .2s;
 }
 .upload-area.dark {
@@ -121,7 +121,7 @@
   font-size: 18px;
   font-weight: 600;
   color: white;
-  background-color: #2770c4;
+  background-color: #514170;
   border-style: none;
   border-radius: 5px;
   margin-bottom: 30px;
@@ -134,8 +134,8 @@
 .convert-all-btn {
   display: none;
   background-color: transparent;
-  color: #2770c4;
-  border: 5px solid #2770c4;
+  color: #514170;
+  border: 5px solid #514170;
 }
 .upload-img-btn:hover,
 .convert-all-btn:hover {
