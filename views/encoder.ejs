@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <style>
+      input[type="radio"] + label {
+        width: 100px;
+        height: 30px;
+        background-color: aqua;
+      }
+      input[type="radio"] {
+        display: none;
+      }
+      input[type="radio"]:checked + label {
+        background-color: rgb(27, 82, 82);
+      }
+      .url-encode-decode{
+        display: none;
+      }
+
+      .btn-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+
+    <main>
+      <div class="container">
+        <div class="type">
+          <input type="radio" id="base64" name="type-radio" checked />
+          <label for="base64">base64</label>
+          <input type="radio" id="base32" name="type-radio" />
+          <label for="base32">base32</label>
+          <input type="radio" id="url" name="type-radio"/>
+          <label for="url">URL</label>
+        </div>
+        <div class="encode-decode">
+          <input type="radio" id="encode" name="encode-decode-radio" class="encode-decode-selector" checked/>
+          <label for="encode"><span>Encode</span></label>
+          <input type="radio" id="decode" name="encode-decode-radio" class="encode-decode-selector"/>
+          <label for="decode"> <span>Decode</span></label>
+        </div>
+        <div class="url-encode-decode">
+          <input type="radio" id="encodeUrl" name="url-type-radio" class="encode-decode-selector" checked/>
+          <label for="encodeUrl"><span>EncodeUrl</span></label>
+          <input type="radio" id="decodeUrl" name="url-type-radio" class="encode-decode-selector"/>
+          <label for="decodeUrl"> <span>DecodeUrl</span></label>
+
+          <input type="radio" id="encodeUrlComponent" name="url-type-radio" class="encode-decode-selector" />
+          <label for="encodeUrlComponent"><span>EncodeUrlComponent</span></label>
+          <input type="radio" id="decodeUrlComponent" name="url-type-radio" class="encode-decode-selector"/>
+          <label for="decodeUrlComponent"> <span>DecodeUrlComponent</span></label>
+
+          <input type="radio" id="escape" name="url-type-radio" class="encode-decode-selector" />
+          <label for="escape"><span>Escape</span></label>
+          <input type="radio" id="unescape" name="url-type-radio" class="encode-decode-selector"/>
+          <label for="unescape"><span>Unescape</span></label>
+        </div>
+    
+        <textarea class="text-input" ></textarea>
+        <div class="btn-container">
+          <button type="button" class="do-encode-btn" onclick="doConvert()">변환</button>
+          <button type="button" class="copy-result" onclick="copyResult()">결과 복사</button>
+          <button type="button" class="clear" onclick="clearBoth()">초기화</button>
+        </div>
+        <textarea class="result"></textarea>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/encoder.js"></script>
+  </body>
+</html>

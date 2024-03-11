@@ -71,6 +71,10 @@ api.get('/youtube-thumbnail', (req, res) => {
 api.get('/gcd-lcm', (req, res) => {
   res.render('gcd-lcm');
 });
+api.get('/encoder', (req, res) => {
+  res.render('encoder');
+});
+
 // 파일 업로드를 위한 multer 설정
 const upload = multer();
 
