@@ -13,6 +13,9 @@ const archiver = require("archiver");
 const crypto = require('crypto');
 const sha512 = require('sha.js/sha512');
 const SHA3 = require('sha3');
+const md5 = require('md5');
+const md4 = require('md4');
+const md2 = require('md2');
 
 const router = express.Router();
 const api = express();
@@ -140,13 +143,13 @@ api.get('/get-hash-text', (req, res) => {
     case 'md':
       switch(detailOption){
         case '5':
-          result = crypto.createHash('md5').update(originalTxt).digest('hex');
+          result = md5(originalTxt);
           break;
         case '4':
-          result = crypto.createHash('md4').update(originalTxt).digest('hex');
+          result = md4(originalTxt)
           break;
         case '2':
-          result = crypto.createHash('md2').update(originalTxt).digest('hex');
+          result = md2(originalTxt)
           break;
       }
       break;
