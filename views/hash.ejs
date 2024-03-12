@@ -64,19 +64,112 @@
       .type-detail-select {
         display: none;
         width: 100%;
+        min-width: 300px;
         height: 40px;
         padding: 5px 10px;
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 5px;
+  outline: none;
       }
+      select.dark {
+  background-color: #3a3a3a;
+  border: 1px solid #151515;
+  color: white;
+}
+select option {
+  font-size: 15px;
+}
+select option.dark {
+  background-color: #3a3a3a;
+  color: dark;
+}
       .type-detail-select.sha {
         display: block;
       }
 
-      .source-txt, .result-txt{
-        padding: 10px;
-        width: calc(100% - 21px);
-        height: 150px;
-        resize: none;
-      }
+      textarea {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  letter-spacing: 0.5px;
+  padding: 10px;
+  width: calc(100% - 20px);
+  min-width: 300px;
+  height: 150px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  outline: none;
+  resize: none;
+  font-size: 14px;
+}
+textarea.dark {
+  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
+  color: white;
+}
+textarea::placeholder {
+  color: #9a9a9a;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  margin: 18px 0 22px 0;
+}
+.btn-container button {
+  margin: 0 25px 0 0;
+  width: 150px;
+  height: 45px;
+  border: 1px solid #325397;
+  border-radius: 5px;
+  background-color: #325397;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-container button:hover {
+  opacity: 0.9;
+  transition: 0.2s;
+}
+.btn-container button.dark {
+  border: 1px solid #117d8f;
+  background-color: #117d8f;
+}
+
+
+input[type="checkbox"] {
+  display: none; 
+}
+
+label[for="capitalize"] {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 7px;
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+
+input[type="checkbox"]:checked + label {
+  background-color: #325397; 
+  color: white; 
+  position: relative;
+  
+}
+
+input[type="checkbox"]:checked + label.check_dark {
+  background-color: #117d8f; 
+  
+}
+
+input[type="checkbox"]:checked + label::before {
+  content: '\2713';
+  font-size: 9px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
     </style>
   </head>
   <body>
@@ -99,8 +192,8 @@
             <input type="radio" id="shake" name="hash-type" />
             <label for="shake">Shake</label>
   
-            <input type="radio" id="md" name="hash-type" />
-            <label for="md">MD</label>
+            <!-- <input type="radio" id="md" name="hash-type" />
+            <label for="md">MD</label> -->
   
             <input type="radio" id="crc" name="hash-type" />
             <label for="crc">CRC</label>
@@ -135,11 +228,11 @@
               <option id="128">Shake-128</option>
             </select>
       
-            <select class="type-detail-select md">
+            <!-- <select class="type-detail-select md">
               <option id="5" selected>MD-5</option>
               <option id="4">MD-4</option>
               <option id="2">MD-2</option>
-            </select>
+            </select> -->
       
             <select class="type-detail-select crc">
               <option id="32" selected>CRC-32</option>
@@ -156,6 +249,9 @@
           <textarea type="text" class="source-txt"></textarea>
           <div class="btn-container">
             <button type="button" class="submit-btn">입력</button>
+            <input type="checkbox" id="capitalize" name="capitalize">
+            <label for="capitalize"></label>
+            <span>알파벳 대문자</span>
           </div>
           <textarea type="text" class="result-txt"></textarea>
         </div>
@@ -190,9 +286,9 @@
             case 'shake':
               document.querySelector('.type-detail-select.shake').style.display = 'block';
               break;
-            case 'md':
-              document.querySelector('.type-detail-select.md').style.display = 'block';
-              break;
+            // case 'md':
+            //   document.querySelector('.type-detail-select.md').style.display = 'block';
+            //   break;
             case 'crc':
               document.querySelector('.type-detail-select.crc').style.display = 'block';
               break;
@@ -204,9 +300,12 @@
       });
 
       submitBtn.addEventListener("click", function () {
+        const capitalCheck = document.querySelector('#capitalize');
+        const resultTxtArea = document.querySelector('.result-txt');
         const hashType = document.querySelector('.type-container input[type="radio"]:checked').id;
         const sourceTxt = sourceTxtArea.value;
         let detailOption;
+        let convertToCapital;
 
         switch(hashType){
           case 'sha':
@@ -225,10 +324,10 @@
             let shakeSelect= document.querySelector('.type-detail-select.shake');
             detailOption = shakeSelect.options[shakeSelect.selectedIndex].getAttribute('id');
             break;
-          case 'md':
-            let mdSelect= document.querySelector('.type-detail-select.md');
-            detailOption = mdSelect.options[mdSelect.selectedIndex].getAttribute('id');
-            break;
+          // case 'md':
+          //   let mdSelect= document.querySelector('.type-detail-select.md');
+          //   detailOption = mdSelect.options[mdSelect.selectedIndex].getAttribute('id');
+          //   break;
           case 'crc':
             let crcSelect= document.querySelector('.type-detail-select.crc');
             detailOption = crcSelect.options[crcSelect.selectedIndex].getAttribute('id');
@@ -247,6 +346,18 @@
           .then((res) => res.json())
           .then((data) => {
             console.log("반환 결과: ", data.result);
+            if(capitalCheck.checked){
+              // for (let i = 0; i < data.result.length; i++) {
+              //   const char = data.result[i];
+              //   if (/[a-zA-Z]/.test(char)) {
+              //     convertToCapital += char.toUpperCase();
+              //   }
+              // }
+
+              resultTxtArea.value = data.result.toUpperCase();
+            } else{
+              resultTxtArea.value = data.result;
+            }
           })
           .catch((error) => {
             console.error("에러 발생: ", error);

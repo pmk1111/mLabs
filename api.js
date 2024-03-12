@@ -13,9 +13,9 @@ const archiver = require("archiver");
 const crypto = require('crypto');
 const sha512 = require('sha.js/sha512');
 const SHA3 = require('sha3');
-const md5 = require('md5');
-const md4 = require('md4');
-const md2 = require('md2');
+const { keccak512, keccak384, keccak256, keccak224, shake_256, shake_128 } = require('js-sha3');
+const crc = require('crc');
+
 
 const router = express.Router();
 const api = express();
@@ -117,6 +117,7 @@ api.get('/get-hash-text', (req, res) => {
       switch(detailOption){
         case '512':
           result = new SHA3.SHA3Hash(512).update(originalTxt).digest('hex');
+          console.log('sha3 실행 되나??')  
           break;
         case '384':
           result = new SHA3.SHA3Hash(384).update(originalTxt).digest('hex');
@@ -135,41 +136,50 @@ api.get('/get-hash-text', (req, res) => {
     case 'shake':
       switch(detailOption){
         case '256':
+          result = shake_256(originalTxt, 256);    
+          console.log("shake 실행 결과: " + result) 
           break;
         case '128':
+          result = shake_128(originalTxt, 128);
           break;
       }
       break;
-    case 'md':
-      switch(detailOption){
-        case '5':
-          result = md5(originalTxt);
-          break;
-        case '4':
-          result = md4(originalTxt)
-          break;
-        case '2':
-          result = md2(originalTxt)
-          break;
-      }
-      break;
+    // case 'md':
+    //   switch(detailOption){
+    //     case '5':
+    //       result = crypto.createHash('md5').update(originalTxt).digest('hex');
+    //       break;
+    //     case '4':
+    //       // result = md4(originalTxt)
+    //       break;
+    //     case '2':
+    //       // result = 2(originalTxt)
+    //       break;
+    //   }
+    //   break;
     case 'crc':
       switch(detailOption){
         case '32':
+          result = crc.crc32(originalTxt).toString(16);;
           break;
         case '16':
+          result = crc.crc16(originalTxt).toString(16);
           break;
       }
       break;
     case 'keccak':
       switch(detailOption){
         case '512':
+          result = keccak512(originalTxt);
           break;
         case '384':
+          result = keccak384(originalTxt);
           break;
         case '256':
+          result = keccak256(originalTxt);
           break;
         case '224':
+          result = keccak224(originalTxt);
           break;
       }
       break;
