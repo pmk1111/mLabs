@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <style>
+      .content-wrapper{
+        width: 70%;
+        min-width: 300px;
+      }
+      input[type="radio"] {
+        display: none;
+      }
+      input[type="radio"] + label {
+        cursor: pointer;
+      }
+      input[type="radio"] + label:hover {
+        opacity: 0.8;
+        transition: 0.2;
+      }
+
+      .type-container {
+        display: flex;
+      }
+      .type-container {
+        border-bottom: 1px solid #ddd;
+      }
+      .type-container.dark {
+        border-bottom: 1px solid #3a3a3a;
+      }
+
+      .type-container input[type="radio"] + label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 40px;
+      }
+      .type-container input[type="radio"]:checked + label {
+        background-color: rgb(226, 226, 226);
+        border: 1px solid #cdcdcd;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border-bottom: transparent;
+      }
+      .type-container input[type="radio"]:checked + label.dark {
+        background-color: #3a3a3a;
+        border: 1px solid #3a3a3a;
+      }
+
+      .type-detail-wrapper{
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        height: 40px;
+      }
+
+      .type-detail-select {
+        display: none;
+        width: 100%;
+        height: 40px;
+        padding: 5px 10px;
+      }
+      .type-detail-select.sha {
+        display: block;
+      }
+
+      .source-txt, .result-txt{
+        padding: 10px;
+        width: calc(100% - 21px);
+        height: 150px;
+        resize: none;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+
+    <main>
+      <div class="container"> 
+        <div class="content-wrapper">
+          <div class="type-container">
+            <input type="radio" id="sha" name="hash-type" checked />
+            <label for="sha">SHA</label>
+  
+            <input type="radio" id="sha3" name="hash-type" />
+            <label for="sha3">SHA3</label>
+  
+            <input type="radio" id="sha1" name="hash-type" />
+            <label for="sha1">SHA1</label>
+  
+            <input type="radio" id="shake" name="hash-type" />
+            <label for="shake">Shake</label>
+  
+            <input type="radio" id="md" name="hash-type" />
+            <label for="md">MD</label>
+  
+            <input type="radio" id="crc" name="hash-type" />
+            <label for="crc">CRC</label>
+  
+            <input type="radio" id="keccak" name="hash-type" />
+            <label for="keccak">Keccak</label>
+          </div>
+      
+          <div class="type-detail-wrapper">
+            <select class="type-detail-select sha">
+              <option id="512" selected>SHA512</option>
+              <option id="384">SHA384</option>
+              <option id="256">SHA256</option>
+              <option id="224">SHA224</option>
+              <option id="512/256">SHA512/256</option>
+              <option id="512/224">SHA512/224</option>
+            </select>
+      
+            <select class="type-detail-select sha3">
+              <option id="512" selected>SHA3-512</option>
+              <option id="384">SHA3-384</option>
+              <option id="256">SHA3-256</option>
+              <option id="224">SHA3-224</option>
+            </select>
+      
+            <select class="type-detail-select sha1">
+              <option id="sha1" selected>SHA1</option>
+            </select>
+      
+            <select class="type-detail-select shake">
+              <option id="256" selected>Shake-256</option>
+              <option id="128">Shake-128</option>
+            </select>
+      
+            <select class="type-detail-select md">
+              <option id="5" selected>MD-5</option>
+              <option id="4">MD-4</option>
+              <option id="2">MD-2</option>
+            </select>
+      
+            <select class="type-detail-select crc">
+              <option id="32" selected>CRC-32</option>
+              <option id="16">CRC-16</option>
+            </select>
+      
+            <select class="type-detail-select keccak">
+              <option id="512" selected>Keccak-512</option>
+              <option id="384">Keccak-384</option>
+              <option id="256">Keccak-256</option>
+              <option id="224">Keccak-224</option>
+            </select>
+          </div>
+          <textarea type="text" class="source-txt"></textarea>
+          <div class="btn-container">
+            <button type="button" class="submit-btn">입력</button>
+          </div>
+          <textarea type="text" class="result-txt"></textarea>
+        </div>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script>
+      const typeRadios = document.querySelectorAll('.type-container input[type="radio"]');
+      const detailOptSelects = document.querySelectorAll('.type-detail-select')
+      const sourceTxtArea = document.querySelector(".source-txt");
+      const submitBtn = document.querySelector(".submit-btn");
+
+      typeRadios.forEach((radio) => {
+        radio.addEventListener('change', (e) => {
+          const current = e.currentTarget;
+          for(i of detailOptSelects){
+            i.style.display = 'none';
+          }
+          switch(current.id){
+            case 'sha':
+              document.querySelector('.type-detail-select.sha').style.display = 'block';
+              break;
+            case 'sha3':
+              document.querySelector('.type-detail-select.sha3').style.display = 'block';
+              break;
+            case 'sha1':
+              document.querySelector('.type-detail-select.sha1').style.display = 'block';
+              break;
+            case 'shake':
+              document.querySelector('.type-detail-select.shake').style.display = 'block';
+              break;
+            case 'md':
+              document.querySelector('.type-detail-select.md').style.display = 'block';
+              break;
+            case 'crc':
+              document.querySelector('.type-detail-select.crc').style.display = 'block';
+              break;
+            case 'keccak':
+              document.querySelector('.type-detail-select.keccak').style.display = 'block';
+              break;
+          }
+        });
+      });
+
+      submitBtn.addEventListener("click", function () {
+        const hashType = document.querySelector('.type-container input[type="radio"]:checked').id;
+        const sourceTxt = sourceTxtArea.value;
+        let detailOption;
+
+        switch(hashType){
+          case 'sha':
+            let shaSelect= document.querySelector('.type-detail-select.sha');
+            detailOption = shaSelect.options[shaSelect.selectedIndex].getAttribute('id');
+            break;
+          case 'sha3':
+            let sha3Select= document.querySelector('.type-detail-select.sha3');
+            detailOption = sha3Select.options[sha3Select.selectedIndex].getAttribute('id');
+            break;
+          case 'sha1':
+            let sha1Select= document.querySelector('.type-detail-select.sha1');
+            detailOption = sha1Select.options[sha1Select.selectedIndex].getAttribute('id');
+            break;
+          case 'shake':
+            let shakeSelect= document.querySelector('.type-detail-select.shake');
+            detailOption = shakeSelect.options[shakeSelect.selectedIndex].getAttribute('id');
+            break;
+          case 'md':
+            let mdSelect= document.querySelector('.type-detail-select.md');
+            detailOption = mdSelect.options[mdSelect.selectedIndex].getAttribute('id');
+            break;
+          case 'crc':
+            let crcSelect= document.querySelector('.type-detail-select.crc');
+            detailOption = crcSelect.options[crcSelect.selectedIndex].getAttribute('id');
+            break;
+          case 'keccak':
+            let keccakSelect= document.querySelector('.type-detail-select.keccak');
+            detailOption = keccakSelect.options[keccakSelect.selectedIndex].getAttribute('id');
+            break;
+        }
+
+        const url = `/get-hash-text?text=${encodeURIComponent(sourceTxt)}&hashType=${hashType}&detail=${detailOption}`;
+
+        fetch(url, {
+          method: "GET",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("반환 결과: ", data.result);
+          })
+          .catch((error) => {
+            console.error("에러 발생: ", error);
+          });
+      });
+    </script>
+  </body>
+</html>

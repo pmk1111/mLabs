@@ -10,6 +10,9 @@ const axios = require('axios');
 
 const fetch = require('node-fetch');
 const archiver = require("archiver");
+const crypto = require('crypto');
+const sha512 = require('sha.js/sha512');
+const SHA3 = require('sha3');
 
 const router = express.Router();
 const api = express();
@@ -74,6 +77,102 @@ api.get('/gcd-lcm', (req, res) => {
 api.get('/encoder', (req, res) => {
   res.render('encoder');
 });
+api.get('/hash', (req, res) => {
+  res.render('hash');
+});
+
+api.get('/get-hash-text', (req, res) => {
+  let result;
+  const originalTxt = req.query.text;
+  const hashType = req.query.hashType;
+  const detailOption = req.query.detail;
+
+  switch(hashType){
+    case 'sha':
+      switch(detailOption){
+        case '512':
+          result = crypto.createHash('sha512').update(originalTxt).digest('hex');
+          break;
+        case '384':
+          result = crypto.createHash('sha384').update(originalTxt).digest('hex');
+          break;
+        case '256':
+          result = crypto.createHash('sha256').update(originalTxt).digest('hex');
+          break;
+        case '224':
+          result = crypto.createHash('sha224').update(originalTxt).digest('hex');
+          break;
+        case '512/256':
+          result = new sha512().update(originalTxt).digest('hex').substring(0, 64);
+          break;
+        case '512/224':
+          result = new sha512().update(originalTxt).digest('hex').substring(0, 56);
+          break;
+      }
+      break;
+    case 'sha3':
+      switch(detailOption){
+        case '512':
+          result = new SHA3.SHA3Hash(512).update(originalTxt).digest('hex');
+          break;
+        case '384':
+          result = new SHA3.SHA3Hash(384).update(originalTxt).digest('hex');
+          break;
+        case '256':
+          result = new SHA3.SHA3Hash(256).update(originalTxt).digest('hex');
+          break;
+        case '224':
+          result = new SHA3.SHA3Hash(224).update(originalTxt).digest('hex');
+          break;
+      }
+      break;
+    case 'sha1':
+      result = crypto.createHash('sha1').update(originalTxt).digest('hex');
+      break;
+    case 'shake':
+      switch(detailOption){
+        case '256':
+          break;
+        case '128':
+          break;
+      }
+      break;
+    case 'md':
+      switch(detailOption){
+        case '5':
+          result = crypto.createHash('md5').update(originalTxt).digest('hex');
+          break;
+        case '4':
+          result = crypto.createHash('md4').update(originalTxt).digest('hex');
+          break;
+        case '2':
+          result = crypto.createHash('md2').update(originalTxt).digest('hex');
+          break;
+      }
+      break;
+    case 'crc':
+      switch(detailOption){
+        case '32':
+          break;
+        case '16':
+          break;
+      }
+      break;
+    case 'keccak':
+      switch(detailOption){
+        case '512':
+          break;
+        case '384':
+          break;
+        case '256':
+          break;
+        case '224':
+          break;
+      }
+      break;
+  }
+  res.json({ result });
+})
 
 // 파일 업로드를 위한 multer 설정
 const upload = multer();

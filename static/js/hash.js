@@ -5,14 +5,7 @@ const crypto = require('crypto');
 const keccakHash = crypto.createHash('keccak256').update('your_string').digest('hex');
 
 // SHA
-const sha1Hash = crypto.createHash('sha1').update('your_string').digest('hex');
-const sha256Hash = crypto.createHash('sha256').update('your_string').digest('hex');
-const sha384Hash = crypto.createHash('sha384').update('your_string').digest('hex');
-const sha512Hash = crypto.createHash('sha512').update('your_string').digest('hex');
 
-// SHA-512/256, SHA-512/224
-const sha512_256Hash = crypto.createHash('sha512/256').update('your_string').digest('hex');
-const sha512_224Hash = crypto.createHash('sha512/224').update('your_string').digest('hex');
 
 // shake256
 const shake256Hash = crypto.createHash('shake256').update('your_string').digest('hex');
