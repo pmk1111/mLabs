@@ -1,31 +1,148 @@
+const body = document.querySelector("body");
+const nav = document.querySelector("nav");
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
+const toggleList = document.querySelectorAll(".toggleSwitch");
+const toggleImg = document.querySelector(".display_mode_icon");
+const menuBtn = document.querySelector(".menu_btn");
+const menu = document.querySelector(".menu");
+const menuLink = document.querySelectorAll(".menu_container a");
+const footer = document.querySelector("footer");
+
+const typeArea = document.querySelector('.type');
 const txtInput = document.querySelector(".text-input");
 const resultTextArea = document.querySelector(".result");
 const encodeBtn = document.querySelector(".do-encode-btn");
 const types = document.querySelectorAll('.type input[type="radio"]');
+const encodeDecodeSelector = document.querySelectorAll('.encode-decode input[type="radio"]');
+const encodeDecodeLabel = document.querySelectorAll('.encode-decode label');
+const selectBox = document.querySelector('select');
+const options = document.querySelector('select option');
+const textAreas = document.querySelectorAll('textarea');
+const btns = document.querySelectorAll('.btn-container button');
+
+var isActive = true;
+// 다크모드
+toggleList.forEach(($toggle) => {
+  $toggle.onclick = () => {
+
+    isActive = $toggle.classList.contains("active");
+    const checkedTypeLabel = document.querySelector('.type input[type="radio"]:checked + label');
+    if (isActive) {
+      $toggle.classList.remove("active");
+      toggleImg.setAttribute("src", "/images/sun.png");
+      body.classList.remove("dark");
+
+      nav.classList.remove("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
+
+      menuBtn.classList.remove("menu_btn_dark");
+      menu.classList.remove("menu_dark");
+      for(item of menuLink){
+        item.classList.remove("link_dark");
+      }
+      footer.classList.remove("footer_dark");
+
+      typeArea.classList.remove('dark');
+      checkedTypeLabel.classList.remove('dark');
+      selectBox.classList.remove('dark');
+      options.classList.remove('dark');
+      for(i of encodeDecodeLabel){
+        i.classList.remove('dark');
+      }
+      for(i of textAreas){
+        i.classList.remove('dark');
+      }
+      for(i of btns){
+        i.classList.remove('dark');
+      }
+
+    } else {
+      $toggle.classList.add("active");
+      toggleImg.setAttribute("src", "/images/moon.png");
+      body.classList.add("dark");
+
+      nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
+
+      menuBtn.classList.add("menu_btn_dark");
+      menu.classList.add("menu_dark");
+      for(item of menuLink){
+        item.classList.add("link_dark");
+      }
+      footer.classList.add("footer_dark");
+
+      typeArea.classList.add('dark');
+      checkedTypeLabel.classList.add('dark');
+      selectBox.classList.add('dark');
+      options.classList.add('dark');
+      for(i of encodeDecodeLabel){
+        i.classList.add('dark');
+      }
+      for(i of textAreas){
+        i.classList.add('dark');
+      }
+      for(i of btns){
+        i.classList.add('dark');
+      }
+    }
+  };
+});
+
+
 
 types.forEach((radio) => {
   radio.addEventListener("change", (e) => {
     const current = e.currentTarget;
     if (current.id === "url") {
-      document.querySelector(".url-encode-decode").style.display = "block";
+      document.querySelector(".url-encode-decode").style.display = "flex";
       document.querySelector(".encode-decode").style.display = "none";
     } else {
       document.querySelector(".url-encode-decode").style.display = "none";
-      document.querySelector(".encode-decode").style.display = "block";
+      document.querySelector(".encode-decode").style.display = "flex";
     }
   });
 });
 
+types.forEach((radio) => {
+  radio.addEventListener('click', (e) => {
+    const typeLabel = document.querySelectorAll('.type label');
+    const current = e.currentTarget;
+    const selectedType = current.getAttribute('id');
+    const selectedLabel = document.querySelector('label[for="' + selectedType + '"]');
+    if(!isActive){
+      for(i of typeLabel){
+        i.classList.remove('dark');
+      }
+      selectedLabel.classList.add('dark');
+    }
+  })
+});
+
+// encodeDecodeSelector.forEach((radio) => {
+//   radio.addEventListener('change', (e) => {
+//     const items = document.querySelectorAll('.encode-decode label');
+//     const current = e.currentTarget;
+//     const selectedType = current.getAttribute('id');
+//     const selectedLabel = document.querySelector('label[for="' + selectedType + '"]');
+//     if(!isActive){
+//       for(i of items){
+//         i.classList.remove('dark');
+//       }
+//       selectedLabel.classList.add('dark');
+//     }
+//   })
+// })
+
 function doConvert() {
-  const checkedType = document.querySelector(
-    '.type input[type="radio"]:checked'
-  );
-  const selector = document.querySelector(
-    '.encode-decode input[type="radio"]:checked'
-  );
-  const URLSelector = document.querySelector(
-    '.url-encode-decode input[type="radio"]:checked'
-  );
+  const checkedType = document.querySelector('.type input[type="radio"]:checked');
+  const selector = document.querySelector('.encode-decode input[type="radio"]:checked');
+  const URLSelector = document.querySelector('select[name="selectbox"] > option:checked');
   const textVal = txtInput.value;
 
   switch (checkedType.id) {
@@ -173,9 +290,9 @@ function copyResult() {
 
   document.execCommand("copy");
   document.body.removeChild(textarea);
-  alert('결과값 복사 완료.')
+  alert("결과값 복사 완료.");
 }
 function clearBoth() {
-    txtInput.value = '';
-    resultTextArea.value = '';
+  txtInput.value = "";
+  resultTextArea.value = "";
 }
