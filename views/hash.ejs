@@ -8,169 +8,8 @@
     
     <link rel="icon" href="/images/logo.png">
     <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/hash.css" />
 
-    <style>
-      .content-wrapper{
-        width: 70%;
-        min-width: 300px;
-      }
-      input[type="radio"] {
-        display: none;
-      }
-      input[type="radio"] + label {
-        cursor: pointer;
-      }
-      input[type="radio"] + label:hover {
-        opacity: 0.8;
-        transition: 0.2;
-      }
-
-      .type-container {
-        display: flex;
-      }
-      .type-container {
-        border-bottom: 1px solid #ddd;
-      }
-      .type-container.dark {
-        border-bottom: 1px solid #3a3a3a;
-      }
-
-      .type-container input[type="radio"] + label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height: 40px;
-      }
-      .type-container input[type="radio"]:checked + label {
-        background-color: rgb(226, 226, 226);
-        border: 1px solid #cdcdcd;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        border-bottom: transparent;
-      }
-      .type-container input[type="radio"]:checked + label.dark {
-        background-color: #3a3a3a;
-        border: 1px solid #3a3a3a;
-      }
-
-      .type-detail-wrapper{
-        margin: 15px 0;
-        display: flex;
-        align-items: center;
-        height: 40px;
-      }
-
-      .type-detail-select {
-        display: none;
-        width: 100%;
-        min-width: 300px;
-        height: 40px;
-        padding: 5px 10px;
-  border: 1px solid rgb(226, 226, 226);
-  border-radius: 5px;
-  outline: none;
-      }
-      select.dark {
-  background-color: #3a3a3a;
-  border: 1px solid #151515;
-  color: white;
-}
-select option {
-  font-size: 15px;
-}
-select option.dark {
-  background-color: #3a3a3a;
-  color: dark;
-}
-      .type-detail-select.sha {
-        display: block;
-      }
-
-      textarea {
-  font-family: "IBM Plex Sans KR", sans-serif;
-  letter-spacing: 0.5px;
-  padding: 10px;
-  width: calc(100% - 20px);
-  min-width: 300px;
-  height: 150px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  outline: none;
-  resize: none;
-  font-size: 14px;
-}
-textarea.dark {
-  background-color: #3a3a3a;
-  border: 1px solid #3a3a3a;
-  color: white;
-}
-textarea::placeholder {
-  color: #9a9a9a;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 50px;
-  margin: 18px 0 22px 0;
-}
-.btn-container button {
-  margin: 0 25px 0 0;
-  width: 150px;
-  height: 45px;
-  border: 1px solid #325397;
-  border-radius: 5px;
-  background-color: #325397;
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-container button:hover {
-  opacity: 0.9;
-  transition: 0.2s;
-}
-.btn-container button.dark {
-  border: 1px solid #117d8f;
-  background-color: #117d8f;
-}
-
-
-input[type="checkbox"] {
-  display: none; 
-}
-
-label[for="capitalize"] {
-  display: inline-block;
-  margin-right: 5px;
-  padding: 7px;
-  cursor: pointer;
-  background-color: #e0e0e0;
-}
-
-input[type="checkbox"]:checked + label {
-  background-color: #325397; 
-  color: white; 
-  position: relative;
-  
-}
-
-input[type="checkbox"]:checked + label.check_dark {
-  background-color: #117d8f; 
-  
-}
-
-input[type="checkbox"]:checked + label::before {
-  content: '\2713';
-  font-size: 9px; 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-    </style>
   </head>
   <body>
     <%- include('./nav') %>
@@ -246,14 +85,15 @@ input[type="checkbox"]:checked + label::before {
               <option id="224">Keccak-224</option>
             </select>
           </div>
-          <textarea type="text" class="source-txt"></textarea>
+          <textarea type="text" class="source-txt" placeholder="여기에 문자를 입력하세요."></textarea>
           <div class="btn-container">
             <button type="button" class="submit-btn">입력</button>
+            <button type="button" class="clear">초기화</button>
             <input type="checkbox" id="capitalize" name="capitalize">
             <label for="capitalize"></label>
             <span>알파벳 대문자</span>
           </div>
-          <textarea type="text" class="result-txt"></textarea>
+          <textarea type="text" class="result-txt" placeholder="여기에 결과가 표시됩니다."></textarea>
         </div>
       </div>
     </main>
@@ -261,108 +101,6 @@ input[type="checkbox"]:checked + label::before {
     <%- include('./footer') %>
 
     <script src="/js/common.js"></script>
-    <script>
-      const typeRadios = document.querySelectorAll('.type-container input[type="radio"]');
-      const detailOptSelects = document.querySelectorAll('.type-detail-select')
-      const sourceTxtArea = document.querySelector(".source-txt");
-      const submitBtn = document.querySelector(".submit-btn");
-
-      typeRadios.forEach((radio) => {
-        radio.addEventListener('change', (e) => {
-          const current = e.currentTarget;
-          for(i of detailOptSelects){
-            i.style.display = 'none';
-          }
-          switch(current.id){
-            case 'sha':
-              document.querySelector('.type-detail-select.sha').style.display = 'block';
-              break;
-            case 'sha3':
-              document.querySelector('.type-detail-select.sha3').style.display = 'block';
-              break;
-            case 'sha1':
-              document.querySelector('.type-detail-select.sha1').style.display = 'block';
-              break;
-            case 'shake':
-              document.querySelector('.type-detail-select.shake').style.display = 'block';
-              break;
-            // case 'md':
-            //   document.querySelector('.type-detail-select.md').style.display = 'block';
-            //   break;
-            case 'crc':
-              document.querySelector('.type-detail-select.crc').style.display = 'block';
-              break;
-            case 'keccak':
-              document.querySelector('.type-detail-select.keccak').style.display = 'block';
-              break;
-          }
-        });
-      });
-
-      submitBtn.addEventListener("click", function () {
-        const capitalCheck = document.querySelector('#capitalize');
-        const resultTxtArea = document.querySelector('.result-txt');
-        const hashType = document.querySelector('.type-container input[type="radio"]:checked').id;
-        const sourceTxt = sourceTxtArea.value;
-        let detailOption;
-        let convertToCapital;
-
-        switch(hashType){
-          case 'sha':
-            let shaSelect= document.querySelector('.type-detail-select.sha');
-            detailOption = shaSelect.options[shaSelect.selectedIndex].getAttribute('id');
-            break;
-          case 'sha3':
-            let sha3Select= document.querySelector('.type-detail-select.sha3');
-            detailOption = sha3Select.options[sha3Select.selectedIndex].getAttribute('id');
-            break;
-          case 'sha1':
-            let sha1Select= document.querySelector('.type-detail-select.sha1');
-            detailOption = sha1Select.options[sha1Select.selectedIndex].getAttribute('id');
-            break;
-          case 'shake':
-            let shakeSelect= document.querySelector('.type-detail-select.shake');
-            detailOption = shakeSelect.options[shakeSelect.selectedIndex].getAttribute('id');
-            break;
-          // case 'md':
-          //   let mdSelect= document.querySelector('.type-detail-select.md');
-          //   detailOption = mdSelect.options[mdSelect.selectedIndex].getAttribute('id');
-          //   break;
-          case 'crc':
-            let crcSelect= document.querySelector('.type-detail-select.crc');
-            detailOption = crcSelect.options[crcSelect.selectedIndex].getAttribute('id');
-            break;
-          case 'keccak':
-            let keccakSelect= document.querySelector('.type-detail-select.keccak');
-            detailOption = keccakSelect.options[keccakSelect.selectedIndex].getAttribute('id');
-            break;
-        }
-
-        const url = `/get-hash-text?text=${encodeURIComponent(sourceTxt)}&hashType=${hashType}&detail=${detailOption}`;
-
-        fetch(url, {
-          method: "GET",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("반환 결과: ", data.result);
-            if(capitalCheck.checked){
-              // for (let i = 0; i < data.result.length; i++) {
-              //   const char = data.result[i];
-              //   if (/[a-zA-Z]/.test(char)) {
-              //     convertToCapital += char.toUpperCase();
-              //   }
-              // }
-
-              resultTxtArea.value = data.result.toUpperCase();
-            } else{
-              resultTxtArea.value = data.result;
-            }
-          })
-          .catch((error) => {
-            console.error("에러 발생: ", error);
-          });
-      });
-    </script>
+    <script src="/js/hash.js"></script>
   </body>
 </html>
