@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>진법 변환기</title>
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/base-convert.css" />
+  </head>
+  <body>
+    <%- include('./nav') %> <%- include('./accordion') %>
+
+    <main>
+      <div class="container">
+        <h1 style="width: 80%; margin-bottom: 30px">진법 변환기</h1>
+        <div class="content-wrapper">
+          <div class="original-container wrapper">
+            <div class="base-selector-wrapper">
+              <input type="radio" id="o-2" name="start-base-type" checked />
+              <label for="o-2">2진법</label>
+
+              <input type="radio" id="o-8" name="start-base-type" />
+              <label for="o-8">8진법</label>
+
+              <input type="radio" id="o-10" name="start-base-type" />
+              <label for="o-10">10진법</label>
+
+              <input type="radio" id="o-16" name="start-base-type" />
+              <label for="o-16">16진법</label>
+            </div>
+
+            <textarea class="original-val" placeholder="변환할 값을 입력하세요."></textarea>
+          </div>
+
+          <div class="switch">
+            <div class="switch-wrapper">
+              <button class="switch-btn"><span>➡</span><span>⬅</span></button>
+            </div>
+          </div>
+
+          <div class="result-container wrapper">
+            <div class="base-selector-wrapper">
+              <input type="radio" id="r-2" name="result-base-type" checked />
+              <label for="r-2">2진법</label>
+
+              <input type="radio" id="r-8" name="result-base-type" />
+              <label for="r-8">8진법</label>
+
+              <input type="radio" id="r-10" name="result-base-type" />
+              <label for="r-10">10진법</label>
+
+              <input type="radio" id="r-16" name="result-base-type" />
+              <label for="r-16">16진법</label>
+            </div>
+            <textarea class="result-val" placeholder="여기에 결과가 표시됩니다."></textarea>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button class="cal-btn">계산하기</button>
+          <button class="clear">초기화</button>
+        </div>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+    <script src="/js/common.js"></script>
+    <script src="/js/base-convert.js"></script>
+  </body>
+</html>

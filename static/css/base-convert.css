@@ -1,0 +1,142 @@
+@media screen and (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  width: calc(50% - 45px);
+  min-width: 300px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label {
+  cursor: pointer;
+}
+input[type="radio"] + label:hover {
+  opacity: 0.8;
+  transition: 0.2;
+}
+.base-selector-wrapper {
+  display: flex;
+}
+/* .base-selector-wrapper {
+    border-bottom: 1px solid #ddd;
+  } */
+.base-selector-wrapperr.dark {
+  border-bottom: 1px solid #151515;
+}
+
+.base-selector-wrapper input[type="radio"] + label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+}
+.base-selector-wrapper input[type="radio"]:checked + label {
+  background-color: rgb(226, 226, 226);
+  border: 1px solid #cdcdcd;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: transparent;
+}
+.base-selector-wrapper input[type="radio"]:checked + label.dark {
+  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
+  border-bottom: 1px solid #151515;
+}
+
+.switch {
+  margin: 0 20px;
+}
+
+textarea {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  padding: 10px;
+  width: calc(100% - 20px);
+  height: 200px;
+  border: 1px solid lightgrey;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+}
+textarea.dark {
+  border: 1px solid #3a3a3a;
+  background-color: #3a3a3a;
+  color: white;
+}
+
+.btn-container {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-container button {
+  margin: 0 20px;
+  width: 150px;
+  height: 45px;
+  border: 1px solid #325397;
+  border-radius: 5px;
+  background-color: #325397;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-container button:hover {
+  opacity: 0.9;
+  transition: 0.2s;
+}
+.btn-container button.dark {
+  border: 1px solid #117d8f;
+  background-color: #117d8f;
+}
+
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.switch-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+}
+.switch button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: #ececec;
+  border-style: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+.switch button:active {
+  width: 48px;
+  height: 39px;
+  transition: 0.2s;
+}
+
+.switch-btn span {
+  display: block;
+  height: 15px;
+  line-height: 17px;
+}

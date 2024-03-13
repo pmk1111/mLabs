@@ -20,6 +20,7 @@ const checkbox = document.querySelector('label[for="capitalize"]');
 
 const textAreas = document.querySelectorAll('textarea');
 
+
 var isActive = true;
 // 다크모드
 toggleList.forEach(($toggle) => {

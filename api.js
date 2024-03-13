@@ -83,6 +83,9 @@ api.get('/encoder', (req, res) => {
 api.get('/hash', (req, res) => {
   res.render('hash');
 });
+api.get('/base-convert', (req, res) => {
+  res.render('base-convert')
+})
 
 api.get('/get-hash-text', (req, res) => {
   let result;
