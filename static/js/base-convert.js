@@ -23,7 +23,6 @@ toggleList.forEach(($toggle) => {
   $toggle.onclick = () => {
 
     isActive = $toggle.classList.contains("active");
-    const fileNameDivs = document.querySelectorAll('.file-name-div');
     if (isActive) {
       $toggle.classList.remove("active");
       toggleImg.setAttribute("src", "/images/sun.png");

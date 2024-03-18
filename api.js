@@ -86,6 +86,9 @@ api.get('/hash', (req, res) => {
 api.get('/base-convert', (req, res) => {
   res.render('base-convert')
 })
+api.get('/roulette', (req, res) => {
+  res.render('roulette');
+})
 
 api.get('/get-hash-text', (req, res) => {
   let result;

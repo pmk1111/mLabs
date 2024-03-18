@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+
+.title{margin-top:50px;text-align:center;}
+
+.box-roulette{position:relative;margin:50px auto;width:500px;height:500px;border:10px solid #ccc;border-radius:50%;background:#ccc;overflow:hidden;}
+.box-roulette .markers{position:absolute;left:50%;top:0;margin-left:-25px;width:0;height:0;border:25px solid #fff;border-left-color:transparent;border-right-color:transparent;border-bottom-color:transparent;z-index:9999;}
+.box-roulette .roulette{position:relative;width:100%;height:100%;overflow:hidden;}
+.box-roulette .item{position:absolute;top:0;width:0;height:0;border:0 solid transparent;transform-origin:0 100%;}
+.box-roulette .label{position:absolute;left:8px;top:-40px;color:#fff;white-space:nowrap;transform-origin:0 0;}
+.box-roulette .label .text{display:inline-block;font-size:20px;font-weight:bold;line-height:1;vertical-align:middle;}
+
+#btn-start{
+  position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 65px;
+        height: 65px;
+        border: 3px solid lightgrey;
+        border-radius: 50%;
+        background-color: rgb(255, 149, 0);
+        color:white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        z-index: 10;
+}
+
+#btn-start:hover{
+        animation: zoom .6s infinite;
+      }
+
+      @keyframes zoom {
+        0%{
+          width: 65px;
+          height: 65px;
+        }
+        100%{
+          width: 75px;
+          height: 75px;
+        }
+      }
+
+
+
+      .item-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .item-wrapper input {
+        height: 26px;
+        padding: 5px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        outline: none;
+      }
+      .item-wrapper input.dark{
+        border: 1px solid #3a3a3a;
+        background-color: #3a3a3a;
+        color: white;
+      }
+      .delete-item-btn {
+        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        border-style: none;
+        background-color: rgb(223, 78, 102);
+        border-radius: 3px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .add-item-btn{
+        width: 100%;
+        height: 50px;
+        background-color: #325397;
+        border: 1px solid #325397;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .add-item-btn.dark{
+        background-color: #117d8f;
+        border: 1px solid #117d8f;
+      }
+
+  </style>
+</head>
+<body>
+  <p class="title">본의아니 행운의 여보세요?</p>
+
+<div class="box-roulette">
+	<div class="markers"></div>
+	<button type="button" id="btn-start">
+		GO!
+	</button>
+	<div class="roulette" id="roulette"></div>
+</div>
+
+<div class="item-container">
+  
+</div>
+
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.sobekrepository.org/includes/jquery-rotate/2.2/jquery-rotate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script>
+  (function($) {
+  $.fn.extend({
+
+    roulette: function(options) {
+
+      var defaults = {
+        angle: 0,
+        angleOffset: -45,
+        speed: 5000,
+        easing: "easeInOutElastic",
+      };
+
+      var opt = $.extend(defaults, options);
+
+      return this.each(function() {
+        var o = opt;
+
+        var data = ['N분의 1', '요즘것들', '도박', '젓가락', '거북선', '겁',
+          'Day Day', '호랑나비', 'Okey Dokey', '오빠차', 
+        ];
+        var bgColor = ['#3f297e', '#1d61ac', '#169ed8', '#209b6c', '#60b236', '#efe61f', 
+                      '#f7a416', '#e6471d', '#dc0936', '#e5177b', '#be107f', '#881f7e']
+
+        var $wrap = $(this);
+        var $btnStart = $wrap.find("#btn-start");
+        var $roulette = $wrap.find(".roulette");
+        var wrapW = $wrap.width();
+        var angle = o.angle;
+        var angleOffset = o.angleOffset;
+        var speed = o.speed;
+        var esing = o.easing;
+        var itemSize = data.length;
+        var itemSelector = "item";
+        var labelSelector = "label";
+        var d = 360 / itemSize;
+        var borderTopWidth = wrapW;
+        var borderRightWidth = tanDeg(d);
+        var itemContainer = $('.item-container');
+
+        for (i = 1; i <= itemSize; i += 1) {
+          var idx = i - 1;
+          var rt = i * d + angleOffset;
+          var itemHTML = $('<div class="' + itemSelector + '">');
+          var labelHTML = '';
+              labelHTML += '<p class="' + labelSelector + '">';
+              labelHTML += '	<span class="text">' + data[idx] + '<\/span>';
+              labelHTML += '<\/p>';
+
+          $roulette.append(itemHTML);
+          $roulette.children("." + itemSelector).eq(idx).append(labelHTML);
+          $roulette.children("." + itemSelector).eq(idx).css({
+            "left": wrapW / 2,
+            "top": -wrapW / 2,
+            "border-top-width": borderTopWidth,
+            "border-right-width": borderRightWidth,
+            "border-top-color": bgColor[idx],
+            "transform": "rotate(" + rt + "deg)"
+          });
+
+          var textH = parseInt(((2 * Math.PI * wrapW) / d) * .5);
+
+          $roulette.children("." + itemSelector).eq(idx).children("." + labelSelector).css({
+            "height": textH + 'px',
+            "line-height": textH + 'px',
+            "transform": 'translateX(' + (textH * 1.3) + 'px) translateY(' + (wrapW * -.3) + 'px) rotateZ(' + (90 + d * .5) + 'deg)'
+          });
+
+          let itemWrapper = $('<div>');
+          let inputItem = $('<input>');
+          let deleteBtn = $('<button>');
+
+          itemWrapper.addClass('item-wrapper');
+          inputItem.addClass('item-input');
+          deleteBtn.addClass('delete-item-btn');
+
+          inputItem.val(data[i-1]);
+          deleteBtn.text('삭제');
+
+          itemWrapper.append(inputItem);
+          itemWrapper.append(deleteBtn);
+
+          itemContainer.append(itemWrapper)
+        }
+
+        const addItemBtn = $('<button>');
+        addItemBtn.addClass('add-item-btn');
+        addItemBtn.text('추가하기');
+        addItemBtn.on('click', function(){
+          const items = $('.item-container .item-wrapper');
+          if(items.length < 12){
+            itemContainer.empty();
+            $('.box-roulette').empty();
+            data.push('항목 ' + (items.length + 1));
+            console.log(data);
+            $('.box-roulette').roulette();
+          } else {
+            alert('돌림판 항목은 최대 12개 까지 가능합니다.');
+          }
+        });
+
+        itemContainer.append(addItemBtn);
+
+        function tanDeg(deg) {
+          var rad = deg * Math.PI / 180;
+          return wrapW / (1 / Math.tan(rad));
+        }
+
+
+        $btnStart.on("click", function() {
+          rotation();
+        });
+
+
+        function rotation() {
+          let randomNum = Math.floor(Math.random() * data.length)+1;
+          var completeA = 4800 + (360 / data.length * randomNum);
+
+          $roulette.rotate({
+            angle: angle,
+            animateTo: completeA,
+            center: ["50%", "50%"],
+            easing: $.easing.esing,
+            callback: function() {
+              var currentA = $(this).getRotateAngle();
+
+              console.log(currentA);
+
+            },
+            duration: speed
+          });
+        }
+
+        function r(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+      });
+    }
+  });
+})(jQuery);
+
+$(function() {
+
+  $('.box-roulette').roulette();
+
+});
+
+
+</script>
+</body>
+</html>
