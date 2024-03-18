@@ -91,6 +91,7 @@ window.onload = function () {
           tryCnt.textContent = trycount;
           val.textContent = items[randomNum - 1];
           ul.appendChild(li);
+          roulette.classList.remove("rotating");
         }, 5000);
         // closeModalBtn.addEventListener("click", function () {
         //   resultModal.style.display = "none";
@@ -211,7 +212,6 @@ const deleteBtns = document.querySelectorAll('delete-item-btn');
 // const modalContent = document.querySelector('.modal-content');
 // const closeModalBtn = document.querySelector('.close-modal-btn');
 const ul = document.querySelector('.all-result-container ul');
-const li = document.querySelectorAll('.all-result-container ul li');
 const liFirstDiv = document.querySelectorAll('.all-result-container ul li > div:nth-child(1)');
 const alertMadalContent = document.querySelector('.alert-modal-content');
 
@@ -221,7 +221,10 @@ toggleList.forEach(($toggle) => {
   $toggle.onclick = () => {
 
     const lines = document.querySelectorAll('.line');
+    const li = document.querySelectorAll('.all-result-container ul li');
     const inputs = document.querySelectorAll('.item-container .item-wrapper input');
+    const liFirstDiv = document.querySelectorAll('.all-result-container > ul > li > div:nth-child(1)');
+
     const addItemBtn = document.querySelector('.add-item-btn');
     isActive = $toggle.classList.contains("active");
     if (isActive) {
