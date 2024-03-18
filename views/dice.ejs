@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>랜덤 주사위</title>
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="icon" href="/images/logo.png" />
+
+  <style>
+    * { padding: 0px; margin: 0px; }
+
+#wrap { display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; }
+#diceBox { max-width: 600px; width: 90vw; height: auto; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2); padding: 40px; box-sizing: border-box; }
+#diceBox.dark{background-color: #3a3a3a;}
+#diceBox > .dice_wrap { width: 100%; height: auto; display: flex; justify-content: center; margin-bottom: 20px;}
+#diceBox > .dice_wrap > [class^=dice]:last-of-type {margin-right: 0px;}
+/* 주사위 만들기 */
+#diceBox > .dice_wrap > [class^=dice] { width: 49%; margin-right: 2%; padding-top: 49%; position: relative; }
+.dice_inner { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; perspective: 300px; padding: 20%; box-sizing: border-box; }
+#diceBox > .dice_wrap > [class^=dice] .dice { width: 100%; height: 100%; transform-style: preserve-3d; transition: 1s; }
+#diceBox > .dice_wrap > [class^=dice] .dice > div { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; opacity: 1; font-size: 60px; border: 1px solid #c3c3c3; border-radius: 3px;}
+/* .face{background-color: white; color: #151515;} */
+#diceBox > .dice_wrap > [class^=dice] .dice > div.dark{background-color: #121014; color: white; border: 1px solid #707070;}
+#diceBox > .dice_wrap > [class^=dice] .dice .face1 { transform: rotateY(0deg) translateZ(60px);}
+#diceBox > .dice_wrap > [class^=dice] .dice .face2 { transform: rotateY(90deg) translateZ(60px);}
+#diceBox > .dice_wrap > [class^=dice] .dice .face3 { transform: rotateX(90deg) translateZ(60px); }
+#diceBox > .dice_wrap > [class^=dice] .dice .face4 { transform: rotateX(270deg) translateZ(60px);}
+#diceBox > .dice_wrap > [class^=dice] .dice .face5 { transform: rotateY(270deg) translateZ(60px);}
+#diceBox > .dice_wrap > [class^=dice] .dice .face6 { transform: rotateY(180deg) translateZ(60px);}
+.face{background-color: rgb(252, 252, 252);}
+/* 주사위 눈 */
+#diceBox > .dice_wrap > [class^=dice] .dice.face1 { transform: rotateX(0deg) rotateY(0deg); }
+#diceBox > .dice_wrap > [class^=dice] .dice.face2 { transform: rotateX(0deg) rotateY(-90deg); }
+#diceBox > .dice_wrap > [class^=dice] .dice.face3 { transform: rotateX(-90deg) rotateY(0deg); }
+#diceBox > .dice_wrap > [class^=dice] .dice.face4 { transform: rotateX(-270deg) rotateY(0deg); }
+#diceBox > .dice_wrap > [class^=dice] .dice.face5 { transform: rotateX(0deg) rotateY(-270deg); }
+#diceBox > .dice_wrap > [class^=dice] .dice.face6 { transform: rotateX(0deg) rotateY(-180deg); }
+#btnRolling { display: block; width: 100%; height: 50px; margin: 0 auto; background-color: #325397; border: none; border-radius: 4px; color: #fff; cursor: pointer; position: relative; overflow: hidden; font-size: 16px; font-weight: 600;}
+/* #btnRolling::before{ display: block; content: ''; width: 60px; height: 100%; background-color: #fff; position: absolute; top:0; left: -60px; transition: all 0.5s; transform: skewX(-45deg); transform-origin: top left; opacity: 0.3; } */
+#btnRolling:hover {opacity: .9; transition: .2s;}
+
+.sum{
+  margin: 30px 0;
+}
+
+/* 반응형 */
+@media screen and (max-width : 429px){
+  #diceBox { box-shadow:none;}
+  #diceBox > .dice_wrap { display: block;}
+  #diceBox > .dice_wrap > [class^=dice] { width: 100%; margin-right: 0%; padding-top: 100%; }
+}
+
+
+
+.selectBoxList {
+      display: flex;
+      grid-gap: 30px;
+  }
+  .selectBox2 * { box-sizing: border-box; }
+  .selectBox2 {
+    position: relative;
+    z-index: 1;
+    width: 150px;
+    height: 35px;
+    border-radius: 4px;
+    border: 2px solid lightgrey;
+    /* background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 7px) center no-repeat; */
+    background-size: 20px;
+    cursor: pointer;
+  }
+  .selectBox2.dark{
+    border: 1px solid #151515;
+  }
+  .selectBox2:before {
+    content: '▼';
+    font-size: 13px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+    right: 10px; 
+    z-index: -1;
+  }
+
+  .selectBox2:after {
+    content: '';
+    display: block; 
+    width: 2px;
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    right: 35px;
+    background: lightgrey;
+  }
+  .selectBox2.dark:after{
+    background-color: #151515;
+    /* border: 1px solid #151515; */
+  }
+  
+  .selectBox2 .label {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+    border: 0 none;
+    outline: 0 none;
+    padding-left: 15px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .selectBox2 .label.dark{
+    color:white;
+  }
+  .selectBox2 .optionList {
+    position: absolute; 
+    top: 35px;
+    left: 0;
+    width: 100%;
+    background: white;
+    /* color: #3a3a3a; */
+    border: 1px solid lightgrey;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    max-height: 0;
+    transition: .3s ease-in;
+  }
+  .selectBox2 .optionList.dark{
+    border: 1px solid #606060;
+    background-color: #121014;
+  }
+  
+  .selectBox2 .optionList::-webkit-scrollbar {width: 6px;}
+  .selectBox2 .optionList::-webkit-scrollbar-track {background: transparent; }
+  .selectBox2 .optionList::-webkit-scrollbar-thumb {background: #303030; border-radius: 45px;}
+  .selectBox2 .optionList::-webkit-scrollbar-thumb:hover {background: #303030;}
+  
+  .selectBox2.active {
+      z-index: 10;
+  }
+
+  .selectBox2.active .optionList {
+    max-height: 500px;
+  }
+  
+  .selectBox2 .optionItem {
+    border-bottom: 1px dashed lightgrey;
+    padding: 5px 15px 5px;
+    transition: .1s;
+  }
+  
+  .selectBox2 .optionItem:hover {
+    background: rgb(228, 228, 228);
+  }
+  .selectBox2 .optionItem.dark:hover{
+    background-color: #303030;
+  }
+  .selectBox2 .optionItem:last-child {
+    border-bottom: 0 none;
+  }
+
+
+  .all-result-container {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.all-result-container h1 {
+  margin-bottom: 30px;
+}
+.all-result-container > ul {
+  border: 1px solid lightgrey;
+  width: 100%;
+  min-width: 300px;
+  list-style: none;
+  border-radius: 5px;
+}
+.all-result-container > ul > li {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid lightgrey;
+  color: #3a3a3a;
+}
+li.dark{
+  color: white;
+}
+.all-result-container > ul > li:nth-child(1) {
+  color: #c3c3c3;
+  border-top-style: none;
+}
+.all-result-container > ul > li:last-child {
+  border-bottom-style: none;
+}
+.all-result-container > ul > li > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+}
+
+.all-result-container > ul > li > div:nth-child(1) {
+  width: 13%;
+  border-right: 1px solid lightgrey;
+}
+.all-result-container > ul > li > div:nth-child(2) {
+  width: 87%;
+  /* border-right: 1px solid lightgrey; */
+}
+
+.all-result-container > ul > li > div:nth-child(1).dark {
+  border-right: 1px solid #121014;
+}
+
+.all-result-container > ul.dark,
+.all-result-container > ul > li.dark {
+  color: white;
+  border-color: #121014;
+}
+
+li.dark > div{
+}
+  </style>
+</head>
+<body>
+  <%- include('./nav') %> <%- include('./accordion') %>
+  <main>
+    <div class="container">
+      <div id="wrap">
+        <section id="diceBox">
+          <h1 style="margin-bottom: 30px">랜덤 주사위</h1>
+          <div class="selectBox2 ">
+            <button class="label">갯수</button>
+            <ul class="optionList">
+              <li class="optionItem">1</li>
+              <li class="optionItem">2</li>
+            </ul>
+          </div>
+          <div class="dice_wrap">
+            <div class="dice01">
+              <div class="dice_inner">
+                <div class="dice">
+                  <div class="face1 face">1</div>
+                  <div class="face2 face">2</div>
+                  <div class="face3 face">3</div>
+                  <div class="face4 face">4</div>
+                  <div class="face5 face">5</div>
+                  <div class="face6 face">6</div>
+                </div>
+              </div>
+            </div>
+            <div class="dice02">
+              <div class="dice_inner">
+                <div class="dice">
+                  <div class="face1 face">1</div>
+                  <div class="face2 face">2</div>
+                  <div class="face3 face">3</div>
+                  <div class="face4 face">4</div>
+                  <div class="face5 face">5</div>
+                  <div class="face6 face">6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sum">
+            <h2>합계: <span></span></h2>
+          </div>
+          <button id="btnRolling">주사위 굴리기</button>
+          
+          <div class="all-result-container">
+            <h1>모든 결과 보기</h1>
+            <ul>
+              <li>
+                <div class="cnt-txt">회차</div>
+                <div class="val-txt">결과</div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <%- include('./footer') %>
+  
+  <script src="/js/common.js"></script>
+  <script>
+const body = document.querySelector("body");
+const nav = document.querySelector("nav");
+const logoImg = document.querySelector('.logo');
+const title = document.querySelector('.title');
+const apps = document.querySelector('.app-icon');
+const toggleList = document.querySelectorAll(".toggleSwitch");
+const toggleImg = document.querySelector(".display_mode_icon");
+const menuBtn = document.querySelector(".menu_btn");
+const menu = document.querySelector(".menu");
+const menuLink = document.querySelectorAll(".menu_container a");
+const footer = document.querySelector("footer");
+
+const ul = document.querySelector('.all-result-container ul');
+const liFirstDiv = document.querySelectorAll('.all-result-container ul li > div:nth-child(1)');
+const diceBox = document.querySelector('#diceBox');
+const label = document.querySelector('.label');
+const options = document.querySelectorAll('.optionItem');
+const selectBox = document.querySelector('.selectBox2');
+const optionList = document.querySelector('.optionList');
+const optionItems = document.querySelectorAll('.selectBox2 .optionItem');
+
+
+var isActive = true;
+// 다크모드
+toggleList.forEach(($toggle) => {
+  $toggle.onclick = () => {
+    const li = document.querySelectorAll('.all-result-container ul li');
+    const liFirstDiv = document.querySelectorAll('.all-result-container > ul > li > div:nth-child(1)');
+    const dice = document.querySelectorAll('#diceBox > .dice_wrap > [class^=dice] .dice > div');
+    isActive = $toggle.classList.contains("active");
+    if (isActive) {
+      $toggle.classList.remove("active");
+      toggleImg.setAttribute("src", "/images/sun.png");
+      body.classList.remove("dark");
+
+      nav.classList.remove("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_black.svg');
+      title.style.color = 'black';
+      apps.setAttribute('src','images/apps-black.svg');
+
+      menuBtn.classList.remove("menu_btn_dark");
+      menu.classList.remove("menu_dark");
+      for(item of menuLink){
+        item.classList.remove("link_dark");
+      }
+      footer.classList.remove("footer_dark");
+
+      ul.classList.remove('dark');
+      for(i of li){
+        i.classList.remove('dark');
+      }
+      for(i of liFirstDiv){
+        i.classList.remove('dark');
+      }
+
+      diceBox.classList.remove('dark');
+      for(i of dice){
+        i.classList.remove('dark');
+      }
+      label.classList.remove('dark');
+      selectBox.classList.remove('dark');
+      optionList.classList.remove('dark');
+      for(i of optionItems){
+        i.classList.remove('dark');
+      }
+    } else {
+      $toggle.classList.add("active");
+      toggleImg.setAttribute("src", "/images/moon.png");
+      body.classList.add("dark");
+
+      nav.classList.add("nav_dark");
+      logoImg.setAttribute('src', '/images/logo_white.svg');
+      title.style.color = 'white';
+      apps.setAttribute('src','images/apps-white.svg');
+
+      menuBtn.classList.add("menu_btn_dark");
+      menu.classList.add("menu_dark");
+      for(item of menuLink){
+        item.classList.add("link_dark");
+      }
+      footer.classList.add("footer_dark");
+
+      ul.classList.add('dark');
+      for(i of li){
+        i.classList.add('dark');
+      }
+      for(i of liFirstDiv){
+        i.classList.add('dark');
+      }
+
+      diceBox.classList.add('dark');
+      for(i of dice){
+        i.classList.add('dark');
+      }
+      label.classList.add('dark');
+      selectBox.classList.add('dark');
+      optionList.classList.add('dark');
+      for(i of optionItems){
+        i.classList.add('dark');
+      }
+    }
+  };
+});
+
+var dice = document.querySelectorAll('.dice');
+var dice_width = dice[0].clientWidth;
+var face1 = document.querySelectorAll('.face1');
+var face2 = document.querySelectorAll('.face2');
+var face3 = document.querySelectorAll('.face3');
+var face4 = document.querySelectorAll('.face4');
+var face5 = document.querySelectorAll('.face5');
+var face6 = document.querySelectorAll('.face6');
+var count = 0;
+function DiceResizing(){
+  Array.prototype.forEach.call(face1, function(item){
+    item.style.transform = 'rotateY(0deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face2, function(item){
+    item.style.transform = 'rotateY(90deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face3, function(item){
+    item.style.transform = 'rotateX(90deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face4, function(item){
+    item.style.transform = 'rotateX(270deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face5, function(item){
+    item.style.transform = 'rotateY(270deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face6, function(item){
+    item.style.transform = 'rotateY(180deg) translateZ(' + dice_width/2 + 'px)';
+  });
+}
+
+DiceResizing();
+
+window.onresize = function(){
+  dice_width = dice[0].clientWidth;
+  DiceResizing();
+};
+
+var RandomNumber = function(){
+  return 'face' + (Math.floor(Math.random()*6)+1);
+};
+function rolling(){
+  let sum = 0;
+  let arr = [];
+  for(i of dice){
+    i.classList.add(RandomNumber());
+  }
+  let dice = document.querySelectorAll('.dice');
+  for(i of dice){
+    let thisClassName = i.className;
+    sum += parseInt(thisClassName.slice(9, 10));
+  }
+  document.querySelector('.sum h2 span').textContent = sum;
+}
+
+function rolling(selectedDice){
+  let sum = 0;
+  let arr = [];
+  for(i of selectedDice){
+    i.classList.add(RandomNumber());
+  }
+  let dice = document.querySelectorAll('.dice');
+  for(i of dice){
+    let thisClassName = i.className;
+    sum += parseInt(thisClassName.slice(9, 10));
+  }
+  document.querySelector('.sum h2 span').textContent = sum;
+  createTotal(sum);
+}
+
+function createTotal(sum){
+  count++;
+  let ul = document.querySelector('.all-result-container ul');
+  let li = document.createElement('li');
+  let cnt = document.createElement('div');
+  let val = document.createElement('div');
+
+  if(!isActive){
+    li.classList.add('dark');
+    cnt.classList.add('dark');
+  }
+
+  cnt.classList.add('cnt');
+  val.classList.add('val');  
+
+  cnt.textContent = count;
+  val.textContent = sum;
+
+  li.appendChild(cnt);
+  li.appendChild(val);
+  ul.appendChild(li);
+}
+
+// 주사위 굴리기
+var btnRolling = document.querySelector('#btnRolling');
+btnRolling.onclick = function(){
+  let selectedDice = document.querySelectorAll('.dice');
+
+  for(i of selectedDice){
+    i.classList.value = 'dice';
+  }
+  rolling(selectedDice);
+};
+
+
+// custom select
+
+const handleSelect = (item) => {
+  label.parentNode.classList.remove('active');
+  label.innerHTML = item.textContent;
+
+  let diceWrap = document.querySelector('.dice_wrap');
+  diceWrap.innerHTML = '';
+  switch(item.textContent){
+    case '1':
+      createDice(1);
+      break;
+    case '2':
+      createDice(2);
+      break;
+  } 
+  let dice = document.querySelectorAll('.dice');
+  let dice_width = dice[0].clientWidth;
+  let face1 = document.querySelectorAll('.face1');
+  let face2 = document.querySelectorAll('.face2');
+  let face3 = document.querySelectorAll('.face3');
+  let face4 = document.querySelectorAll('.face4');
+  let face5 = document.querySelectorAll('.face5');
+  let face6 = document.querySelectorAll('.face6');
+  Array.prototype.forEach.call(face1, function(item){
+    item.style.transform = 'rotateY(0deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face2, function(item){
+    item.style.transform = 'rotateY(90deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face3, function(item){
+    item.style.transform = 'rotateX(90deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face4, function(item){
+    item.style.transform = 'rotateX(270deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face5, function(item){
+    item.style.transform = 'rotateY(270deg) translateZ(' + dice_width/2 + 'px)';
+  });
+  Array.prototype.forEach.call(face6, function(item){
+    item.style.transform = 'rotateY(180deg) translateZ(' + dice_width/2 + 'px)';
+  });
+}
+options.forEach(option => {
+	option.addEventListener('click', () => handleSelect(option))
+})
+
+label.addEventListener('click', () => {
+  if(label.parentNode.classList.contains('active')) {
+  	label.parentNode.classList.remove('active');
+  } else {
+  	label.parentNode.classList.add('active');
+  }
+});
+
+function createDice(num){
+  let diceWrapper = document.querySelector('.dice_wrap');
+  let diceCnt = 1;
+  for(let i=0;i<num;i++){
+    //dice div
+    const dice = document.createElement('div');
+    dice.classList.add('dice0' + diceCnt);
+    diceCnt++;
+
+    //dice_inner div
+    const diceInner = document.createElement('div');
+    diceInner.classList.add('dice_inner');
+
+    //dice item wrapper div
+    const diceItemWrap = document.createElement('div');
+    diceItemWrap.classList.add('dice');
+
+    for(let i=1;i<=6;i++){
+      const diceNum = document.createElement('div');
+      diceNum.classList.add('face' + i);
+      diceNum.classList.add('face');
+      diceNum.textContent = i;
+      if(!isActive){
+        diceNum.classList.add('dark');
+      }
+
+      diceItemWrap.appendChild(diceNum);
+    }
+    diceInner.appendChild(diceItemWrap);
+    dice.appendChild(diceInner);
+    diceWrapper.appendChild(dice);
+  }
+}
+  </script>
+</body>
+</html>
