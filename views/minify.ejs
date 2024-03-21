@@ -3,107 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>코드압축 - HTML, CSS, Javascript 코드 압축</title>
 
     <link rel="icon" href="/images/logo.png">
-    <link rel="stylesheet" href="/css/common.css" />
-
-    <style>
-      .code-textarea {
-        width: 600px;
-        height: 400px;
-      }
-      .content-wrap{width: 70%;}
-      .radio-wrap{margin-bottom: 30px; display: flex; align-items: center; width: 100%; min-width: 300px; border-bottom: 1px solid #ddd;}
-      .radio-wrap.dark{border-bottom: 1px solid #3a3a3a;}
-
-      .textarea-wrap{display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 300px;}
-      .btn-wrap{
-        margin: 30px 0;
-        width: 100%;
-        display: flex;
-        align-items: center;
-      }
-      .textarea-wrap textarea{
-        font-family: "IBM Plex Sans KR", sans-serif;
-        width: calc(100% - 20px);
-        min-width: 300px;
-        padding: 10px;
-        outline: none;
-        resize: none;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-      }
-      .textarea-wrap textarea.dark{
-        background-color: #3a3a3a;
-        color: white;
-        border: 1px solid #3a3a3a;
-      }
-      .btn-wrap > button{
-        width: 32%;
-        height: 50px;
-        font-size: 18px;
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .btn-wrap > button:hover{
-        opacity: .9;
-        transition: .2s;
-      }
-      .do-minify-btn, .copy-btn{
-        color: white;
-        background-color: #325397;
-        border-style: none;
-        margin-right: 2%;
-      }
-      .do-minify-btn.dark, .copy-btn.dark{
-        background-color: #117d8f;
-      }
-
-      .clear-btn{
-        color: #325397;
-        border: 2px solid #325397;
-        background-color:transparent;
-      }
-      .clear-btn.dark{
-        color: white;
-        border: 2px solid #e74900;
-        background-color: #e74900;
-      }
-
-      .radio-wrap input[type="radio"]{
-        display: none;
-      }
-      .radio-wrap input[type="radio"] + label{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height: 40px;
-        cursor: pointer;
-      }
-      .radio-wrap input[type="radio"] + label:hover{
-        opacity: .9;
-        transition: .2s;
-      }
-      .radio-wrap input[type="radio"]:checked + label{
-        background-color: rgb(226, 226, 226);
-         border: 1px solid #cdcdcd;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        border-bottom: transparent;
-      }
-      .radio-wrap input[type="radio"]:checked + label.dark {
-  background-color: #3a3a3a;
-  border: 1px solid #3a3a3a;
-}
-
-      @media screen and (max-width: 675px){
-        
-      }
-    </style>
+    <link rel="stylesheet" href="/css/common.css"/> 
+    <link rel="stylesheet" href="/css/minify.css">
   </head>
   <body>
     <%- include('./nav') %>
@@ -111,6 +15,30 @@
     <main>
       <div class="container">
         <div class="content-wrap">
+          <div class="title-desc-wrap">
+            <h1>코드 압축</h1>
+            <div class="tooltip">
+              <label class="desc">사용법</label>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="help">
+                <path id="Oval 2" d="M12 14C12 12 13.576 11.6653 14.1187 11.124C14.6631 10.5809 15 9.82977 15 9C15 7.34315 13.6569 6 12 6C11.1041 6 10.2999 6.39273 9.7502 7.01542C9.49603 7.30334 9.29626 7.64044 9.16699 8.01061" stroke="#8d8d8d" stroke-width="2" stroke-linecap="round"/>
+                <path id="Oval" fill-rule="evenodd" clip-rule="evenodd" d="M12 18C12.5523 18 13 17.5523 13 17C13 16.4477 12.5523 16 12 16C11.4477 16 11 16.4477 11 17C11 17.5523 11.4477 18 12 18Z" fill="#8d8d8d"/>
+                <path id="Oval_2" fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8d8d8d" stroke-width="2"/>
+                </g>
+                </svg>
+                
+              <div class="tooltiptext">
+                1. 코드 타입을 선택합니다.<br>
+                2. '압축' 버튼을 클릭해 코드를 압축합니다.<br>
+                3. '복사' 버튼을 눌러 압축한 코드를 복사합니다.<br>
+                4. '초기화'를 눌러 원본 & 압축 코드 입력란을 초기화합니다.<br><br>
+                
+                주의사항<br>
+                1. HTML 압축 시, css, js가 섞인 경우 HTML 항목만 압축됩니다.<br>
+                2. CSS, js의 경우, 해당 타입 외 코드가 섞여있으면 오류가 발생합니다.<br>
+              </div>
+            </div>
+          </div>
           <div class="radio-wrap">
             <input type="radio" id="html" name="code-type" checked>  
             <label for="html">html</label>

@@ -106,6 +106,7 @@ minifyButton.addEventListener("click", function () {
       }
     })
     .catch((error) => {
+      alert('압축 에러 발생');
       console.error("Minify 작업 중 오류 발생:", error);
     });
 });
