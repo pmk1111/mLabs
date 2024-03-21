@@ -21,7 +21,6 @@ window.onload = function () {
     const noteToolBarBtn = noteToolBar.querySelectorAll('button');
 
     summerNote = document.querySelector('.note-editable');
-    console.log(summerNote);
 
     let txtValue = "";
     var isActive = true;

@@ -7,6 +7,7 @@ const PDFDocument  = require('pdfkit');
 const multer = require('multer'); // multer 모듈을 require
 const sharp = require('sharp');
 const axios = require('axios');
+const FormData = require('form-data');
 
 const fetch = require('node-fetch');
 const archiver = require("archiver");
@@ -16,6 +17,12 @@ const SHA3 = require('sha3');
 const { keccak512, keccak384, keccak256, keccak224, shake_256, shake_128 } = require('js-sha3');
 const crc = require('crc');
 
+const uglify = require('uglify-js');
+const htmlMinifier = require('html-minifier').minify;
+const csso = require('csso');
+
+// 파일 업로드를 위한 multer 설정
+const upload = multer();
 
 const router = express.Router();
 const api = express();
@@ -92,6 +99,28 @@ api.get('/roulette', (req, res) => {
 api.get('/dice', (req, res) => {
   res.render('dice');
 });
+api.get('/minify', (req, res) => {
+  res.render('minify');
+});
+
+api.post('/do-minify', (req, res) => {
+  const originalCode = req.body.originalCode;
+  const codeType =req.body.checkedCodeType;
+  let result = '';
+  if(codeType === 'html'){
+    result = htmlMinifier(originalCode, {
+      collapseWhitespace: true,
+      removeComments: true
+    });
+  } else if(codeType === 'css'){
+      result = csso.minify(originalCode).css;
+  } else{
+      result = uglify.minify(originalCode);
+  }
+
+  res.json({ minifiedCode: result });
+});
+
 
 api.get('/get-hash-text', (req, res) => {
   let result;
@@ -196,9 +225,6 @@ api.get('/get-hash-text', (req, res) => {
   res.json({ result });
 })
 
-// 파일 업로드를 위한 multer 설정
-const upload = multer();
-
 api.post('/download-thumbnail', async (req, res) => {
   try {
     const imgUrl = req.body.imgUrl;
@@ -243,26 +269,6 @@ api.post("/download-all-thumbnail", async (req, res) => {
     res.status(500).send('서버 내부 오류');
   }
 });
-
-// convert img
-// api.post('/convert-image', upload.array('image[]'), async (req, res) => {
-//   try {
-//     const { format } = req.body;
-
-//     // 이미지 변환 (sharp 모듈 사용)
-//     const convertedImageBuffer = await sharp(req.file.buffer).toFormat(format).toBuffer();
-
-//     // HTTP 응답mlabolatories 헤더 설정
-//     res.setHeader('Content-Type', `image/${format}`);
-//     res.setHeader('Content-Disposition', `attachment; filename=converted_image.${format}`);
-
-//     // 변환된 이미지 응답
-//     res.send(convertedImageBuffer);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
 
 
 api.post('/convert-all-img', upload.array('image[]'), async (req, res) => {

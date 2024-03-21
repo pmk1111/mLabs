@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="icon" href="/images/logo.png">
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <style>
+      .code-textarea {
+        width: 600px;
+        height: 400px;
+      }
+      .content-wrap{width: 70%;}
+      .radio-wrap{margin-bottom: 30px; display: flex; align-items: center; width: 100%; min-width: 300px; border-bottom: 1px solid #ddd;}
+      .radio-wrap.dark{border-bottom: 1px solid #3a3a3a;}
+
+      .textarea-wrap{display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 300px;}
+      .btn-wrap{
+        margin: 30px 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+      .textarea-wrap textarea{
+        font-family: "IBM Plex Sans KR", sans-serif;
+        width: calc(100% - 20px);
+        min-width: 300px;
+        padding: 10px;
+        outline: none;
+        resize: none;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .textarea-wrap textarea.dark{
+        background-color: #3a3a3a;
+        color: white;
+        border: 1px solid #3a3a3a;
+      }
+      .btn-wrap > button{
+        width: 32%;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn-wrap > button:hover{
+        opacity: .9;
+        transition: .2s;
+      }
+      .do-minify-btn, .copy-btn{
+        color: white;
+        background-color: #325397;
+        border-style: none;
+        margin-right: 2%;
+      }
+      .do-minify-btn.dark, .copy-btn.dark{
+        background-color: #117d8f;
+      }
+
+      .clear-btn{
+        color: #325397;
+        border: 2px solid #325397;
+        background-color:transparent;
+      }
+      .clear-btn.dark{
+        color: white;
+        border: 2px solid #e74900;
+        background-color: #e74900;
+      }
+
+      .radio-wrap input[type="radio"]{
+        display: none;
+      }
+      .radio-wrap input[type="radio"] + label{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 40px;
+        cursor: pointer;
+      }
+      .radio-wrap input[type="radio"] + label:hover{
+        opacity: .9;
+        transition: .2s;
+      }
+      .radio-wrap input[type="radio"]:checked + label{
+        background-color: rgb(226, 226, 226);
+         border: 1px solid #cdcdcd;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border-bottom: transparent;
+      }
+      .radio-wrap input[type="radio"]:checked + label.dark {
+  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
+}
+
+      @media screen and (max-width: 675px){
+        
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %>
+    <%- include('./accordion') %>
+    <main>
+      <div class="container">
+        <div class="content-wrap">
+          <div class="radio-wrap">
+            <input type="radio" id="html" name="code-type" checked>  
+            <label for="html">html</label>
+            <input type="radio" id="css" name="code-type">  
+            <label for="css">css</label>
+            <input type="radio" id="javascript" name="code-type">  
+            <label for="javascript">javascript</label>
+          </div>
+          <div class="textarea-wrap">
+            <textarea class="original-code code-textarea" placeholder="코드를 입력하세요."></textarea>
+            <div class="btn-wrap">
+              <button type="button" class="do-minify-btn">압축</button>
+              <button type="button" class="copy-btn" onclick="copyResult()">복사</button>
+              <button type="button" class="clear-btn" onclick="clearTextarea()">초기화</button>
+            </div>
+            <textarea class="minified-code code-textarea" placeholder="여기에 결과가 표시됩니다."></textarea>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('./footer') %>
+
+    <script src="/js/common.js"></script>
+    <script src="/js/minify.js"></script>
+
+  </body>
+</html>

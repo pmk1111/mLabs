@@ -54,7 +54,6 @@ function slideList(list){
 
 }
 
-// browserWidth 변화에 따른 content arrow 추가 및 제거
 function handleResize() {
     let isSpan = document.querySelector(".arrow");
     if (window.innerWidth <= 768) {
@@ -78,10 +77,8 @@ function handleResize() {
     }
   }
   
-    // 초기 로딩 시에도 한 번 실행
     handleResize();
     
-    // 브라우저 크기가 변할 때마다 실행
     window.addEventListener("resize", handleResize);
 
     openHelp.addEventListener('click', function(){
