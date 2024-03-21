@@ -88,11 +88,11 @@ main.main_dark {
   transition: .2s;
 }
 .do_cal_btn {
-  background-color: #514170;
+  background-color: #325397;
   cursor: pointer;
 }
 .do_cal_btn.cal_btn_dark {
-  background-color: #212529;
+  background-color: #117d8f;
   border-style: none;
 }
 .csv_btn {

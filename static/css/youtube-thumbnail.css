@@ -59,7 +59,7 @@
   height: 50px;
 }
 .url-input.dark, .img-size-selector.dark{
-  border: 5px solid #3a3a3a;
+  border: 3px solid #3a3a3a;
   background-color: #151515;
   color: white;
 }
@@ -73,25 +73,25 @@
   font-size: 18px;
   font-weight: 600;
   color: white;
-  background-color: #514170;
+  background-color: #325397;
   border-style: none;
   border-radius: 5px;
   margin: 30px 0 0 0;
   cursor: pointer;
 }
 .submit-url.dark{
-  background-color: #3a3a3a;
+  background-color: #117d8f;
 }
 .download-all {
   display: none;
   background-color: transparent;
-  color: #514170;
-  border: 2px solid #514170;
+  color: #325397;
+  border: 2px solid #325397;
 }
 .download-all.dark{
   background-color: transparent;
   color: white;
-  border: 3px solid #3a3a3a;
+  border: 3px solid #117d8f;
 }
 .submit-url:hover, .download-all:hover {
   opacity: 0.9;

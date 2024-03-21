@@ -122,7 +122,7 @@ textarea {
   transition: 0.2s;
 }
 .btn-container button.active {
-  background-color: #514170;
+  background-color: #325397;
   border-style: none;
   color: white;
 }
@@ -155,7 +155,7 @@ label[for="spell-check"] {
 }
 
 input[type="checkbox"]:checked + label {
-  background-color: #514170;
+  background-color: #325397;
   color: white;
   position: relative;
 }

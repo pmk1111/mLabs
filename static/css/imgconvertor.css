@@ -8,10 +8,10 @@
 	background-color: #f5f5fa;
 	cursor: pointer;
 }
-.upload-area:hover{
+/* .upload-area:hover{
   opacity: .8;
   transition: .2s;
-  }
+  } */
   .upload-area.dark {
 	background-color: #151515;
   }
@@ -135,7 +135,7 @@
 } */
 
 .btn_dark {
-	background-color: #3a3a3a;
+	background-color: #117d8f;
 	
 }
 
@@ -147,7 +147,7 @@
   font-size: 18px;
   font-weight: 600;
   color: white;
-  background-color: #514170;
+  background-color: #325397;
   border-style: none;
   border-radius: 5px;
   margin-bottom: 30px;
@@ -157,15 +157,15 @@
 .convert-all-btn{
   display: none;
   background-color: transparent;
-  border: 5px solid #514170;
-  color: #514170;
+  border: 3px solid #325397;
+  color: #325397;
   border-radius: 5px;
 }
 .upload-img-btn.dark{
-	background-color: #3a3a3a;
+	background-color: #117d8f;
 }
 .convert-all-btn.dark{
-	border: 5px solid #3a3a3a;
+	border: 3px solid #117d8f;
 	color: white;
 }
 .format-selector{

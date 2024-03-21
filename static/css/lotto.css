@@ -97,11 +97,11 @@
   animation-play-state: running;
 }
 .num_generate_btn.btn_lite {
-  background-color: #514170;
+  background-color: #325397;
   
 }
 .num_generate_btn.btn_dark {
-  background-color: #5f5f5f;
+  background-color: #117d8f;
   
 }
 @keyframes big {

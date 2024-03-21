@@ -73,7 +73,7 @@
   height: 50px;
   border-style: none;
   border-radius: 5px;
-  background-color: #514170;
+  background-color: #325397;
   color: white;
   font-size: 18px;
   font-weight: 600;
@@ -84,7 +84,7 @@
   transition: 0.2s;
 }
 .do-convert.dark {
-  background-color: #3a3a3a;
+  background-color: #117d8f;
 }
 
 

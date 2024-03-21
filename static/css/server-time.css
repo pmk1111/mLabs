@@ -25,20 +25,20 @@
 	width: calc(100% - 26px);
 	height: 44px;
 	padding: 3px 10px;
-	border: 3px solid #514170;
+	border: 3px solid #325397;
 	border-radius: 5px;
 	font-size: 16px;
 	outline: none;
 }
 .search.dark{
-	border: 5px solid #3a3a3a;
+	border: 3px solid #117d8f;
 	background-color: #151515;
 	color: white;
 }
 .get-time-btn{
 	width: 100%;
 	height: 60px;
-	background-color: #514170;
+	background-color: #325397;
 	color: white;
 	border-radius: 5px;
 	border-style: none;
@@ -47,7 +47,7 @@
 	cursor: pointer;
 }
 .search.search-dark {
-	background-color: #3a3a3a;
+	background-color: #117d8f;
 	color: white;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .get-time-btn.get-time-btn-dark {
-	background-color: #3a3a3a;
+	background-color: #117d8f;
 }
 
 .url-data-wrap, .server-time-wrap {
@@ -101,7 +101,7 @@
 #serverTime {
 	font-family: 'Black Han Sans', sans-serif;
 	font-size: 50px;
-	color: #514170;
+	color: #325397;
 	text-align: center;
 }
 
