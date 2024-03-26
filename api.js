@@ -69,8 +69,8 @@ api.get('/server-time', (req, res) => {
 api.get('/memo', (req, res) => {
   res.render('memo');
 });
-api.get('/pdf-convert', (req, res) => {
-  res.render('pdf-convert');
+api.get('/img-to-pdf', (req, res) => {
+  res.render('img-to-pdf');
 });
 api.get('/pdf-to-jpg', (req, res) =>{
   res.render('pdf-to-jpg');
@@ -84,8 +84,8 @@ api.get('/youtube-thumbnail', (req, res) => {
 api.get('/gcd-lcm', (req, res) => {
   res.render('gcd-lcm');
 });
-api.get('/encoder', (req, res) => {
-  res.render('encoder');
+api.get('/encoder-decoder', (req, res) => {
+  res.render('encoder-decoder');
 });
 api.get('/hash', (req, res) => {
   res.render('hash');

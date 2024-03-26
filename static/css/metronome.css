@@ -59,7 +59,7 @@
 .bpm-display {
   width: 100%;
   text-align: center;
-  color: #514170;
+  color: #325397;
   font-weight: bold;
 }
 
@@ -102,8 +102,8 @@
 .increase-tempo:hover,
 .subtrack-beats:hover,
 .add-beats:hover {
-  background-color: #514170;
-  border-color: #514170;
+  background-color: #325397;
+  border-color: #325397;
   color: white;
   transition: 0.2s;
 }
@@ -137,7 +137,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #514170;
+  background-color: #325397;
   cursor: pointer;
   margin-top: -6px;
 }
@@ -146,7 +146,7 @@ input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #514170;
+  background-color: #325397;
   border: none;
   cursor: pointer;
   margin-top: -6px;
@@ -200,7 +200,7 @@ input[type="range"]::-moz-range-track {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  background-color: #514170;
+  background-color: #325397;
   border-radius: 3px;
   color: #fff;
   line-height: 50px;
@@ -212,7 +212,7 @@ input[type="range"]::-moz-range-track {
   transition: 0.2s;
 }
 .start-stop.start-stop-dark {
-  background-color: #3a3a3a;
+  background-color: #117d8f;
 }
 .start-stop.start-stop-dark:hover {
   background-color: #dcb662;
@@ -266,8 +266,8 @@ input[type="range"]::-moz-range-track {
 .increase-tempo-dark,
 .subtrack-beats-dark,
 .add-beats-dark {
-  background-color: #3a3a3a;
-  border: 1px solid #3a3a3a !important;
+  background-color: #117d8f;
+  border: 1px solid #117d8f !important;
   color: white;
 }
 
