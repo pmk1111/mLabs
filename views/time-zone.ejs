@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>국가별 시간대 확인</title>
+
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/youtube-thumbnail.css" />
+
+    <style>
+      .time-container{
+        margin-bottom: 50px;
+        width: 65%;
+        min-width: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .timezone-container{
+        margin-top: 50px;
+        padding: 20px;
+        width: calc(26% - 40px);
+        min-width: 255px;
+        height: 250px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #f4f4f4;
+        border-radius: 10px;
+      }
+      .timezone-container>h3{
+        margin-bottom:15px;
+      }
+      .timezone-container:nth-child(3n-1){
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      .time-wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .time-wrap > span, .time-wrap input, .time-wrap img, .time-wrap > div{
+        margin: 0 3px;
+      }
+      .flag{
+        width: 20px;
+      }
+      .colon{
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%{opacity: 1;}
+        50%{opacity: 0;}
+      }
+
+
+      .timezone-container::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.timezone-container::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #c0c0c0; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+.timezone-container::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+    </style>
+  </head>
+  <body>
+    <%- include('./nav') %> <%- include('./accordion') %>
+    <main>
+      <div class="container"></div>
+    </main>
+    <%- include('./footer') %>
+    <script>
+      var cities = [];
+      var timeArr = [];
+
+      function displayLocalDateTime(region, flag, city, standard, timeZone) {
+        const options = {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+          timeZone: timeZone,
+        };
+
+        const localDateTime = new Date().toLocaleString("en-US", options);
+        timeArr.push([region, flag, city, standard, localDateTime]);
+      }
+
+      // 각 도시의 정보
+      const northAmerica = [
+        // 미국
+        { region: 'NA', flag: '/images/미국.png', name: "워싱턴 DC", standard: "미국 동부 표준시(GMT-4)", timeZone: "America/New_York" }, // 미 동부 하계 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "시카고", standard: "미국 중부 하계 표준시(GMT-5)", timeZone: "America/Chicago" }, // 미 중부 하계 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "덴버", standard: "미국 산지 하계 표준시(GMT-6)", timeZone: "America/Denver" }, // 미 산지 하계 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "피닉스", standard: "미국 산악 표준시(GMT-7)", timeZone: "America/Phoenix" }, // 미 산악 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "로스앤젤레스", standard: "미국 태평양 하계 표준시(GMT-7)", timeZone: "America/Los_Angeles" }, // 미 태평양 하계 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "앵커리지", standard: "알래스카 하계 표준시(GMT-8)", timeZone: "America/Anchorage" }, // 알래스카 하계 표준시
+        { region: 'NA', flag: '/images/미국.png', name: "호놀룰루", standard: "하와이 알루샨 표준시(GMT-10)", timeZone: "Pacific/Honolulu" }, // 하와이 알류샨 표준시
+
+        // 캐나다
+        { region: 'NA', flag: '/images/캐나다.png', name: "토론토·오타와·퀘벡", standard: "동부 시간대(GMT-4)", timeZone: "America/Toronto" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "뉴펀들랜드 섬", standard: "동부 시간대(GMT-2:30)", timeZone: "America/St_Johns" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "핼리팩스 카운티", standard: "대서양 시간대(GMT-3)", timeZone: "America/Halifax" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "위니펙", standard: "중부 시간대(GMT-5)", timeZone: "America/Winnipeg" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "리자이나", standard: "중부 시간대(GMT-6)", timeZone: "America/Regina" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "에드먼턴", standard: "산지 시간대(GMT-6)", timeZone: "America/Edmonton" },
+        { region: 'NA', flag: '/images/캐나다.png', name: "밴쿠버", standard: "태평양 시간대(GMT-7)", timeZone: "America/Vancouver" },
+
+        // 그린란드
+        { region: 'NA', flag: '/images/그린란드.png', name: "누크 ", standard: "서부 그린란드 시간대 (WGT, GMT-3)", timeZone: "America/Godthab" },
+
+        // 멕시코
+        { region: 'NA', flag: '/images/멕시코.jpg', name: "멕시코시티", standard: "중부 표준시 (CST, GMT-6)", timeZone: "America/Mexico_City" },
+        { region: 'NA', flag: '/images/멕시코.jpg', name: "칸쿤", standard: "동부 표준시 (EST, GMT-5)", timeZone: "America/Cancun" },
+      ];
+
+      const southAmerica = [
+        { region: 'SA', flag: '/images/아르헨티나.png', name: "부에노스아이레스", standard: "아르헨티나 표준시 (ART, GMT-3)", timeZone: "America/Argentina/Buenos_Aires" }, // 아르헨티나
+
+        // 브라질
+        { region: 'SA', flag: '/images/브라질.png', name: "브라질리아", standard: "브라질 표준시 (BRT, GMT-3)", timeZone: "America/Sao_Paulo" },
+        { region: 'SA', flag: '/images/브라질.png', name: "아마소나스 마나우스", standard: "브라질 아마존 시간 (AMT, GMT-4)", timeZone: "America/Manaus" },
+        { region: 'SA', flag: '/images/브라질.png', name: "리오브랑코", standard: "브라질 아크레 시간 (ACT, GMT-5)", timeZone: "America/Rio_Branco" },
+        
+        // 칠레
+        { region: 'SA', flag: '/images/칠레.png', name: "산티아고", standard: "칠레 표준시 (CLT, GMT-4)", timeZone: "America/Santiago" },
+        { region: 'SA', flag: '/images/칠레.png', name: "이스터섬", standard: "이스터섬 표준시 (EAST, GMT-6)", timeZone: "Pacific/Easter" },
+
+        { region: 'SA', flag: '/images/콜롬비아.png', name: "보고타", standard: "콜롬비아 표준시 (COT, GMT-5)", timeZone: "America/Bogota" },// 콜롬비아
+        { region: 'SA', flag: '/images/에콰도르.png', name: "키토", standard: "에콰도르 갈라파고스 (GMT-6)", timeZone: "America/Guayaquil" },// 에콰도르
+        { region: 'SA', flag: '/images/페루.png', name: "리마", standard: "페루 표준시 (PET, GMT-5)", timeZone: "America/Lima" },// 페루
+        { region: 'SA', flag: '/images/베네수엘라.png', name: "카라카스", standard: "베네수엘라 표준시 (VET, GMT-4)", timeZone: "America/Caracas" },// 베네수엘라
+        { region: 'SA', flag: '/images/우루과이.png', name: "몬테비데오", standard: "우루과이 표준시 (UYT, GMT-3)", timeZone: "America/Montevideo" },// 우루과이
+        { region: 'SA', flag: '/images/파라과이.png', name: "아순시온", standard: "파라과이 표준시 (PYT, GMT-4)", timeZone: "America/Asuncion" },// 파라과이
+      ];
+
+      const asia = [
+        { region: 'ASIA', flag: '/images/중국.png', name: "베이징", standard: "중국 표준시 (CST, GMT+8)", timeZone: "Asia/Shanghai" },
+        { region: 'ASIA', flag: '/images/한국.png', name: "서울", standard: "대한민국 표준시 (KST, GMT+9)", timeZone: "Asia/Seoul" },
+        { region: 'ASIA', flag: '/images/일본.jpg', name: "도쿄", standard: "일본 표준시 (JST, GMT+9)", timeZone: "Asia/Tokyo" },
+        { region: 'ASIA', flag: '/images/대만.jpg', name: "타이베이", standard: "대만 표준시 (CST, GMT+8)", timeZone: "Asia/Taipei" },
+        { region: 'ASIA', flag: '/images/홍콩.png', name: "홍콩", standard: "홍콩 표준시 (HKT, GMT+8)", timeZone: "Asia/Hong_Kong" },
+        { region: 'ASIA', flag: '/images/필리핀.png', name: "마닐라", standard: "필리핀 표준시 (PHT, GMT+8)", timeZone: "Asia/Manila" },
+        { region: 'ASIA', flag: '/images/싱가포르.png', name: "싱가포르", standard: "싱가포르 표준시 (SGT, GMT+8)", timeZone: "Asia/Singapore" },
+        { region: 'ASIA', flag: '/images/태국.png', name: "방콕", standard: "태국 표준시 (ICT, GMT+7)", timeZone: "Asia/Bangkok" },
+        { region: 'ASIA', flag: '/images/베트남.png', name: "호치민시", standard: "베트남 표준시 (ICT, GMT+7)", timeZone: "Asia/Ho_Chi_Minh" },
+        { region: 'ASIA', flag: '/images/말레이시아.jpg', name: "쿠알라룸푸르", standard: "말레이시아 표준시 (MYT, GMT+8)", timeZone: "Asia/Kuala_Lumpur" },
+        { region: 'ASIA', flag: '/images/인도네시아.png', name: "자카르타", standard: "인도네시아 중부 표준시 (WIB, GMT+7)", timeZone: "Asia/Jakarta" },
+        { region: 'ASIA', flag: '/images/인도.png', name: "뉴델리", standard: "인도 표준시 (IST, GMT+5:30)", timeZone: "Asia/Kolkata" },
+        { region: 'ASIA', flag: '/images/사우디.png', name: "리야드", standard: "사우디 아라비아 표준시 (AST, GMT+3)", timeZone: "Asia/Riyadh" },
+        { region: 'ASIA', flag: '/images/아랍에미리트.png', name: "아부다비", standard: "아랍 에미리트 표준시 (GST, GMT+4)", timeZone: "Asia/Dubai" },
+        { region: 'ASIA', flag: '/images/이란.png', name: "테헤란", standard: "이란 표준시 (IRST, GMT+3:30)", timeZone: "Asia/Tehran" },
+        { region: 'ASIA', flag: '/images/카자흐스탄.png', name: "알마티", standard: "카자흐스탄 표준시 (ALMT, GMT+6)", timeZone: "Asia/Almaty" },
+        { region: 'ASIA', flag: '/images/이스라엘.png', name: "이스라엘", standard: "이스라엘 표준시 (IST, GMT+3)", timeZone: "Asia/Jerusalem" }
+      ];
+
+      const europe = [
+        { region: 'EU', flag: '/images/프랑스.png', name: "파리", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Paris" },// 프랑스
+        { region: 'EU', flag: '/images/독일.png', name: "베를린", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Berlin" },// 독일
+        { region: 'EU', flag: '/images/영국.png', name: "런던", standard: "그리니치 표준시 (GMT, GMT+0)", timeZone: "Europe/London" },// 영국
+        { region: 'EU', flag: '/images/이탈리아.png', name: "로마", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Rome" },// 이탈리아
+        { region: 'EU', flag: '/images/스페인.png', name: "마드리드", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Madrid" },// 스페인
+        { region: 'EU', flag: '/images/네덜란드.png', name: "암스테르담", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Amsterdam" }, // 네덜란드
+        { region: 'EU', flag: '/images/벨기에.png', name: "브뤼셀", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Brussels" },// 벨기에
+        { region: 'EU', flag: '/images/스웨덴.png', name: "스톡홀름", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Stockholm" },// 스웨덴
+        { region: 'EU', flag: '/images/덴마크.png', name: "코펜하겐", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Copenhagen" },// 덴마크
+        { region: 'EU', flag: '/images/포르투갈.png', name: "리스본", standard: "서유럽 시간 (WET, GMT+0)", timeZone: "Europe/Lisbon" },// 포르투갈
+        { region: 'EU', flag: '/images/오스트리아.png', name: "빈", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Vienna" },// 오스트리아
+        { region: 'EU', flag: '/images/그리스.png', name: "아테네", standard: "동유럽 시간 (EET, GMT+2)", timeZone: "Europe/Athens" },// 그리스
+        { region: 'EU', flag: '/images/러시아.png', name: "모스크바", standard: "모스크바 표준시 (MSK, GMT+3)", timeZone: "Europe/Moscow" }, // 러시아
+        { region: 'EU', flag: '/images/노르웨이.png', name: "오슬로", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Oslo" },// 노르웨이   
+        { region: 'EU', flag: '/images/핀란드.png', name: "헬싱키", standard: "동유럽 시간 (EET, GMT+2)", timeZone: "Europe/Helsinki" },// 핀란드
+        { region: 'EU', flag: '/images/스위스.png', name: "취리히", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Zurich" },// 스위스
+        { region: 'EU', flag: '/images/아일랜드.png', name: "더블린", standard: "그리니치 표준시 (GMT, GMT+0)", timeZone: "Europe/Dublin" },// 아일랜드
+        { region: 'EU', flag: '/images/폴란드.png', name: "바르샤바", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Warsaw" },// 폴란드
+        { region: 'EU', flag: '/images/체코.png', name: "프라하", standard: "중앙 유럽 시간 (CET, GMT+1)", timeZone: "Europe/Prague" },// 체코
+        { region: 'EU', flag: '/images/터키.png', name: "앙카라", standard: "터키 표준시 (TRT, GMT+3)", timeZone: "Europe/Istanbul" }// 터키
+      ];
+
+      const africa = [
+        { region: 'AFRICA', flag: '/images/남아공.png', name: '케이프타운', standard: '남아프리카 표준시 (SAST, GMT+2)', timeZone: 'Africa/Johannesburg' },
+        { region: 'AFRICA', flag: '/images/나이지리아.jpg', name: '라고스', standard: '서부 아프리카 시간 (WAT, GMT+1)', timeZone: 'Africa/Lagos' },
+        { region: 'AFRICA', flag: '/images/알제리.png', name: '알제', standard: '중앙 유럽 시간 (CET, GMT+1)', timeZone: 'Africa/Algiers' },
+        { region: 'AFRICA', flag: '/images/에티오피아.png', name: '아디스아바바', standard: '동아프리카 시간 (EAT, GMT+3)', timeZone: 'Africa/Addis_Ababa' },
+        { region: 'AFRICA', flag: '/images/앙골라.png', name: '루안다', standard: '서부 아프리카 시간 (WAT, GMT+1)', timeZone: 'Africa/Luanda' },
+        { region: 'AFRICA', flag: '/images/케냐.png', name: '나이로비', standard: '동아프리카 시간 (EAT, GMT+3)', timeZone: 'Africa/Nairobi' },
+        { region: 'AFRICA', flag: '/images/가나.png', name: '아크라', standard: '서부 아프리카 시간 (WAT, GMT+1)', timeZone: 'Africa/Accra' },
+        { region: 'AFRICA', flag: '/images/모로코.png', name: '라바트', standard: '중앙 유럽 시간 (CET, GMT+1)', timeZone: 'Africa/Casablanca' },
+        { region: 'AFRICA', flag: '/images/탄자니아.png', name: '다르에스살람', standard: '동아프리카 시간 (EAT, GMT+3)', timeZone: 'Africa/Dar_es_Salaam' },
+        { region: 'AFRICA', flag: '/images/우간다.png', name: '캄팔라', standard: '동아프리카 시간 (EAT, GMT+3)', timeZone: 'Africa/Kampala' },
+        { region: 'AFRICA', flag: '/images/코트디부아르.jpg', name: '야무수크로', standard: '서부 아프리카 시간 (WAT, GMT+1)', timeZone: 'Africa/Abidjan' },
+        { region: 'AFRICA', flag: '/images/모리셔스.png', name: '포트루이스', standard: '모리셔스 표준시 (MUT, GMT+4)', timeZone: 'Indian/Mauritius' },
+        { region: 'AFRICA', flag: '/images/가봉.png', name: '리브르빌', standard: '서부 아프리카 시간 (WAT, GMT+1)', timeZone: 'Africa/Libreville' },
+        { region: 'AFRICA', flag: '/images/마다가스카르.png', name: '안타나나리보', standard: '동아프리카 시간 (EAT, GMT+3)', timeZone: 'Indian/Antananarivo' },
+        { region: 'AFRICA', flag: '/images/자메이카.jpg', name: '킹스턴', standard: '대서양 표준시 (AST, GMT-4)', timeZone: 'America/Jamaica' },
+        { region: 'AFRICA', flag: '/images/수단.jpg', name: '하르툼', standard: '중앙 아프리카 시간 (CAT, GMT+2)', timeZone: 'Africa/Khartoum' }
+      ];
+
+      const oceania = [
+        // 호주
+        { region: 'OC', flag: '/images/호주.png', name: "캔버라", standard: "오스트레일리아 동부 시간 (AEST, GMT+10)", timeZone: "Australia/Canberra" },
+        { region: 'OC', flag: '/images/호주.png', name: "시드니", standard: "오스트레일리아 동부 시간 (AEST, GMT+10)", timeZone: "Australia/Sydney" },
+        { region: 'OC', flag: '/images/호주.png', name: "킹스톤", standard: "GMT+12", timeZone: "Pacific/Kwajalein" },
+        { region: 'OC', flag: '/images/호주.png', name: "애들레이드", standard: "GMT+10:30", timeZone: "Australia/Adelaide" },
+        { region: 'OC', flag: '/images/호주.png', name: "퍼스", standard: "GMT+8", timeZone: "Australia/Perth" },
+        { region: 'OC', flag: '/images/호주.png', name: "크리스마스섬", standard: "GMT", timeZone: "Pacific/Kiritimati" },
+
+        // 뉴질랜드
+        { region: 'OC', flag: '/images/뉴질랜드.png', name: "오클랜드", standard: "뉴질랜드 표준시 (NZST, GMT+12)", timeZone: "Pacific/Auckland" },
+        { region: 'OC', flag: '/images/뉴질랜드.png', name: "웰링턴", standard: "뉴질랜드 표준시 (NZST, GMT+12)", timeZone: "Pacific/Chatham" },
+        { region: 'OC', flag: '/images/뉴질랜드.png', name: "채텀 아일랜드", standard: "채텀 아일랜드 표준시 (CHADT, GMT+13:45)", timeZone: "Pacific/Chatham" }
+      ];
+
+      cities.push(northAmerica, southAmerica, asia, europe, africa, oceania)
+
+      // 각 도시의 현재 시각 표시
+      cities.forEach((city) => {
+        city.forEach((i) => {
+          displayLocalDateTime(i.region, i.flag, i.name, i.standard, i.timeZone);
+        });
+      });
+      console.log(timeArr);
+
+      function timeDisplay(){
+        const container = document.querySelector('.container');
+        const timeContainer = document.createElement('div');
+        timeContainer.classList.add('time-container');
+
+        let naContainer = document.createElement('div');
+        let saContainer = document.createElement('div');
+        let asiaContainer = document.createElement('div');
+        let euContainer = document.createElement('div');
+        let afContainer = document.createElement('div');
+        let ocContainer = document.createElement('div');
+
+        let naH3 = document.createElement('h3');
+        let saH3 = document.createElement('h3');
+        let asiaH3 = document.createElement('h3');
+        let euH3 = document.createElement('h3');
+        let afH3 = document.createElement('h3');
+        let ocH3 = document.createElement('h3');
+
+        naH3.textContent = '북미';
+        saH3.textContent = '남미';
+        asiaH3.textContent = '아시아';
+        euH3.textContent = '유럽';
+        afH3.textContent = '아프리카';
+        ocH3.textContent = '오세아니아';
+
+        naContainer.appendChild(naH3);
+        saContainer.appendChild(saH3);
+        asiaContainer.appendChild(asiaH3);
+        euContainer.appendChild(euH3);
+        afContainer.appendChild(afH3);
+        ocContainer.appendChild(ocH3);
+
+        naContainer.classList.add('na', 'timezone-container');
+        saContainer.classList.add('sa', 'timezone-container');
+        asiaContainer.classList.add('asia', 'timezone-container');
+        euContainer.classList.add('eu', 'timezone-container');
+        afContainer.classList.add('af', 'timezone-container');
+        ocContainer.classList.add('oc', 'timezone-container');
+
+        for(let i=0;i<timeArr.length;i++){
+          let timeWrap = document.createElement('div');
+          let checkBox = document.createElement('input');
+          let flagImg = document.createElement('img');
+          let cityNameTxt = document.createElement('span');
+          let standardTxt = document.createElement('span');
+          let nowTime = document.createElement('div');
+          let hour = document.createElement('span');
+          let minutes = document.createElement('span');
+          let colon = document.createElement('span');
+
+          checkBox.setAttribute('type', 'checkbox');
+          flagImg.setAttribute('src', timeArr[i][1]);
+
+          flagImg.classList.add('flag');
+          timeWrap.classList.add('time-wrap');
+          cityNameTxt.classList.add('city-name');
+          // standardTxt.classList.add('time-standard');
+          nowTime.classList.add('time');
+          hour.classList.add('hour');
+          minutes.classList.add('minutes');
+          colon.classList.add('colon')
+
+          timeWrap.appendChild(checkBox);
+          timeWrap.appendChild(flagImg);
+          timeWrap.appendChild(cityNameTxt);
+          // timeWrap.appendChild(standardTxt);
+          timeWrap.appendChild(nowTime);
+
+          cityNameTxt.textContent = timeArr[i][2];
+          // standardTxt.textContent = timeArr[i][2];
+
+          const currentTime = timeArr[i][4];
+          hour.textContent = currentTime.substring(12, 14);
+          minutes.textContent = currentTime.substring(15);
+          colon.textContent = ':';
+          nowTime.appendChild(hour);
+          nowTime.appendChild(colon);
+          nowTime.appendChild(minutes);
+
+          switch (timeArr[i][0]) {
+            case 'NA':
+              naContainer.appendChild(timeWrap);
+              break;
+            case 'SA':
+              saContainer.appendChild(timeWrap);
+              break;
+            case 'ASIA':
+              asiaContainer.appendChild(timeWrap);
+              break;
+            case 'EU':
+              euContainer.appendChild(timeWrap);
+              break;
+            case 'AFRICA':
+              afContainer.appendChild(timeWrap);
+              break;
+            case 'OC':
+              ocContainer.appendChild(timeWrap);
+              break;
+          }
+        }
+        timeContainer.appendChild(naContainer);
+        timeContainer.appendChild(saContainer);
+        timeContainer.appendChild(asiaContainer);
+        timeContainer.appendChild(euContainer);
+        timeContainer.appendChild(afContainer);
+        timeContainer.appendChild(ocContainer);
+
+        container.appendChild(timeContainer);
+      }
+      timeDisplay();
+    </script>
+  </body>
+</html>
