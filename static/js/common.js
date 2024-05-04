@@ -92,3 +92,4 @@ function handleResize() {
     modalOverlay.addEventListener('click', function(){
       helpModal.style.display = 'none';
     });
+    

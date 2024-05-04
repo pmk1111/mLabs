@@ -102,6 +102,12 @@ api.get('/dice', (req, res) => {
 api.get('/minify', (req, res) => {
   res.render('minify');
 });
+api.get('/time-zone', (req, res) => {
+  res.render('time-zone');
+});
+api.get('/cal-your-pay', (req, res) => {
+  res.render('cal-your-pay');
+});
 
 api.post('/do-minify', (req, res) => {
   const originalCode = req.body.originalCode;

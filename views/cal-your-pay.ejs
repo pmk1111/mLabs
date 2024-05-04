@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="간편한 급여 계산기. 내 급여를 확인해 보세요."/>
+
+    <meta name="keywords" content="시급, 일급, 주급, 월급, 연봉, 급여, 급여계산, 급여계산기, 주휴수당, 연장급여, 연장근무시간"/>
+    <meta name="robots" content="index nofollow">
+    <title>급여 계산기</title>
+  
+    <meta name="robots" content="index nofollow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mlabstools.com/dice">
+    <meta property="og:site_name" content="mlabstools:Online Tools">
+    <meta property="og:title" content="급여 계산기">
+    <meta property="og:image" content="images/ogimage.png">
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mlabstools">
+    <meta name="twitter:title" content="급여 계산기">
+    <meta name="twitter:creator" content="@mlabstools">
+    <meta name="twitter:description" content="간편한 급여 계산기. 내 급여를 확인해 보세요.">
+    <meta property="twitter:image" content="images/ogimage.png">
+    <meta name="by" content="mlabstools">
+    
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/dice.css" />
+    <link rel="icon" href="/images/logo.png" />
+    <link rel="stylesheet" href="/css/cal-your-pay.css">
+  </head>
+  <body>
+    <%- include('./nav') %> <%- include('./accordion') %>
+    <main>
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="min-pay-wrap m-b-30 p-25">
+            <p>2024년 현재 최저시급</p><span>9,860원</span>
+          </div>
+          <div class="type-select-wrap m-b-30">
+            <select class="payment-type">
+              <option selected>시급</option>
+              <option>일급</option>
+              <option>주급</option>
+              <option>월급</option>
+              <option>연봉</option>
+            </select>
+            <span class="arrow">></span>
+            <select class="result-type">
+              <option>일급</option>
+              <option>주급</option>
+              <option>월급</option>
+              <option>연봉</option>
+            </select>
+          </div>
+      
+          <div class="your-pay-wrap m-b-30">
+            <h3 class="pay-type-txt m-b-15">시급</h3>
+            <!-- <span class="pay-type-txt">시급</span> -->
+            <input class="your-pay" type="text" placeholder="급여를 입력하세요." />
+          </div>
+      
+          <div class="hour-wrap m-b-30">
+            <h3 class="m-b-15">일 근무 시간</h3>
+            <div style="margin-bottom: 10px;">
+              <span class="hour-txt"></span><span>시간</span>
+            </div>
+            <input class="hour" type="range" step="0.25" min="0.5" max="24" value="8"/>
+          </div>
+      
+          <div class="date-wrap m-b-30">
+            <h3 class="m-b-15">주 근무일 수</h3>
+            <select class="date-per-week">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+            </select>
+          </div>
+      
+          <div class="overtime-wrap m-b-30">
+            <h3 class="m-b-15">연장 근무시간</h3>
+            <select class="overtime-selector">
+              <option value="0">없음</option>
+            </select>
+          </div>
+      
+          <div class="tax-type-wrap m-b-30">
+            <h3 class="m-b-15">세금적용</h3>
+            <select class="tax-type">
+              <option>적용안함</option>
+              <option>4대보험(9.32%)</option>
+              <option>소득세(3.3%)</option>
+            </select>
+          </div>
+      
+          <div class="btn-wrap m-b-30">
+            <button class="do-cal-btn" type="button">계산하기</button>
+            <button class="clear-btn" type="button">초기화</button>
+          </div>
+      
+          <div class="my-pay-wrap m-b-30">
+            <div class="estimate-pay-wrap">
+              <span>예상금액</span><span class="without-allowance"></span>
+            </div>
+            <div class="allowance-wrap">
+              <span>주휴수당</span><span class="allowance"></span>
+            </div>
+            <div class="overtime-val-wrap">
+              <span>연장수당</span><span class="overtime"></span>
+            </div>
+            <div class="tax-wrap">
+              <span class="tax-type-txt"></span><span class="total-tax"></span>
+            </div>
+            <div class="line"></div>
+            <div class="total-pay-wrap">
+              <span>최종금액</span><span class="total-payment"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include('./footer') %>
+  
+    <script src="/js/cal-your-pay.js"></script>
+    <script src="/js/common.js"></script>
+  </body>
+</html>
