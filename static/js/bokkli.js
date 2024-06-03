@@ -146,7 +146,6 @@ toggleList.forEach(($toggle) => {
 });
 
 function openStep(e){
-  console.log(e)
   const parent = e.parentElement;
   const arrow = parent.querySelector('.up-down-arrow');
   const step = parent.querySelector('.step');

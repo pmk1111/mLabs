@@ -99,7 +99,6 @@ toggleList.forEach(($toggle) => {
 
 function handleClick(event) {
   existingFile = Array.from(fileInput.files);
-  console.log(existingFile);
   if (event.target.id == "uploadArea" || event.target.id == "addImg" || event.target.className == 'upload-img-btn') {
     fileInput.click();
   }
@@ -117,8 +116,6 @@ function handleFileSelect() {
 
     fileInput.files = emptyFileList;
     fileInput.files = mergedFiles.files;
-
-    console.log(fileInput.files);
 
     handleFiles(fileInput.files);
     isFileExist(fileInput.files);
@@ -183,10 +180,14 @@ function createThumbnail(file) {
 
   const cancelBtn = document.createElement("button");
   cancelBtn.className = "cancel-btn";
-  cancelBtn.addEventListener("click", () => cancelUpload(thumbnail));
+  // cancelBtn.addEventListener("click", () => cancelUpload(thumbnail));
 
   const cancelBtnImg = ``;
   cancelBtn.innerHTML = "❌";
+  cancelBtn.addEventListener("click", (event) => {
+    event.stopPropagation(); // 이벤트 전파 방지
+    cancelUpload(thumbnail);
+  });
   thumbnail.appendChild(cancelBtn);
 
   const fileNameDiv = document.createElement("div");
@@ -203,7 +204,7 @@ function createThumbnail(file) {
 }
 
 function convertToPDF(file) {
-  console.log(fileInput.files);
+  // console.log(fileInput.files);
   const formData = new FormData();
   formData.append("image", file);
 
@@ -220,17 +221,17 @@ function convertToPDF(file) {
       downloadLink.click();
     })
     .catch((error) => console.error("Error:", error));
-  console.log(fileInput.files);
+  // console.log(fileInput.files);
 }
 
 function convertAll() {
-  console.log(fileInput.files);
+  // console.log(fileInput.files);
   const formData = new FormData();
   for (let i = 0; i < fileInput.files.length; i++) {
     formData.append("image[]", fileInput.files[i]);
   }
   for (const entry of formData.entries()) {
-    console.log(entry);
+    // console.log(entry);
   }
 
   fetch("/convert-all-to-pdf", {
@@ -259,8 +260,6 @@ function cancelUpload(thumbnail) {
   remainingFiles.forEach((file) => updatedFiles.items.add(file));
 
   fileInput.files = updatedFiles.files;
-
-  console.log(fileInput.files);
 
   uploadArea.removeChild(thumbnail);
   isFileExist(fileInput.files);
