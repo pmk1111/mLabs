@@ -39,6 +39,9 @@ api.use(express.json());
 api.get('/', (req, res) => {
   res.render(path.join(__dirname, 'index'));
 });
+api.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'sitemap.xml'));
+});
 api.get('/frequency', (req, res) => {
   res.render('frequency'); 
 });
