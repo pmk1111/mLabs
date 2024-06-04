@@ -227,14 +227,50 @@ function handleResize() {
               contentImg.setAttribute("src", "images/search-dark.svg");
             }
             if(content === "간편 복리 계산기"){
-              goToContent.setAttribute("href", "https://bokkli.netlify.app/");
+              goToContent.setAttribute("href", "https://mlabstool.site/bokkli");
             } else if(content === "공학용 계산기"){
-              goToContent.setAttribute("href", "https://scientifics.netlify.app/");
-            } else if(content === "로또 번호 생성하기"){
-              goToContent.setAttribute("href", "https://lotto-generate.netlify.app/");
+              goToContent.setAttribute("href", "https://mlabstool.site/cal");
+            } else if(content === "공약수 & 공배수 계산기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/gcd-lcm")
+            } else if(content === "진법 변환기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/base-convert");
+            } else if(content === "급여 계산기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/cal-your-pay");
             } else if(content === "가청 주파수 테스트"){
-              goToContent.setAttribute("href", "https://frequecny.netlify.app/");
-            } 
+              goToContent.setAttribute("href", "https://mlabstool.site/frequency");
+            } else if(content === "온라인 메트로놈"){
+              goToContent.setAttribute("href", "https://mlabstool.site/metronome");
+            } else if(content === "로또 번호 생성하기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/lotto");
+            } else if(content === "바코드/QR코드 생성기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/barcode");
+            } else if(content === "돌려돌려 돌림판"){
+              goToContent.setAttribute("href", "https://mlabstool.site/roulette");
+            } else if(content === "랜덤 주사위"){
+              goToContent.setAttribute("href", "https://mlabstool.site/dice");
+            } else if(content === "이미지 확장자 변환"){
+              goToContent.setAttribute("href", "https://mlabstool.site/img-convert");
+            } else if(content === "PNG, JPG PDF 변환"){
+              goToContent.setAttribute("href", "https://mlabstool.site/img-to-pdf");
+            } else if(content === "PDF JPG 변환"){
+              goToContent.setAttribute("href", "https://mlabstool.site/pdf-to-jpg");
+            } else if(content === "유튜브 썸네일 추출"){
+              goToContent.setAttribute("href", "https://mlabstool.site/youtube-thumbnail");
+            } else if(content === "HTML 색상표"){
+              goToContent.setAttribute("href", "https://mlabstool.site/color-picker");
+            } else if(content === "텍스트 인코더/디코더"){
+              goToContent.setAttribute("href", "https://mlabstool.site/encoder-decoder");
+            } else if(content === "해시 암호화"){
+              goToContent.setAttribute("href", "https://mlabstool.site/hash");
+            } else if(content === "코드 압축"){
+              goToContent.setAttribute("href", "https://mlabstool.site/minify");
+            } else if(content === "서버 시간 확인하기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/server-time");
+            } else if(content === "내 IP 주소 확인하기"){
+              goToContent.setAttribute("href", "https://mlabstool.site/myip");
+            } else if(content === "온라인 메모장"){
+              goToContent.setAttribute("href", "https://mlabstool.site/memo");
+            }
             goToContent.textContent = content;
             
             li.classList.add("result_li");
