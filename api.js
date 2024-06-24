@@ -42,6 +42,9 @@ api.get('/', (req, res) => {
 api.get('/sitemap.xml', (req, res) => {
   res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
+api.get('/ads.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ads.txt'));
+});
 api.get('/frequency', (req, res) => {
   res.render('frequency'); 
 });
