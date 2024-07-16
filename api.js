@@ -81,8 +81,8 @@ api.get('/img-to-pdf', (req, res) => {
 api.get('/pdf-to-jpg', (req, res) =>{
   res.render('pdf-to-jpg');
 });
-api.get('/color-picker', (req, res) => {
-  res.render('color-picker');
+api.get('/html-color-picker', (req, res) => {
+  res.render('html-color-picker');
 });
 api.get('/youtube-thumbnail', (req, res) => {
   res.render('youtube-thumbnail');
